@@ -1,0 +1,45 @@
+{
+  "version": 8,
+  "name": "TriMet District Boundary \u2014 outline only",
+  "metadata": {
+    "description": "The district edge with no fill, for overlaying on top of other layers without tinting what is underneath."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../district-boundary.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "district-boundary-edge",
+      "type": "line",
+      "source": "data",
+      "source-layer": "district-boundary",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#D4451F",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          7,
+          1.5,
+          12,
+          3.5
+        ],
+        "line-dasharray": [
+          3,
+          2
+        ]
+      }
+    }
+  ]
+}

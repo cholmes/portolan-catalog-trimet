@@ -1,0 +1,41 @@
+{
+  "version": 8,
+  "name": "TriMet Transit Centers",
+  "metadata": {
+    "description": "The fifteen transit centers as prominent marks in TriMet brand orange. These are the network's timed-transfer hubs, so they are drawn larger than ordinary stops and stay visible at low zoom."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../transit-centers.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "transit-centers",
+      "type": "circle",
+      "source": "data",
+      "source-layer": "transit-centers",
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          4,
+          12,
+          7,
+          16,
+          12
+        ],
+        "circle-color": "#D4451F",
+        "circle-stroke-color": "#1A1A1A",
+        "circle-stroke-width": 2
+      }
+    }
+  ]
+}

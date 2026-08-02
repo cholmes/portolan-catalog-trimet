@@ -1,0 +1,121 @@
+{
+  "version": 8,
+  "name": "TriMet Rail Lines by passage",
+  "metadata": {
+    "description": "Encodes the PASSAGE attribute \u2014 whether a segment runs at surface level, over a bridge, or through a tunnel. Bridges are drawn heavy and dark, tunnels dashed, surface track light. TriMet notes that PASSAGE is intended for cartographic display rather than analysis, so read this as a drawing hint and not an infrastructure inventory."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../rail-lines.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "rail-lines-surface",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "==",
+        [
+          "get",
+          "passage"
+        ],
+        "surface"
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#8A94A0",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          1,
+          14,
+          3
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-tunnel",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "==",
+        [
+          "get",
+          "passage"
+        ],
+        "tunnel"
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": "#5B4B8A",
+        "line-dasharray": [
+          2,
+          1.5
+        ],
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          1.4,
+          14,
+          4
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-bridge",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "==",
+        [
+          "get",
+          "passage"
+        ],
+        "bridge"
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": "#14304F",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          2,
+          14,
+          5.5
+        ]
+      }
+    }
+  ]
+}

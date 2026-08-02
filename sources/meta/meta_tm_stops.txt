@@ -1,0 +1,65 @@
+
+TriMet GIS Metadata
+Stops (tm_stops)
+Description
+Active transit stops.
+Geometry Type
+Point.
+Status
+Current. Last update: 
+July 30, 2026
+Contact Information
+TriMet GIS
+4012 SE 17th Ave, GIS3
+Portland, OR 97202
+E-mail: 
+gis@trimet.org
+Attribute Information
+Attribute: 
+STOP_ID
+Definition: Unique identifier.
+Attribute type: Integer
+Attribute length: 8
+Attribute: 
+STOP_NAME
+Definition: Intersection or street address of stop.
+Attribute type: String
+Attribute length: 50
+Attribute: 
+JURISDIC
+Definition: Jurisdiction (City or County) in which stop is located.
+Attribute type: String
+Attribute length: 30
+Attribute: 
+ZIPCODE
+Definition: Zipcode in which stop is located.
+Attribute type: String
+Attribute length: 5
+Attribute: 
+TYPE
+Definition: Type of service.
+Attribute type: String
+Attribute length: 20
+Value
+Definition
+AT
+Aerial Tram.
+BUS
+Bus.
+CR
+Commuter rail.
+MAX
+Light rail.
+SC
+Streetcar.
+BSC
+Shared Bus and Streetcar.
+Spatial Reference Information
+Horizontal coordinate system definition:
+  Coordinate system name:
+    Projected coordinate system name: 
+NAD_1983_HARN_StatePlane_Oregon_North_FIPS_3601
+    Geographic coordinate system name: 
+GCS_North_American_1983_HARN
+  Planar:
+    Map projection: Lambert conformal conic

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><sld:StyledLayerDescriptor xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
+    <sld:NamedLayer>
+        <sld:Name>ott:current_routes</sld:Name>
+        <sld:UserStyle>
+            <sld:Name>routes</sld:Name>
+            <sld:IsDefault>1</sld:IsDefault>
+            <sld:FeatureTypeStyle>
+                <sld:Name>name</sld:Name>
+                <sld:Rule>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">
+                                <ogc:PropertyName>route_color</ogc:PropertyName>
+                            </sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:VendorOption name="ruleEvaluation">first</sld:VendorOption>
+            </sld:FeatureTypeStyle>
+            <sld:FeatureTypeStyle>
+                <sld:Name>name</sld:Name>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:Or>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>route_type</ogc:PropertyName>
+                                <ogc:Literal>0</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>route_type</ogc:PropertyName>
+                                <ogc:Literal>2</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>route_short_name</ogc:PropertyName>
+                                <ogc:Literal>FX2</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:Or>
+                    </ogc:Filter>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">
+                                <ogc:PropertyName>route_color</ogc:PropertyName>
+                            </sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:VendorOption name="ruleEvaluation">first</sld:VendorOption>
+            </sld:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+</sld:StyledLayerDescriptor>
+

@@ -1,0 +1,253 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json"
+  ],
+  "id": "district-boundary",
+  "title": "TriMet District Boundary",
+  "description": "TriMet district boundary. 1 Polygon feature covering TriMet's service district in the Portland, Oregon metropolitan area, published by TriMet as `tm_boundary` and last updated at the source on January 09, 2013. This is a cloud-native mirror: the same data as GeoParquet and PMTiles, reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft). The original Shapefile, KML and metadata page are linked as assets. Column descriptions and code lists are TriMet's own, taken from https://developer.trimet.org/gis/meta_tm_boundary.shtml.",
+  "license": "other",
+  "keywords": [
+    "transit",
+    "public transport",
+    "TriMet",
+    "Portland",
+    "Oregon",
+    "polygon"
+  ],
+  "providers": [
+    {
+      "name": "TriMet",
+      "description": "Tri-County Metropolitan Transportation District of Oregon, the transit agency for the Portland metropolitan area and the originator of this data.",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://developer.trimet.org/gis/",
+      "email": "gis@trimet.org"
+    },
+    {
+      "name": "Chris Holmes",
+      "description": "Maintains this cloud-native mirror. Not affiliated with TriMet.",
+      "roles": [
+        "host"
+      ],
+      "url": "https://github.com/cholmes/portolan-catalog-trimet",
+      "email": "cholmes@9eo.org"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -123.153536,
+          45.255802,
+          -122.277052,
+          45.657213
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2013-01-09T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "updated": "2026-08-02T18:02:50Z",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "TriMet Geospatial Data"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "TriMet Geospatial Data"
+    },
+    {
+      "rel": "describedby",
+      "href": "./README.md",
+      "type": "text/markdown",
+      "title": "TriMet District Boundary README"
+    },
+    {
+      "rel": "agents",
+      "href": "./AGENTS.md",
+      "type": "text/markdown",
+      "title": "TriMet District Boundary agent guide"
+    },
+    {
+      "rel": "license",
+      "href": "https://developer.trimet.org/terms_of_use.shtml",
+      "type": "text/html",
+      "title": "TriMet Terms of Use"
+    },
+    {
+      "rel": "via",
+      "href": "https://developer.trimet.org/gis/meta_tm_boundary.shtml",
+      "type": "text/html",
+      "title": "TriMet metadata for tm_boundary"
+    },
+    {
+      "rel": "via",
+      "href": "https://developer.trimet.org/gis/",
+      "type": "text/html",
+      "title": "TriMet Geospatial Data"
+    },
+    {
+      "rel": "icon",
+      "href": "../_assets/trimet-logo.png",
+      "type": "image/png",
+      "title": "TriMet"
+    },
+    {
+      "rel": "pmtiles",
+      "href": "./district-boundary.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "TriMet District Boundary vector tiles",
+      "pmtiles:layers": [
+        "district-boundary"
+      ]
+    }
+  ],
+  "assets": {
+    "data": {
+      "href": "./district-boundary.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "TriMet District Boundary (GeoParquet)",
+      "description": "TriMet district boundary. Reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft) source, Hilbert-ordered, zstd-compressed, with a GeoParquet 1.1 bbox covering column for row-group pruning.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 92956,
+      "file:checksum": "122019540dce03d570e2f5422a51a9dbf21faa5c881557abc63fb6f6aacc51aa1381",
+      "table:columns": [
+        {
+          "name": "area_sq_mi",
+          "type": "int64",
+          "description": "Area in square miles"
+        },
+        {
+          "name": "acres",
+          "type": "int64",
+          "description": "Area in acres."
+        },
+        {
+          "name": "geometry",
+          "type": "binary",
+          "description": "Feature geometry, WGS84 longitude and latitude. Reprojected from TriMet's EPSG:2913 (NAD83(HARN) / Oregon North (ft))."
+        },
+        {
+          "name": "geometry_bbox",
+          "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>"
+        }
+      ],
+      "table:primary_geometry": "geometry",
+      "table:row_count": 1,
+      "proj:code": "EPSG:4326",
+      "alternate": {
+        "s3": {
+          "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/district-boundary/district-boundary.parquet",
+          "title": "S3 URI"
+        }
+      }
+    },
+    "visual": {
+      "href": "./district-boundary.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "TriMet District Boundary (PMTiles)",
+      "description": "Vector tiles for web display, layer name `district-boundary`. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 27538,
+      "file:checksum": "12201151886ed4877881db1477052c685fc9df3611c69c857be9d76e90ca95595bef",
+      "alternate": {
+        "s3": {
+          "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/district-boundary/district-boundary.pmtiles",
+          "title": "S3 URI"
+        }
+      }
+    },
+    "thumbnail": {
+      "href": "./thumbnail.webp",
+      "type": "image/webp",
+      "title": "TriMet District Boundary preview",
+      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap. WebP is allowed for thumbnails by spec PR portolan-sdi/portolan-spec#121, which this catalog targets; Portolan 0.1 alone permits only PNG and JPEG.",
+      "roles": [
+        "thumbnail"
+      ],
+      "file:size": 49784,
+      "file:checksum": "1220e873719f6534dd3e055689b770e4f774bf59b7b2695c92ff54bdd86fa1f7da3f"
+    },
+    "style": {
+      "href": "./styles/default.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "TriMet District Boundary",
+      "description": "The TriMet service district as a tinted fill with a TriMet-orange edge. The fill uses TriMet's own basemap water tint at low opacity so the district reads as an area without hiding a basemap underneath.",
+      "roles": [
+        "style"
+      ],
+      "file:size": 1146,
+      "file:checksum": "122004bd5d2247e2b4fabf88d04b86a146d1604bf4789fa6f6be11c02e16af4ed660"
+    },
+    "style-context": {
+      "href": "./styles/context.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "TriMet District Boundary \u2014 solid context",
+      "description": "A solid, opaque fill in TriMet's basemap building gray. Use this as a backdrop underneath the stop and route layers when no basemap is available, so the network has a visible service area behind it.",
+      "roles": [
+        "style"
+      ],
+      "file:size": 715,
+      "file:checksum": "1220458a3c085f6bd4e84c657837616be36bf24247c99381db76412f850ff43bb087"
+    },
+    "style-outline": {
+      "href": "./styles/outline.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "TriMet District Boundary \u2014 outline only",
+      "description": "The district edge with no fill, for overlaying on top of other layers without tinting what is underneath.",
+      "roles": [
+        "style"
+      ],
+      "file:size": 913,
+      "file:checksum": "12204f15fcc1985ce744f510b626a49fcdca26ad0babcec93a0e2bbc6c8355d5fe89"
+    },
+    "source_shapefile": {
+      "href": "https://developer.trimet.org/gis/data/tm_boundary.zip",
+      "type": "application/zip",
+      "title": "TriMet District Boundary \u2014 original TriMet Shapefile",
+      "description": "TriMet's own distribution of `tm_boundary`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. Size and checksum are of what TriMet served at the sync time recorded in `updated`.",
+      "roles": [
+        "data",
+        "source"
+      ],
+      "file:size": 68862,
+      "file:checksum": "12208a1a21d037a0462a9cb6bfc934b664dc4f9f56b637929c047ea4639f84f67f1d"
+    },
+    "source_kml": {
+      "href": "https://developer.trimet.org/gis/data/tm_boundary.kml",
+      "type": "application/vnd.google-earth.kml+xml",
+      "title": "TriMet District Boundary \u2014 original TriMet KML",
+      "description": "TriMet's KML distribution of the same layer.",
+      "roles": [
+        "data",
+        "source"
+      ],
+      "file:size": 261887,
+      "file:checksum": "12200993dc67171ff764551c3948f3419d775dd39f69d88cd5738315cb7218f8e258"
+    }
+  }
+}

@@ -1,0 +1,116 @@
+
+TriMet GIS Metadata
+Rail Lines (tm_rail_lines)
+Description
+Public transit rail lines. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar lines. The data have been generalized to improve cartographic display at smaller scales.
+Geometry Type
+Polyline.
+Status
+Current. Last update: 
+September 26, 2024
+Contact Information
+TriMet GIS
+4012 SE 17th Ave, GIS3
+Portland, OR 97202
+E-mail: 
+gis@trimet.org
+Attribute Information
+Attribute: 
+LINE
+Definition: Line(s) serving a particular segment.
+Attribute type: String
+Attribute length: 254
+Value
+Definition
+AL
+Portland Streetcar A Loop
+AL/BL
+Portland Streetcar A & B Loops
+AUX
+Auxiliary track. No revenue service
+B
+MAX Blue Line
+BG
+MAX Blue, and Green Lines
+BGR
+MAX Blue, Green, and Red Lines
+BGRY
+MAX Blue, Green, Red, and Yellow Lines
+BL
+Portland Streetcar B Loop
+BL/NS
+Portland Streetcar B Loop and North/South Line
+BR
+MAX Blue and Red Lines
+G
+MAX Green Line
+GO
+MAX Green and Orange Lines
+GY
+MAX Green and Yellow Lines
+NS
+Portland Streetcar North/South Line
+NS/AL
+Portland Streetcar A Loop and North/South Line
+NS/AL/BL
+Portland Streetcar A & B Loops and North/South Line
+O
+MAX Orange Line
+O/AL/BL
+MAX Orange Line and Portland Streetcar A & B Loops
+R
+MAX Red Line
+WES
+WES (Westside Express Service)
+Y
+MAX Yellow Line
+Attribute: 
+PASSAGE
+Definition: Indicates the infrastructure (if any) over/through which a rail segment travels.  This data is intended for use in cartographic display rather than analysis
+Attribute type: String
+Attribute length: 254
+Value
+Definition
+bridge
+Rail segment travels over bridge
+surface
+Rail segment travels over ground/surface level
+tunnel
+Rail segment passes through tunnel
+Attribute: 
+STATUS
+Definition: Operational status of the segment.
+Attribute type: String
+Attribute length: 254
+Value
+Definition
+Existing
+Service currently provided on rail segment
+Planned
+Rail segment in advanced planning stages
+UC
+Rail segment is under construction
+Attribute: 
+TYPE
+Definition: Type of service.
+Attribute type: String
+Attribute length: 254
+Value
+Definition
+CR
+Commuter rail
+MAX
+Light rail
+MAX/SC
+Shared light rail and streetcar
+SC
+Streetcar
+Spatial Reference Information
+Horizontal coordinate system definition:
+  Coordinate system name:
+    Projected coordinate system name: 
+NAD_1983_HARN_StatePlane_Oregon_North_FIPS_3601
+    Geographic coordinate system name: 
+GCS_North_American_1983_HARN
+  Planar:
+    Map projection: Lambert conformal conic

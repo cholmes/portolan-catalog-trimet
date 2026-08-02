@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Node 24 is one of the three ABIs MapLibre Native publishes a prebuilt
+      # binary for (v137). Node 23 would fail to install chiitiler.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install Python deps
+        run: pip install pyarrow pillow
+
+      - name: Install DuckDB
+        run: |
+          curl -fsSL https://install.duckdb.org | sh
+          echo "$HOME/.duckdb/cli/latest" >> "$GITHUB_PATH"
+
+      - name: Install rashid
+        run: |
+          pipx install rashid || pip install rashid
+
+      # The catalog's data files are not committed, and several tests read them
+      # (row counts, checksums, SQL recipes). Rebuild them from the sources.
+      - name: Install GDAL and tippecanoe
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gdal-bin tippecanoe
+
+      - name: Fetch TriMet sources
+        run: python3 tools/fetch.py --data
+
+      - name: Convert
+        run: python3 tools/convert.py
+
+      - name: Run tests
+        run: python3 tests/run_all.py
+
+  # Regenerating the metadata must reproduce what is committed. This runs
+  # without the data files to prove the generators do not depend on network.
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyflakes
+      - run: pyflakes tools/*.py tests/*.py

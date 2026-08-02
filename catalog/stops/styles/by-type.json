@@ -1,0 +1,62 @@
+{
+  "version": 8,
+  "name": "TriMet Stops by service type",
+  "metadata": {
+    "description": "The same mark filled by TYPE, so the 6,075 bus stops read apart from the 161 MAX platforms, 58 streetcar stops, 14 shared bus/streetcar stops, 6 WES platforms and 2 aerial tram terminals. Colors are TriMet's GTFS route_color values for each mode."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../stops.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "stops",
+      "type": "circle",
+      "source": "data",
+      "source-layer": "stops",
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          9,
+          1.6,
+          13,
+          3.4,
+          16,
+          6
+        ],
+        "circle-color": [
+          "match",
+          [
+            "get",
+            "type"
+          ],
+          "BUS",
+          "#4679AA",
+          "MAX",
+          "#1359AE",
+          "SC",
+          "#72A130",
+          "CR",
+          "#6E6E6E",
+          "AT",
+          "#898E91",
+          "BSC",
+          "#0093B2",
+          "MAX/SC",
+          "#D05F27",
+          "#CCCCCC"
+        ],
+        "circle-stroke-color": "#1A1A1A",
+        "circle-stroke-width": 1.6
+      }
+    }
+  ]
+}

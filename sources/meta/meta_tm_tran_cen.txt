@@ -1,0 +1,64 @@
+
+TriMet GIS Metadata
+Transit Centers (tm_tran_cen)
+Description
+Transit Centers.
+Geometry Type
+Point.
+Status
+Current. Last update: 
+July 31, 2024
+Contact Information
+TriMet GIS
+4012 SE 17th Ave, GIS3
+Portland, OR 97202
+E-mail: 
+gis@trimet.org
+Attribute Information
+Attribute: 
+NAME
+Definition: Name of Transit Center.
+Attribute type: String
+Attribute length: 60
+Attribute: 
+ADDRESS
+Definition: Transit Center street address or major intersection.
+Attribute type: String
+Attribute length: 50
+Attribute: 
+CITY
+Definition: City in which Transit Center is located.
+Attribute type: String
+Attribute length: 30
+Attribute: 
+COUNTY
+Definition: County in which Transit Center is located.
+Attribute type: String
+Attribute length: 30
+Attribute: 
+ZIPCODE
+Definition: Zipcode in which Transit Center is located.
+Attribute type: String
+Attribute length: 5
+Attribute: 
+STATUS
+Definition: Operational status of segment.
+Attribute type: String
+Attribute length: 20
+Value
+Definition
+Existing
+Transit Center is operational.
+Planned
+Transit Center is in advanced planning stages.
+UC
+Transit Center is under construction.
+Spatial Reference Information
+Horizontal coordinate system definition:
+  Coordinate system name:
+    Projected coordinate system name: 
+NAD_1983_HARN_StatePlane_Oregon_North_FIPS_3601
+    Geographic coordinate system name: 
+GCS_North_American_1983_HARN
+  Planar:
+    Map projection: Lambert conformal conic

@@ -1,0 +1,85 @@
+{
+  "version": 8,
+  "name": "TriMet Routes by direction",
+  "metadata": {
+    "description": "Colors the two DIR values apart. Each route appears twice in this layer, once per direction, and the two alignments are rarely identical because of one-way streets \u2014 this style makes those divergences visible. Offsetting the two directions by a couple of pixels keeps coincident segments from hiding each other."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../routes.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "routes-dir0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "routes",
+      "filter": [
+        "==",
+        [
+          "get",
+          "dir"
+        ],
+        0
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#1359AE",
+        "line-offset": 1.5,
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          0.6,
+          14,
+          2
+        ]
+      }
+    },
+    {
+      "id": "routes-dir1",
+      "type": "line",
+      "source": "data",
+      "source-layer": "routes",
+      "filter": [
+        "==",
+        [
+          "get",
+          "dir"
+        ],
+        1
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#D05F27",
+        "line-offset": -1.5,
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          0.6,
+          14,
+          2
+        ]
+      }
+    }
+  ]
+}

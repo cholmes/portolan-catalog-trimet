@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/content.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="TriMet" />
+<meta name="robots" content="all" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>TriMet Developer Resources - GIS Metadata</title>
+<!-- InstanceEndEditable -->
+<link href="/static/css/new/content.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/new/content-print.css" rel="stylesheet" type="text/css" media="print" />
+<link href="/static/css/new/global.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/new/global-print.css" rel="stylesheet" type="text/css" media="print" />
+<!--[if lte IE 7]>
+<link href="/new/css/ie7.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/new/js/ie7.js"></script>
+<![endif]-->
+
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+</head>
+
+<body class="standard" onclick="HandleBodyOnClick();" onload="HideAllMenus();" onunload="HideAllMenus();">
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+var pageTracker = _gat._getTracker("UA-688646-3");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+<div id="screenreader">
+    <a href="#content">Skip navigation</a>
+</div>
+<div id="container">
+	
+    <div id="top">
+		<div class="homelink"><a href="/"></a></div>
+<div id="mainMenu">
+
+</div>
+<!-- end #mainMenu -->
+<div id="logo-print"></div>
+
+    </div><!-- end #top -->
+        
+    <div id="middle">
+        <a name="content"></a>
+        <div id="mainContent" class="content">
+
+
+<h2>TriMet GIS Metadata</h2>
+<h4>Transit Centers (tm_tran_cen)</h4>
+<h5>Description</h5>
+<p>Transit Centers.</p>
+
+<h5>Geometry Type</h5>
+<p>Point.</p>
+
+<h5>Status</h5>
+<p>Current. Last update: <b>July 31, 2024</b></p>
+
+<h5>Contact Information</h5>
+<p>TriMet GIS<br>4012 SE 17th Ave, GIS3<br>Portland, OR 97202<br>
+E-mail: <a href="mailto:gis@trimet.org?subject=Website GIS Data">gis@trimet.org</a>
+
+<h5>Attribute Information</h5>
+<p>Attribute: <b>NAME</b><br>
+Definition: Name of Transit Center.<br>
+Attribute type: String<br>
+Attribute length: 60</p>
+
+<p>Attribute: <b>ADDRESS</b><br>
+Definition: Transit Center street address or major intersection.<br>
+Attribute type: String<br>
+Attribute length: 50</p>
+
+<p>Attribute: <b>CITY</b><br>
+Definition: City in which Transit Center is located.<br>
+Attribute type: String<br>
+Attribute length: 30</p>
+
+<p>Attribute: <b>COUNTY</b><br>
+Definition: County in which Transit Center is located.<br>
+Attribute type: String<br>
+Attribute length: 30</p>
+
+<p>Attribute: <b>ZIPCODE</b><br>
+Definition: Zipcode in which Transit Center is located.<br>
+Attribute type: String<br>
+Attribute length: 5</p>
+
+<p>Attribute: <b>STATUS</b><br>
+Definition: Operational status of segment.<br>
+Attribute type: String<br>
+Attribute length: 20</p>
+
+<table class="table-dev">
+  <tr>
+    <th>Value</th><th>Definition</th>
+  </tr><tr>	
+    <td><b>Existing</b></td><td>Transit Center is operational.</td>
+  </tr><tr>	
+	<td><b>Planned</b></td><td>Transit Center is in advanced planning stages.</td>
+  </tr><tr>	
+	<td><b>UC</b></td><td>Transit Center is under construction.</td>
+  </tr>
+</table>
+
+<br>
+
+<h5>Spatial Reference Information</h5>
+
+<p>
+Horizontal coordinate system definition:<br>
+&nbsp;&nbsp;Coordinate system name:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Projected coordinate system name: <b>NAD_1983_HARN_StatePlane_Oregon_North_FIPS_3601</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Geographic coordinate system name: <b>GCS_North_American_1983_HARN</b><br>
+&nbsp;&nbsp;Planar:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Map projection: Lambert conformal conic<br>
+</p>
+
+
+
+        </div><!-- end #mainContent -->
+        
+        <div id="mainSidebar" class="sidebar">
+        <!-- InstanceBeginEditable name="Sidebar" -->
+            <div id="icon" class="icon-rosette">
+                <h2>Developer Resources</h2>
+                <ul class="links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/GTFS.shtml">GTFS &amp; GTFS-realtime</a></li>
+                    <li><a href="/gis/">GIS Data</a></li>
+                    <li><a href="/timetablepublisher.shtml">TimeTable Publisher</a></li>
+                    <li><a href="/localize.shtml">Localization &amp; Translation</a></li>
+                    <li><a href="/privacy_policy.shtml">Privacy Policy</a></li>
+                    <li><a href="/appid/registration/">Registration</a></li>
+                    <li><a href="/terms_of_use.shtml">Terms of Use</a></li>
+                    <li><a href="/definitions.shtml">Transit Definitions</a></li>
+                    <li><a href="/why_an_appid.shtml">Why Register?</a></li>
+                    <li><a href="/ws_docs/">Web Services Documentation</a></li>
+                </ul>
+            </div>
+            <!-- InstanceEndEditable -->
+        </div><!-- end #mainSidebar -->
+    </div><!-- end #middle -->
+	<!-- end Main -->
+
+    <div id="bottom" class="bottom">
+        <div id="bottomContent">&nbsp;</div>
+        <div id="mainFooter">
+
+	<div id="contact-footer">
+        <ul>
+            <li id="rss"><a href="http://trimet.org/rss/index.htm"><span>RSS News Feeds</span></a></li>
+            <li id="email"><a href="http://trimet.org/emailupdates/index.htm"><span>Email Updates</span></a></li>
+            <li id="feedback"><a href="http://trimet.org/contact/index.htm"><span>Contact/Feedback</span></a></li>
+            <li id="phone"><a href="http://trimet.org/contact/index.htm"><span>503-238-RIDE (7433)</span></a></li>
+      </ul>
+    </div>
+    <div id="social-footer">
+        <div id="facebook"><a href="http://facebook.com/trimet" title="Facebook">&nbsp;</a></div>
+        <div id="flickr"><a href="http://flickr.com/photos/trimet" title="Flickr">&nbsp;</a></div>
+        <div id="youtube"><a href="http://youtube.com/trimettv" title="YouTube">&nbsp;</a></div>
+        <div id="twitter"><a href="http://twitter.com/trimet" title="Twitter">&nbsp;</a></div>
+    </div>
+
+</div><!-- end #mainFooter -->
+
+    </div><!-- end #bottom -->
+
+	
+<div id="footerLinks" style="position:relative;">
+    <ul>
+        <li class="first"><a href="/terms_of_use.shtml">Terms of Use</a></li>
+        <li><a href="/privacy_policy.shtml">Privacy Policy</a></li>
+        <li><a href="http://trimet.org/help/linking.htm">Linking to trimet.org</a></li>
+    </ul>
+    <ul class="copyright">
+        <li>&copy; 2013 TriMet</li>
+    </ul>
+    <p class="footerlinks-ie6"></p>
+</div><!-- end #footerLinks -->
+
+</div><!-- end #container -->
+</body>
+<!-- InstanceEnd --></html>
+
+

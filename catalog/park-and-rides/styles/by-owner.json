@@ -1,0 +1,52 @@
+{
+  "version": 8,
+  "name": "TriMet Park and Rides by ownership",
+  "metadata": {
+    "description": "Separates the 32 TriMet-owned lots from the 14 shared-use facilities. The distinction matters in practice: shared lots are much smaller, 929 spaces between them against 11,572 in the TriMet-owned lots, and their availability depends on an agreement with the property owner."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../park-and-rides.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "park-and-rides",
+      "type": "circle",
+      "source": "data",
+      "source-layer": "park-and-rides",
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          3.5,
+          12,
+          6,
+          16,
+          10
+        ],
+        "circle-color": [
+          "match",
+          [
+            "get",
+            "owner"
+          ],
+          "TriMet",
+          "#1359AE",
+          "Shared",
+          "#D05F27",
+          "#999999"
+        ],
+        "circle-stroke-color": "#1A1A1A",
+        "circle-stroke-width": 1.8
+      }
+    }
+  ]
+}

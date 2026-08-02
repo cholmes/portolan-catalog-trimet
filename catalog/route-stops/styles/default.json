@@ -1,0 +1,64 @@
+{
+  "version": 8,
+  "name": "TriMet Route Stops by service type",
+  "metadata": {
+    "description": "One mark per stop per route-direction, colored by TYPE. Because a stop served by several routes appears several times, marks are drawn semi-transparent \u2014 the busiest transfer points show up as the darkest spots on the map."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../route-stops.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "route-stops",
+      "type": "circle",
+      "source": "data",
+      "source-layer": "route-stops",
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          9,
+          1.4,
+          13,
+          3,
+          16,
+          5.5
+        ],
+        "circle-color": [
+          "match",
+          [
+            "get",
+            "type"
+          ],
+          "BUS",
+          "#4679AA",
+          "MAX",
+          "#1359AE",
+          "SC",
+          "#72A130",
+          "CR",
+          "#6E6E6E",
+          "AT",
+          "#898E91",
+          "BSC",
+          "#0093B2",
+          "MAX/SC",
+          "#D05F27",
+          "#CCCCCC"
+        ],
+        "circle-opacity": 0.55,
+        "circle-stroke-color": "#1A1A1A",
+        "circle-stroke-width": 0.6,
+        "circle-stroke-opacity": 0.5
+      }
+    }
+  ]
+}

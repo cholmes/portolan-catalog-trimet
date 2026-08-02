@@ -1,0 +1,36 @@
+
+TriMet GIS Metadata
+TriMet District Boundary (tm_boundary)
+Description
+TriMet district boundary.
+Geometry Type
+Polygon.
+Status
+Current. Last update: 
+January 09, 2013
+Contact Information
+TriMet GIS
+4012 SE 17th Ave, GIS3
+Portland, OR 97202
+E-mail: 
+gis@trimet.org
+Attribute Information
+Attribute: 
+AREA_SQ_MI
+Definition: Area in square miles
+Attribute type: Float
+Attribute length: 13
+Attribute: 
+ACRES
+Definition: Area in acres.
+Attribute type: Float
+Attribute length: 13
+Spatial Reference Information
+Horizontal coordinate system definition:
+  Coordinate system name:
+    Projected coordinate system name: 
+NAD_1983_HARN_StatePlane_Oregon_North_FIPS_3601
+    Geographic coordinate system name: 
+GCS_North_American_1983_HARN
+  Planar:
+    Map projection: Lambert conformal conic

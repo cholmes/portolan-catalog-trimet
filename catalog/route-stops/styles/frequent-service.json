@@ -1,0 +1,78 @@
+{
+  "version": 8,
+  "name": "TriMet Route Stops \u2014 Frequent Service",
+  "metadata": {
+    "description": "Stops on route-directions flagged FREQUENT, drawn over the rest. This is the stop-level companion to the routes Frequent Service style, and it answers a question the routes layer cannot: which stops a rider can use without consulting a timetable."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../route-stops.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "route-stops-other",
+      "type": "circle",
+      "source": "data",
+      "source-layer": "route-stops",
+      "filter": [
+        "!=",
+        [
+          "get",
+          "frequent"
+        ],
+        "True"
+      ],
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          9,
+          1.2,
+          15,
+          3
+        ],
+        "circle-color": "#C3CBD3",
+        "circle-opacity": 0.7
+      }
+    },
+    {
+      "id": "route-stops-frequent",
+      "type": "circle",
+      "source": "data",
+      "source-layer": "route-stops",
+      "filter": [
+        "==",
+        [
+          "get",
+          "frequent"
+        ],
+        "True"
+      ],
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          9,
+          1.8,
+          15,
+          4.5
+        ],
+        "circle-color": "#61A60E",
+        "circle-stroke-color": "#FFFFFF",
+        "circle-stroke-width": 0.8
+      }
+    }
+  ]
+}

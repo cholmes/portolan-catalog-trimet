@@ -1,0 +1,9 @@
+# Where catalog/ is published. Read by tools/publish.py.
+# catalog/ is synced 1:1 to bucket/prefix; nothing outside catalog/ is published.
+
+bucket: us-west-2.opendata.source.coop
+prefix: cholmes/trimet
+public_base: https://data.source.coop/cholmes/trimet
+
+# AWS profile: default
+# Credentials come from the usual boto3 chain (env, ~/.aws/credentials, SSO).

@@ -1,0 +1,103 @@
+{
+  "version": 8,
+  "name": "TriMet Park and Rides by capacity",
+  "metadata": {
+    "description": "Scales each mark by SPACES and ramps its color with it, over a range that runs from small lots up to the 750-space Clackamas Town Center garage. Area, not radius, tracks capacity, so a lot that looks twice as big holds roughly twice as many cars. The whole system holds 12,501 spaces."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../park-and-rides.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "park-and-rides",
+      "type": "circle",
+      "source": "data",
+      "source-layer": "park-and-rides",
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          [
+            "*",
+            [
+              "sqrt",
+              [
+                "max",
+                [
+                  "get",
+                  "spaces"
+                ],
+                1
+              ]
+            ],
+            0.11
+          ],
+          12,
+          [
+            "*",
+            [
+              "sqrt",
+              [
+                "max",
+                [
+                  "get",
+                  "spaces"
+                ],
+                1
+              ]
+            ],
+            0.22
+          ],
+          16,
+          [
+            "*",
+            [
+              "sqrt",
+              [
+                "max",
+                [
+                  "get",
+                  "spaces"
+                ],
+                1
+              ]
+            ],
+            0.4
+          ]
+        ],
+        "circle-color": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "get",
+            "spaces"
+          ],
+          0,
+          "#D5EEF8",
+          150,
+          "#7FB6D9",
+          350,
+          "#4679AA",
+          550,
+          "#D4451F",
+          750,
+          "#8C2A10"
+        ],
+        "circle-opacity": 0.8,
+        "circle-stroke-color": "#FFFFFF",
+        "circle-stroke-width": 1
+      }
+    }
+  ]
+}

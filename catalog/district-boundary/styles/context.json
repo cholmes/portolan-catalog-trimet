@@ -1,0 +1,26 @@
+{
+  "version": 8,
+  "name": "TriMet District Boundary \u2014 solid context",
+  "metadata": {
+    "description": "A solid, opaque fill in TriMet's basemap building gray. Use this as a backdrop underneath the stop and route layers when no basemap is available, so the network has a visible service area behind it."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../district-boundary.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "district-boundary",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "district-boundary",
+      "paint": {
+        "fill-color": "#EEEEEE",
+        "fill-opacity": 1,
+        "fill-outline-color": "#C8CCD0"
+      }
+    }
+  ]
+}

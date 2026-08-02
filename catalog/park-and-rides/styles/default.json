@@ -1,0 +1,41 @@
+{
+  "version": 8,
+  "name": "TriMet Park and Rides",
+  "metadata": {
+    "description": "The 46 park and ride facilities in TriMet blue. A steady mark size makes this the right style when the question is where the lots are rather than how big they are."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../park-and-rides.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "park-and-rides",
+      "type": "circle",
+      "source": "data",
+      "source-layer": "park-and-rides",
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          3.5,
+          12,
+          6,
+          16,
+          10
+        ],
+        "circle-color": "#1359AE",
+        "circle-stroke-color": "#1A1A1A",
+        "circle-stroke-width": 1.8
+      }
+    }
+  ]
+}

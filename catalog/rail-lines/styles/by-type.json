@@ -1,0 +1,56 @@
+{
+  "version": 8,
+  "name": "TriMet Rail Lines by service type",
+  "metadata": {
+    "description": "Collapses the twenty LINE values into the four TYPE values: light rail, streetcar, commuter rail, and the shared MAX/streetcar segment. Colors come from TriMet's GTFS route_color. Simpler than the default style and easier to read at metro-wide zooms."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../rail-lines.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "rail-lines",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "type"
+          ],
+          "MAX",
+          "#1359AE",
+          "SC",
+          "#72A130",
+          "CR",
+          "#6E6E6E",
+          "MAX/SC",
+          "#D05F27",
+          "#999999"
+        ],
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          1.2,
+          14,
+          4
+        ]
+      }
+    }
+  ]
+}

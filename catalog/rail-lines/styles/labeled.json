@@ -1,0 +1,878 @@
+{
+  "version": 8,
+  "name": "TriMet Rail Lines with line codes",
+  "metadata": {
+    "description": "TriMet's rail cartography with the LINE code drawn along each segment. Because a code such as BGR means three lines share that track, the labels are the fastest way to read which services run where."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../rail-lines.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "rail-lines-base",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "BGRY",
+          "#084C8D",
+          "BGR",
+          "#084C8D",
+          "BRY",
+          "#084C8D",
+          "BR",
+          "#084C8D",
+          "BG",
+          "#084C8D",
+          "B",
+          "#084C8D",
+          "GY",
+          "#008852",
+          "G",
+          "#008852",
+          "GO",
+          "#F58220",
+          "O",
+          "#F58220",
+          "O/AL/BL",
+          "#F58220",
+          "R",
+          "#D81526",
+          "Y",
+          "#F8C213",
+          "NS",
+          "#84BD00",
+          "NS/AL",
+          "#84BD00",
+          "NS/BL",
+          "#84BD00",
+          "NS/AL/BL",
+          "#84BD00",
+          "AL",
+          "#CE0F69",
+          "AL/BL",
+          "#CE0F69",
+          "BL",
+          "#0093B2",
+          "WES",
+          "#000000",
+          "AUX",
+          "#9AA0A6",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-0-8_0x8_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "AL/BL",
+            "NS/AL",
+            "NS/BL"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "NS/AL",
+          "#CE0F69",
+          "NS/BL",
+          "#0093B2",
+          "AL/BL",
+          "#0093B2",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          8.0,
+          8.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-0-16_0x8_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "NS/AL/BL"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "NS/AL/BL",
+          "#CE0F69",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          16.0,
+          8.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-0-6_0x2_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "BGRY"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "BGRY",
+          "#D81526",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          6.0,
+          2.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-0-8_0x4_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "BGR",
+            "O/AL/BL"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "BGR",
+          "#008852",
+          "O/AL/BL",
+          "#CE0F69",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          8.0,
+          4.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-0-4_0x2_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "BRY"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "BRY",
+          "#D81526",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          4.0,
+          2.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-0-4_0x4_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "BG",
+            "BR",
+            "GO",
+            "GY"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "BR",
+          "#D81526",
+          "BG",
+          "#008852",
+          "GY",
+          "#F8C213",
+          "GO",
+          "#008852",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          4.0,
+          4.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-1-8_0x16_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "NS/AL/BL"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "NS/AL/BL",
+          "#0093B2",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          8.0,
+          16.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-1-4_0x4_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "BGRY",
+            "O/AL/BL"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "BGRY",
+          "#008852",
+          "O/AL/BL",
+          "#0093B2",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          4.0,
+          4.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-1-4_0x8_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "BGR"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "BGR",
+          "#D81526",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          4.0,
+          8.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-1-2_0x4_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "BRY"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "BRY",
+          "#F8C213",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          2.0,
+          4.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-overlay-2-2_0x6_0",
+      "type": "line",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "filter": [
+        "in",
+        [
+          "get",
+          "line"
+        ],
+        [
+          "literal",
+          [
+            "BGRY"
+          ]
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": [
+          "match",
+          [
+            "get",
+            "line"
+          ],
+          "BGRY",
+          "#F8C213",
+          "#666666"
+        ],
+        "line-width": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            1.0,
+            2.0
+          ],
+          12,
+          [
+            "match",
+            [
+              "get",
+              "type"
+            ],
+            "SC",
+            2.0,
+            3.0
+          ]
+        ],
+        "line-dasharray": [
+          2.0,
+          6.0
+        ]
+      }
+    },
+    {
+      "id": "rail-lines-labels",
+      "type": "symbol",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "minzoom": 11,
+      "layout": {
+        "symbol-placement": "line",
+        "text-field": [
+          "get",
+          "line"
+        ],
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-size": 11,
+        "symbol-spacing": 200,
+        "text-rotation-alignment": "map"
+      },
+      "paint": {
+        "text-color": "#1A1A1A",
+        "text-halo-color": "#FFFFFF",
+        "text-halo-width": 1.6
+      }
+    }
+  ]
+}

@@ -1,0 +1,1147 @@
+<?xml version="1.0" encoding="UTF-8"?><sld:StyledLayerDescriptor xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/sld" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" version="1.0.0">
+    <sld:NamedLayer>
+        <sld:Name>ott:current_rail</sld:Name>
+        <sld:UserStyle>
+            <sld:Name>rail</sld:Name>
+            <sld:Title>TriMet Rail Lines</sld:Title>
+            <sld:IsDefault>1</sld:IsDefault>
+            <sld:Abstract>Colors the rail lines individually</sld:Abstract>
+            <sld:FeatureTypeStyle>
+                <sld:Name>name</sld:Name>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BGRY</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">24.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">16.0 16.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F8C213</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 24.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BGRY</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">12.0 4.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F8C213</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">4.0 12.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BGR</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">60.0 30.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">30.0 60.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BGR</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">16.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 16.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BRY</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">32.0 16.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F8C213</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">16.0 32.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BRY</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 4.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F8C213</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">4.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>GO</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>GO</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BR</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BR</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BG</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">16.0 16.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BG</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>GY</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F8C213</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>GY</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F8C213</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>B</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>B</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#084C8D</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>G</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>G</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>R</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>R</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>O/AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>O/AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>O</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>O</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>Y</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F8C213</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>Y</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F8C213</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>WES</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>WES</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>O/AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>O/AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>NS/AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#84BD00</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">16.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 16.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>NS/AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#84BD00</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">16.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 16.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>NS/AL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#84BD00</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>NS/AL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#84BD00</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>NS/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#84BD00</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>NS/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#84BD00</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>AL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>AL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>NS</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#84BD00</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>NS</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#84BD00</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>O/AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MaxScaleDenominator>151181.0</sld:MaxScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#0093B2</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">24.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#CE0F69</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">16.0 16.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">3.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 24.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+                <sld:Rule>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsEqualTo>
+                                <ogc:PropertyName>line</ogc:PropertyName>
+                                <ogc:Literal>O/AL/BL</ogc:Literal>
+                            </ogc:PropertyIsEqualTo>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <sld:MinScaleDenominator>151181.0</sld:MinScaleDenominator>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#D81526</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">12.0 4.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#008852</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">8.0 8.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                    <sld:LineSymbolizer>
+                        <sld:Stroke>
+                            <sld:CssParameter name="stroke">#F58220</sld:CssParameter>
+                            <sld:CssParameter name="stroke-linejoin">round</sld:CssParameter>
+                            <sld:CssParameter name="stroke-width">2.0</sld:CssParameter>
+                            <sld:CssParameter name="stroke-dasharray">4.0 12.0</sld:CssParameter>
+                        </sld:Stroke>
+                    </sld:LineSymbolizer>
+                </sld:Rule>
+            </sld:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+</sld:StyledLayerDescriptor>
+

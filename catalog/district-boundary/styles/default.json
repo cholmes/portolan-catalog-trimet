@@ -1,0 +1,51 @@
+{
+  "version": 8,
+  "name": "TriMet District Boundary",
+  "metadata": {
+    "description": "The TriMet service district as a tinted fill with a TriMet-orange edge. The fill uses TriMet's own basemap water tint at low opacity so the district reads as an area without hiding a basemap underneath."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../district-boundary.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "district-boundary",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "district-boundary",
+      "paint": {
+        "fill-color": "#D4451F",
+        "fill-opacity": 0.08
+      }
+    },
+    {
+      "id": "district-boundary-edge",
+      "type": "line",
+      "source": "data",
+      "source-layer": "district-boundary",
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#D4451F",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          7,
+          1.2,
+          12,
+          3
+        ]
+      }
+    }
+  ]
+}

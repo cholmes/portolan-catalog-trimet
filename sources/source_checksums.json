@@ -1,0 +1,82 @@
+{
+  "tm_boundary": {
+    "shapefile": {
+      "size": 68862,
+      "checksum": "12208a1a21d037a0462a9cb6bfc934b664dc4f9f56b637929c047ea4639f84f67f1d"
+    },
+    "kml": {
+      "size": 261887,
+      "checksum": "12200993dc67171ff764551c3948f3419d775dd39f69d88cd5738315cb7218f8e258"
+    }
+  },
+  "tm_routes": {
+    "shapefile": {
+      "size": 757147,
+      "checksum": "12206a72cc514baadbfc0ccffe9168b92c3e179c6f6cc75155905469bdfcaf2bfa20"
+    },
+    "kml": {
+      "size": 6851807,
+      "checksum": "1220745616f45568b2b85a263070db18dd8d16e6b44aaaaa0b25641551bc35308515"
+    }
+  },
+  "tm_rail_lines": {
+    "shapefile": {
+      "size": 72423,
+      "checksum": "122017e2df17a7d9a3d2b6c4444c68c3893c0b432ad75f925ffdb312bcc9824b89d5"
+    },
+    "kml": {
+      "size": 351503,
+      "checksum": "122033e5ea985e92c8d4a4aacfb0060e9ec060cf3aba570ef4d851e73cfed40cfa02"
+    }
+  },
+  "tm_stops": {
+    "shapefile": {
+      "size": 197720,
+      "checksum": "122027ea0b13a7d74aa0aea65063ae2124344fb72e1d8d4c311837067b307c86a867"
+    },
+    "kml": {
+      "size": 5280261,
+      "checksum": "12200744fd7385f8b895b2de2df2f2e4184f5b91af548e039c432cc7a6b6612481aa"
+    }
+  },
+  "tm_route_stops": {
+    "shapefile": {
+      "size": 255997,
+      "checksum": "1220d0ad9c51d05b0759d6574619e3f36bea3791aa4361ccade64b2a7080fc9a585d"
+    },
+    "kml": {
+      "size": 12590040,
+      "checksum": "12206028a99fc14d47c0dba0a7460fec043071414ef9b577a5bf6b7b1d72a1af8fa1"
+    }
+  },
+  "tm_rail_stops": {
+    "shapefile": {
+      "size": 6143,
+      "checksum": "12202f663e515345ea867165b2d3ccf957eaf954121ce20fb4cb16c9d2f22539b6c5"
+    },
+    "kml": {
+      "size": 119193,
+      "checksum": "12209035e1c2f28bb259d3d0e6674dd839ff46e273a1b9477fc887d03357ffd6fa51"
+    }
+  },
+  "tm_tran_cen": {
+    "shapefile": {
+      "size": 1797,
+      "checksum": "122060d7e42eff402b203d2f441139495fdada208a7a2667cabf25565a7eb94feba6"
+    },
+    "kml": {
+      "size": 14623,
+      "checksum": "1220a5a645eb9694e537453b17848ff1fd400d10fef4d9a0cbf9f685e7efda854c3c"
+    }
+  },
+  "tm_parkride": {
+    "shapefile": {
+      "size": 3588,
+      "checksum": "12202a96f73b259332b5cccc038873d26bcaf5e83791be9c6788de7a4779fcd703e7"
+    },
+    "kml": {
+      "size": 53704,
+      "checksum": "12200f8f82892c5850dbe427a4f6b95d8a18bbd909a7a3d00f77f17f94a9f1912f18"
+    }
+  }
+}

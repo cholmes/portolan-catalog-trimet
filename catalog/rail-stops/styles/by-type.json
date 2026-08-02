@@ -1,0 +1,105 @@
+{
+  "version": 8,
+  "name": "TriMet Rail Stops by service type",
+  "metadata": {
+    "description": "Three marks instead of eighteen: light rail, streetcar and commuter rail. MAX platforms are drawn largest and WES smallest, matching the relative prominence TriMet gives each mode in its own line styling."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../rail-stops.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "rail-stops",
+      "type": "circle",
+      "source": "data",
+      "source-layer": "rail-stops",
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          [
+            "*",
+            [
+              "match",
+              [
+                "get",
+                "type"
+              ],
+              "MAX",
+              1.0,
+              "SC",
+              0.7,
+              "CR",
+              0.85,
+              0.8
+            ],
+            3
+          ],
+          12,
+          [
+            "*",
+            [
+              "match",
+              [
+                "get",
+                "type"
+              ],
+              "MAX",
+              1.0,
+              "SC",
+              0.7,
+              "CR",
+              0.85,
+              0.8
+            ],
+            5.5
+          ],
+          16,
+          [
+            "*",
+            [
+              "match",
+              [
+                "get",
+                "type"
+              ],
+              "MAX",
+              1.0,
+              "SC",
+              0.7,
+              "CR",
+              0.85,
+              0.8
+            ],
+            9
+          ]
+        ],
+        "circle-color": [
+          "match",
+          [
+            "get",
+            "type"
+          ],
+          "MAX",
+          "#1359AE",
+          "SC",
+          "#72A130",
+          "CR",
+          "#6E6E6E",
+          "#999999"
+        ],
+        "circle-stroke-color": "#FFFFFF",
+        "circle-stroke-width": 1.6
+      }
+    }
+  ]
+}

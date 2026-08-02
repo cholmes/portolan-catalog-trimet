@@ -1,0 +1,83 @@
+{
+  "version": 8,
+  "name": "TriMet Routes \u2014 Frequent Service",
+  "metadata": {
+    "description": "Splits the network on the FREQUENT flag. The 51 route-direction segments flagged True are drawn heavy in TriMet's FX green; the remaining 149 recede to a thin gray, so the frequent-service spine stands out against the rest of the system."
+  },
+  "sources": {
+    "data": {
+      "type": "vector",
+      "url": "pmtiles://../routes.pmtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "routes-other",
+      "type": "line",
+      "source": "data",
+      "source-layer": "routes",
+      "filter": [
+        "!=",
+        [
+          "get",
+          "frequent"
+        ],
+        "True"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#B8C2CC",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          0.5,
+          14,
+          1.2
+        ]
+      }
+    },
+    {
+      "id": "routes-frequent",
+      "type": "line",
+      "source": "data",
+      "source-layer": "routes",
+      "filter": [
+        "==",
+        [
+          "get",
+          "frequent"
+        ],
+        "True"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#61A60E",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          8,
+          1.4,
+          14,
+          3.6
+        ]
+      }
+    }
+  ]
+}

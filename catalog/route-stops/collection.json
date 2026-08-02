@@ -1,0 +1,320 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.3.0/schema.json",
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json"
+  ],
+  "id": "route-stops",
+  "title": "TriMet Route Stops",
+  "description": "Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. 8,314 Point features covering TriMet's service district in the Portland, Oregon metropolitan area, published by TriMet as `tm_route_stops` and last updated at the source on July 30, 2026. This is a cloud-native mirror: the same data as GeoParquet and PMTiles, reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft). The original Shapefile, KML and metadata page are linked as assets. Column descriptions and code lists are TriMet's own, taken from https://developer.trimet.org/gis/meta_tm_route_stops.shtml.",
+  "license": "other",
+  "keywords": [
+    "transit",
+    "public transport",
+    "TriMet",
+    "Portland",
+    "Oregon",
+    "point"
+  ],
+  "providers": [
+    {
+      "name": "TriMet",
+      "description": "Tri-County Metropolitan Transportation District of Oregon, the transit agency for the Portland metropolitan area and the originator of this data.",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://developer.trimet.org/gis/",
+      "email": "gis@trimet.org"
+    },
+    {
+      "name": "Chris Holmes",
+      "description": "Maintains this cloud-native mirror. Not affiliated with TriMet.",
+      "roles": [
+        "host"
+      ],
+      "url": "https://github.com/cholmes/portolan-catalog-trimet",
+      "email": "cholmes@9eo.org"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -123.115462,
+          45.285222,
+          -122.333062,
+          45.637731
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2026-07-30T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "updated": "2026-08-02T18:02:50Z",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "TriMet Geospatial Data"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "TriMet Geospatial Data"
+    },
+    {
+      "rel": "describedby",
+      "href": "./README.md",
+      "type": "text/markdown",
+      "title": "TriMet Route Stops README"
+    },
+    {
+      "rel": "agents",
+      "href": "./AGENTS.md",
+      "type": "text/markdown",
+      "title": "TriMet Route Stops agent guide"
+    },
+    {
+      "rel": "license",
+      "href": "https://developer.trimet.org/terms_of_use.shtml",
+      "type": "text/html",
+      "title": "TriMet Terms of Use"
+    },
+    {
+      "rel": "via",
+      "href": "https://developer.trimet.org/gis/meta_tm_route_stops.shtml",
+      "type": "text/html",
+      "title": "TriMet metadata for tm_route_stops"
+    },
+    {
+      "rel": "via",
+      "href": "https://developer.trimet.org/gis/",
+      "type": "text/html",
+      "title": "TriMet Geospatial Data"
+    },
+    {
+      "rel": "icon",
+      "href": "../_assets/trimet-logo.png",
+      "type": "image/png",
+      "title": "TriMet"
+    },
+    {
+      "rel": "pmtiles",
+      "href": "./route-stops.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "TriMet Route Stops vector tiles",
+      "pmtiles:layers": [
+        "route-stops"
+      ]
+    }
+  ],
+  "assets": {
+    "data": {
+      "href": "./route-stops.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "TriMet Route Stops (GeoParquet)",
+      "description": "Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. Reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft) source, Hilbert-ordered, zstd-compressed, with a GeoParquet 1.1 bbox covering column for row-group pruning.",
+      "roles": [
+        "data"
+      ],
+      "file:size": 331128,
+      "file:checksum": "12200d706b872e056a87c9ac2f915e007efdcf68043288d1899aa8c459fb6881c9eb",
+      "table:columns": [
+        {
+          "name": "rte",
+          "type": "int32",
+          "description": "Route number."
+        },
+        {
+          "name": "dir",
+          "type": "int32",
+          "description": "Direction of line serving this stop. Values: 0 = Direction 0; 1 = Direction 1."
+        },
+        {
+          "name": "rte_desc",
+          "type": "string",
+          "description": "Route name."
+        },
+        {
+          "name": "dir_desc",
+          "type": "string",
+          "description": "Description of route direction."
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Type of service. Values: AT = Aerial Tram; BUS = Bus; CR = Commuter rail; MAX = Light rail; SC = Streetcar."
+        },
+        {
+          "name": "stop_seq",
+          "type": "int32",
+          "description": "Stop sequence number."
+        },
+        {
+          "name": "stop_id",
+          "type": "int32",
+          "description": "Unique identifier."
+        },
+        {
+          "name": "stop_name",
+          "type": "string",
+          "description": "Intersection or street address of stop."
+        },
+        {
+          "name": "jurisdic",
+          "type": "string",
+          "description": "Jurisdiction (City or County) in which stop is located."
+        },
+        {
+          "name": "zipcode",
+          "type": "string",
+          "description": "Zipcode in which stop is located."
+        },
+        {
+          "name": "frequent",
+          "type": "string",
+          "description": "Indicates whether a route or route segment has frequent service. Values: True = Route segment has frequent service; False = Route segment does not have frequent service. Present in the shapefile but not listed in TriMet's metadata page for this layer; the definition is carried over from tm_routes, where FREQUENT is documented."
+        },
+        {
+          "name": "geometry",
+          "type": "binary",
+          "description": "Feature geometry, WGS84 longitude and latitude. Reprojected from TriMet's EPSG:2913 (NAD83(HARN) / Oregon North (ft))."
+        },
+        {
+          "name": "geometry_bbox",
+          "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>"
+        }
+      ],
+      "table:primary_geometry": "geometry",
+      "table:row_count": 8314,
+      "proj:code": "EPSG:4326",
+      "alternate": {
+        "s3": {
+          "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/route-stops/route-stops.parquet",
+          "title": "S3 URI"
+        }
+      }
+    },
+    "visual": {
+      "href": "./route-stops.pmtiles",
+      "type": "application/vnd.pmtiles",
+      "title": "TriMet Route Stops (PMTiles)",
+      "description": "Vector tiles for web display, layer name `route-stops`. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
+      "roles": [
+        "visual"
+      ],
+      "file:size": 2377631,
+      "file:checksum": "12208ef1157e8cf1c4c3fdf1d17cf6003d4521413b92a90246b01a7fa687bf0a1062",
+      "alternate": {
+        "s3": {
+          "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/route-stops/route-stops.pmtiles",
+          "title": "S3 URI"
+        }
+      }
+    },
+    "thumbnail": {
+      "href": "./thumbnail.webp",
+      "type": "image/webp",
+      "title": "TriMet Route Stops preview",
+      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap. WebP is allowed for thumbnails by spec PR portolan-sdi/portolan-spec#121, which this catalog targets; Portolan 0.1 alone permits only PNG and JPEG.",
+      "roles": [
+        "thumbnail"
+      ],
+      "file:size": 49678,
+      "file:checksum": "12202b7e93826459acf6cfddabca099e4e46603d770fe1049ea7b8a15a7d370ab749"
+    },
+    "style": {
+      "href": "./styles/default.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "TriMet Route Stops by service type",
+      "description": "One mark per stop per route-direction, colored by TYPE. Because a stop served by several routes appears several times, marks are drawn semi-transparent \u2014 the busiest transfer points show up as the darkest spots on the map.",
+      "roles": [
+        "style"
+      ],
+      "file:size": 1405,
+      "file:checksum": "122005ca678f7459bdff74d7662595c6b030bc72052d7b24803cefbf8b7d8ace6831"
+    },
+    "style-by-direction": {
+      "href": "./styles/by-direction.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "TriMet Route Stops by direction",
+      "description": "Splits stops on DIR. Along a two-way corridor the inbound and outbound stops sit on opposite sides of the street, so this style shows the paired-stop structure of the network directly.",
+      "roles": [
+        "style"
+      ],
+      "file:size": 1092,
+      "file:checksum": "1220dd1d2e556ff4ef3b85a095cdd74be584917767a5b08faab2c671884a07296604"
+    },
+    "style-by-sequence": {
+      "href": "./styles/by-sequence.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "TriMet Route Stops by stop sequence",
+      "description": "Ramps color across STOP_SEQ, the position of a stop along its route-direction. Following the ramp traces the direction of travel, and the gradient makes route ends easy to pick out. Sequence numbers restart at every route-direction, so the ramp is only meaningful when the view is filtered to one route.",
+      "roles": [
+        "style"
+      ],
+      "file:size": 1245,
+      "file:checksum": "1220e0dcdc475992e2ce74b36d1867ba4d68a85672b297e09c96459e48acd4d4e37f"
+    },
+    "style-frequent-service": {
+      "href": "./styles/frequent-service.json",
+      "type": "application/vnd.mapbox.style+json",
+      "title": "TriMet Route Stops \u2014 Frequent Service",
+      "description": "Stops on route-directions flagged FREQUENT, drawn over the rest. This is the stop-level companion to the routes Frequent Service style, and it answers a question the routes layer cannot: which stops a rider can use without consulting a timetable.",
+      "roles": [
+        "style"
+      ],
+      "file:size": 1632,
+      "file:checksum": "122064140610ec4c5a40a7a055f6bce67ad8b508787ea574a8aa1b5261f6d211363c"
+    },
+    "source_shapefile": {
+      "href": "https://developer.trimet.org/gis/data/tm_route_stops.zip",
+      "type": "application/zip",
+      "title": "TriMet Route Stops \u2014 original TriMet Shapefile",
+      "description": "TriMet's own distribution of `tm_route_stops`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. Size and checksum are of what TriMet served at the sync time recorded in `updated`.",
+      "roles": [
+        "data",
+        "source"
+      ],
+      "file:size": 255997,
+      "file:checksum": "1220d0ad9c51d05b0759d6574619e3f36bea3791aa4361ccade64b2a7080fc9a585d"
+    },
+    "source_kml": {
+      "href": "https://developer.trimet.org/gis/data/tm_route_stops.kml",
+      "type": "application/vnd.google-earth.kml+xml",
+      "title": "TriMet Route Stops \u2014 original TriMet KML",
+      "description": "TriMet's KML distribution of the same layer.",
+      "roles": [
+        "data",
+        "source"
+      ],
+      "file:size": 12590040,
+      "file:checksum": "12206028a99fc14d47c0dba0a7460fec043071414ef9b577a5bf6b7b1d72a1af8fa1"
+    },
+    "source_sld": {
+      "href": "./styles/trimet-stops.sld.xml",
+      "type": "application/vnd.ogc.sld+xml",
+      "title": "TriMet GeoServer style ott:stops (SLD)",
+      "description": "TriMet's own stop symbology: a white circle with a dark 2px stroke at size 6, which styles/default.json reproduces.",
+      "roles": [
+        "metadata"
+      ],
+      "file:size": 1551,
+      "file:checksum": "1220937efc897573873afe2a886f1ff3176298ab2fd01e911612766af6c22dc6f479"
+    }
+  }
+}
