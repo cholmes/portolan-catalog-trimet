@@ -116,9 +116,9 @@ LIMIT 10;
 
 ## Related collections
 
-- [`route-stops`](../route-stops/AGENTS.md) — the same stops exploded by route and direction; join on `stop_id`
-- [`rail-stops`](../rail-stops/AGENTS.md) — rail platforms with real station names, but a *different* id space
-- [`transit-centers`](../transit-centers/AGENTS.md) — the 15 major transfer hubs
+- [`route-stops`](https://data.source.coop/cholmes/trimet/route-stops/AGENTS.md) — the same stops exploded by route and direction; join on `stop_id`
+- [`rail-stops`](https://data.source.coop/cholmes/trimet/rail-stops/AGENTS.md) — rail platforms with real station names, but a *different* id space
+- [`transit-centers`](https://data.source.coop/cholmes/trimet/transit-centers/AGENTS.md) — the 15 major transfer hubs
 
 ## Provenance
 

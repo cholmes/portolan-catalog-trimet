@@ -14,10 +14,10 @@ Clackamas counties. Its edge is not a county boundary and not the Metro urban
 growth boundary; it is the taxing and service district, and it excludes parts of
 all three counties.
 
-> **Agents:** see [AGENTS.md](./AGENTS.md) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md](https://data.source.coop/cholmes/trimet/district-boundary/AGENTS.md) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![TriMet District Boundary](./thumbnail.webp)
+![TriMet District Boundary](https://data.source.coop/cholmes/trimet/district-boundary/thumbnail.webp)
 
 ## Quick start
 
@@ -69,15 +69,15 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/district-boundar
 
 Column descriptions are TriMet's own, taken verbatim from
 [meta_tm_boundary.shtml](https://developer.trimet.org/gis/meta_tm_boundary.shtml). The same text is carried in
-`table:columns` in [collection.json](./collection.json).
+`table:columns` in [collection.json](https://data.source.coop/cholmes/trimet/district-boundary/collection.json).
 
 ## Visualization
 
 | Style | What it shows |
 |---|---|
-| [`default.json`](./styles/default.json) | The TriMet service district as a tinted fill with a TriMet-orange edge. The fill uses TriMet's own basemap water tint at low opacity so the district reads as an area without hiding a basemap underneath. |
-| [`context.json`](./styles/context.json) | A solid, opaque fill in TriMet's basemap building gray. Use this as a backdrop underneath the stop and route layers when no basemap is available, so the network has a visible service area behind it. |
-| [`outline.json`](./styles/outline.json) | The district edge with no fill, for overlaying on top of other layers without tinting what is underneath. |
+| [`default.json`](https://data.source.coop/cholmes/trimet/district-boundary/styles/default.json) | The TriMet service district as a tinted fill with a TriMet-orange edge. The fill uses TriMet's own basemap water tint at low opacity so the district reads as an area without hiding a basemap underneath. |
+| [`context.json`](https://data.source.coop/cholmes/trimet/district-boundary/styles/context.json) | A solid, opaque fill in TriMet's basemap building gray. Use this as a backdrop underneath the stop and route layers when no basemap is available, so the network has a visible service area behind it. |
+| [`outline.json`](https://data.source.coop/cholmes/trimet/district-boundary/styles/outline.json) | The district edge with no fill, for overlaying on top of other layers without tinting what is underneath. |
 
 The PMTiles layer is named `district-boundary`. Styles reference it as `../district-boundary.pmtiles`,
 so they load unmodified against this directory.
@@ -86,14 +86,14 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`district-boundary.parquet`](./district-boundary.parquet) | 90.8 KB | GeoParquet 1.1, 1 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`district-boundary.pmtiles`](./district-boundary.pmtiles) | 26.9 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](./thumbnail.webp) | 48.6 KB | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`](./collection.json) | — | STAC Collection metadata |
+| [`district-boundary.parquet`](https://data.source.coop/cholmes/trimet/district-boundary/district-boundary.parquet) | 90.8 KB | GeoParquet 1.1, 1 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`district-boundary.pmtiles`](https://data.source.coop/cholmes/trimet/district-boundary/district-boundary.pmtiles) | 26.9 KB | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/district-boundary/thumbnail.webp) | 48.6 KB | Rendered from `styles/default.json` over a light basemap |
+| [`collection.json`](https://data.source.coop/cholmes/trimet/district-boundary/collection.json) | — | STAC Collection metadata |
 
 ## Provenance
 
-[![TriMet](../_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
+[![TriMet](https://data.source.coop/cholmes/trimet/_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
 
 Produced by **TriMet GIS** (4012 SE 17th Ave, GIS3,
 Portland, OR 97202, gis@trimet.org) and distributed at

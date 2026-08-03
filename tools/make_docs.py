@@ -25,6 +25,21 @@ OUT = ROOT / "catalog"
 BASE = M.PUBLIC_BASE
 
 
+def url(*parts):
+    """An absolute URL into the published catalog.
+
+    Links inside the generated Markdown are absolute, not relative. Source
+    Cooperative renders a README on a page whose URL is not the README's own
+    directory, so `./_assets/trimet-logo.png` resolves against the wrong base
+    and the image 404s. Absolute URLs render correctly there, on GitHub, and
+    anywhere else the file is displayed. This costs no portability that the
+    docs did not already give up: every Quick Start in them names the published
+    URL. The STAC links and asset hrefs in collection.json stay relative, which
+    is what the spec requires and what keeps the catalog relocatable.
+    """
+    return "/".join([BASE, *(str(p).strip("/") for p in parts)])
+
+
 def coll_stats(cid):
     import pyarrow.parquet as pq
     p = OUT / cid / f"{cid}.parquet"
@@ -76,7 +91,7 @@ def styles_table(cid):
     for n in names:
         meta = json.loads((sdir / n).read_text())
         desc = meta.get("metadata", {}).get("description", "")
-        rows.append(f"| [`{n}`](./styles/{n}) | {desc} |")
+        rows.append(f"| [`{n}`]({url(cid, 'styles', n)}) | {desc} |")
     return "\n".join(rows)
 
 
@@ -104,10 +119,10 @@ as `{coll['source']}` and last updated at the source on
 
 {c['summary']}
 
-> **Agents:** see [AGENTS.md](./AGENTS.md) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md]({url(cid, "AGENTS.md")}) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![{coll['title']}](./thumbnail.webp)
+![{coll['title']}]({url(cid, 'thumbnail.webp')})
 
 ## Quick start
 
@@ -142,7 +157,7 @@ gdf = gpd.read_parquet("{BASE}/{cid}/{cid}.parquet")
 
 Column descriptions are TriMet's own, taken verbatim from
 [{s['metadata'].split('/')[-1]}]({s['metadata']}). The same text is carried in
-`table:columns` in [collection.json](./collection.json).
+`table:columns` in [collection.json]({url(cid, "collection.json")}).
 
 ## Visualization
 
@@ -155,14 +170,14 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`{cid}.parquet`](./{cid}.parquet) | {human(st['size'])} | GeoParquet 1.1, {st['rows']:,} rows in {st['row_groups']} row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`{cid}.pmtiles`](./{cid}.pmtiles) | {human(st['pmtiles'])} | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](./thumbnail.webp) | {human(st["thumb"])} | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`](./collection.json) | — | STAC Collection metadata |
+| [`{cid}.parquet`]({url(cid, cid + ".parquet")}) | {human(st['size'])} | GeoParquet 1.1, {st['rows']:,} rows in {st['row_groups']} row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`{cid}.pmtiles`]({url(cid, cid + ".pmtiles")}) | {human(st['pmtiles'])} | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`]({url(cid, "thumbnail.webp")}) | {human(st["thumb"])} | Rendered from `styles/default.json` over a light basemap |
+| [`collection.json`]({url(cid, "collection.json")}) | — | STAC Collection metadata |
 
 ## Provenance
 
-[![TriMet](../_assets/trimet-logo.png)]({M.GIS_PAGE})
+[![TriMet]({url("_assets/trimet-logo.png")})]({M.GIS_PAGE})
 
 Produced by **TriMet GIS** ({M.TRIMET_CONTACT['address']},
 {M.TRIMET_CONTACT['city']}, {M.TRIMET_CONTACT['email']}) and distributed at
@@ -187,7 +202,7 @@ def collection_agents(coll):
 
     quirks = "\n\n".join(f"### {h}\n\n{b}" for h, b in c["quirks"])
     recipes = "\n\n".join(f"### {t}\n\n```sql\n{q}\n```" for t, q in c["recipes"])
-    related = "\n".join(f"- [`{r}`](../{r}/AGENTS.md) — {why}" for r, why in c["related"])
+    related = "\n".join(f"- [`{r}`]({url(r, 'AGENTS.md')}) — {why}" for r, why in c["related"])
 
     return f"""# {coll['title']} — agent guide
 
@@ -256,7 +271,7 @@ SORT_BY_BBOX=YES -lco WRITE_COVERING_BBOX=YES`, then tippecanoe with `-r1
 def catalog_readme():
     rows = ["| Collection | Features | Geometry | Description |", "|---|---|---|---|"]
     for c in M.COLLECTIONS:
-        rows.append(f"| [{c['title']}](./{c['id']}/) | {c['count']:,} | "
+        rows.append(f"| [{c['title']}]({url(c['id'])}/) | {c['count']:,} | "
                     f"{c['geometry']} | {c['blurb']} |")
     table = "\n".join(rows)
 
@@ -268,11 +283,11 @@ def catalog_readme():
 
     return f"""# TriMet Geospatial Data
 
-[![TriMet](./_assets/trimet-logo.png)]({M.GIS_PAGE})
+[![TriMet]({url("_assets/trimet-logo.png")})]({M.GIS_PAGE})
 
 {C.CATALOG_INTRO}
 
-> **Agents:** start at [AGENTS.md](./AGENTS.md).
+> **Agents:** start at [AGENTS.md]({url("AGENTS.md")}).
 
 ## Collections
 
@@ -358,7 +373,7 @@ def catalog_agents():
     }
     for c in M.COLLECTIONS:
         k, note = keys[c["id"]]
-        rows.append(f"| [`{c['id']}`](./{c['id']}/AGENTS.md) | {c['count']:,} | "
+        rows.append(f"| [`{c['id']}`]({url(c['id'], 'AGENTS.md')}) | {c['count']:,} | "
                     f"{c['geometry']} | {k} | {note} |")
     table = "\n".join(rows)
 

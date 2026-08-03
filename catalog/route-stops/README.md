@@ -13,10 +13,10 @@ This is the only layer in the catalog that connects a stop to a route, and it
 carries `stop_seq`, the position of the stop along its route-direction, which is
 what lets you reconstruct the order of stops along a line.
 
-> **Agents:** see [AGENTS.md](./AGENTS.md) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md](https://data.source.coop/cholmes/trimet/route-stops/AGENTS.md) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![TriMet Route Stops](./thumbnail.webp)
+![TriMet Route Stops](https://data.source.coop/cholmes/trimet/route-stops/thumbnail.webp)
 
 ## Quick start
 
@@ -78,16 +78,16 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/route-stops/rout
 
 Column descriptions are TriMet's own, taken verbatim from
 [meta_tm_route_stops.shtml](https://developer.trimet.org/gis/meta_tm_route_stops.shtml). The same text is carried in
-`table:columns` in [collection.json](./collection.json).
+`table:columns` in [collection.json](https://data.source.coop/cholmes/trimet/route-stops/collection.json).
 
 ## Visualization
 
 | Style | What it shows |
 |---|---|
-| [`default.json`](./styles/default.json) | One mark per stop per route-direction, colored by TYPE. Because a stop served by several routes appears several times, marks are drawn semi-transparent — the busiest transfer points show up as the darkest spots on the map. |
-| [`by-direction.json`](./styles/by-direction.json) | Splits stops on DIR. Along a two-way corridor the inbound and outbound stops sit on opposite sides of the street, so this style shows the paired-stop structure of the network directly. |
-| [`by-sequence.json`](./styles/by-sequence.json) | Ramps color across STOP_SEQ, the position of a stop along its route-direction. Following the ramp traces the direction of travel, and the gradient makes route ends easy to pick out. Sequence numbers restart at every route-direction, so the ramp is only meaningful when the view is filtered to one route. |
-| [`frequent-service.json`](./styles/frequent-service.json) | Stops on route-directions flagged FREQUENT, drawn over the rest. This is the stop-level companion to the routes Frequent Service style, and it answers a question the routes layer cannot: which stops a rider can use without consulting a timetable. |
+| [`default.json`](https://data.source.coop/cholmes/trimet/route-stops/styles/default.json) | One mark per stop per route-direction, colored by TYPE. Because a stop served by several routes appears several times, marks are drawn semi-transparent — the busiest transfer points show up as the darkest spots on the map. |
+| [`by-direction.json`](https://data.source.coop/cholmes/trimet/route-stops/styles/by-direction.json) | Splits stops on DIR. Along a two-way corridor the inbound and outbound stops sit on opposite sides of the street, so this style shows the paired-stop structure of the network directly. |
+| [`by-sequence.json`](https://data.source.coop/cholmes/trimet/route-stops/styles/by-sequence.json) | Ramps color across STOP_SEQ, the position of a stop along its route-direction. Following the ramp traces the direction of travel, and the gradient makes route ends easy to pick out. Sequence numbers restart at every route-direction, so the ramp is only meaningful when the view is filtered to one route. |
+| [`frequent-service.json`](https://data.source.coop/cholmes/trimet/route-stops/styles/frequent-service.json) | Stops on route-directions flagged FREQUENT, drawn over the rest. This is the stop-level companion to the routes Frequent Service style, and it answers a question the routes layer cannot: which stops a rider can use without consulting a timetable. |
 
 The PMTiles layer is named `route-stops`. Styles reference it as `../route-stops.pmtiles`,
 so they load unmodified against this directory.
@@ -96,14 +96,14 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`route-stops.parquet`](./route-stops.parquet) | 323.4 KB | GeoParquet 1.1, 8,314 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`route-stops.pmtiles`](./route-stops.pmtiles) | 2.3 MB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](./thumbnail.webp) | 48.5 KB | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`](./collection.json) | — | STAC Collection metadata |
+| [`route-stops.parquet`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.parquet) | 323.4 KB | GeoParquet 1.1, 8,314 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`route-stops.pmtiles`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.pmtiles) | 2.3 MB | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/route-stops/thumbnail.webp) | 48.5 KB | Rendered from `styles/default.json` over a light basemap |
+| [`collection.json`](https://data.source.coop/cholmes/trimet/route-stops/collection.json) | — | STAC Collection metadata |
 
 ## Provenance
 
-[![TriMet](../_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
+[![TriMet](https://data.source.coop/cholmes/trimet/_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
 
 Produced by **TriMet GIS** (4012 SE 17th Ave, GIS3,
 Portland, OR 97202, gis@trimet.org) and distributed at

@@ -113,8 +113,8 @@ GROUP BY 1;
 
 ## Related collections
 
-- [`transit-centers`](../transit-centers/AGENTS.md) — many park and rides sit at a transit center
-- [`rail-stops`](../rail-stops/AGENTS.md) — the large lots are mostly on MAX
+- [`transit-centers`](https://data.source.coop/cholmes/trimet/transit-centers/AGENTS.md) — many park and rides sit at a transit center
+- [`rail-stops`](https://data.source.coop/cholmes/trimet/rail-stops/AGENTS.md) — the large lots are mostly on MAX
 
 ## Provenance
 

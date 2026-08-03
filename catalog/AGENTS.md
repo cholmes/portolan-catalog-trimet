@@ -10,14 +10,14 @@ a query engine beyond DuckDB.
 
 | Collection | Rows | Geometry | Key | Notes |
 |---|---|---|---|---|
-| [`district-boundary`](./district-boundary/AGENTS.md) | 1 | Polygon | — | single polygon; the service district |
-| [`routes`](./routes/AGENTS.md) | 200 | LineString | `(rte, dir)` | alignments; `rte` alone is **not** unique |
-| [`rail-lines`](./rail-lines/AGENTS.md) | 171 | LineString | — | generalized for display; `line` encodes shared track |
-| [`stops`](./stops/AGENTS.md) | 6,316 | Point | `stop_id` | deduplicated stops; `stop_id` is the public stop number |
-| [`route-stops`](./route-stops/AGENTS.md) | 8,314 | Point | `(rte, dir, stop_id)` | stops exploded by service; the only stop↔route link |
-| [`rail-stops`](./rail-stops/AGENTS.md) | 169 | Point | — | **no id column**; does not join to `stops` |
-| [`transit-centers`](./transit-centers/AGENTS.md) | 15 | Point | `name` | 15 hubs |
-| [`park-and-rides`](./park-and-rides/AGENTS.md) | 46 | Point | `name` | 46 lots, `spaces` = nominal capacity |
+| [`district-boundary`](https://data.source.coop/cholmes/trimet/district-boundary/AGENTS.md) | 1 | Polygon | — | single polygon; the service district |
+| [`routes`](https://data.source.coop/cholmes/trimet/routes/AGENTS.md) | 200 | LineString | `(rte, dir)` | alignments; `rte` alone is **not** unique |
+| [`rail-lines`](https://data.source.coop/cholmes/trimet/rail-lines/AGENTS.md) | 171 | LineString | — | generalized for display; `line` encodes shared track |
+| [`stops`](https://data.source.coop/cholmes/trimet/stops/AGENTS.md) | 6,316 | Point | `stop_id` | deduplicated stops; `stop_id` is the public stop number |
+| [`route-stops`](https://data.source.coop/cholmes/trimet/route-stops/AGENTS.md) | 8,314 | Point | `(rte, dir, stop_id)` | stops exploded by service; the only stop↔route link |
+| [`rail-stops`](https://data.source.coop/cholmes/trimet/rail-stops/AGENTS.md) | 169 | Point | — | **no id column**; does not join to `stops` |
+| [`transit-centers`](https://data.source.coop/cholmes/trimet/transit-centers/AGENTS.md) | 15 | Point | `name` | 15 hubs |
+| [`park-and-rides`](https://data.source.coop/cholmes/trimet/park-and-rides/AGENTS.md) | 46 | Point | `name` | 46 lots, `spaces` = nominal capacity |
 
 **The joins that work:**
 

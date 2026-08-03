@@ -124,8 +124,8 @@ WHERE frequent = 'True';
 
 ## Related collections
 
-- [`stops`](../stops/AGENTS.md) — the deduplicated stop list; join on `stop_id`
-- [`routes`](../routes/AGENTS.md) — route attributes including `public_rte`; join on `(rte, dir)`
+- [`stops`](https://data.source.coop/cholmes/trimet/stops/AGENTS.md) — the deduplicated stop list; join on `stop_id`
+- [`routes`](https://data.source.coop/cholmes/trimet/routes/AGENTS.md) — route attributes including `public_rte`; join on `(rte, dir)`
 
 ## Provenance
 

@@ -10,10 +10,10 @@ display and carrying real **station names** rather than intersections. Each stop
 records the line or lines that serve it in the same `line` code space as
 `rail-lines`, so the two layers style consistently.
 
-> **Agents:** see [AGENTS.md](./AGENTS.md) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md](https://data.source.coop/cholmes/trimet/rail-stops/AGENTS.md) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![TriMet Rail Stops](./thumbnail.webp)
+![TriMet Rail Stops](https://data.source.coop/cholmes/trimet/rail-stops/thumbnail.webp)
 
 ## Quick start
 
@@ -68,15 +68,15 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/rail-stops/rail-
 
 Column descriptions are TriMet's own, taken verbatim from
 [meta_tm_rail_stops.shtml](https://developer.trimet.org/gis/meta_tm_rail_stops.shtml). The same text is carried in
-`table:columns` in [collection.json](./collection.json).
+`table:columns` in [collection.json](https://data.source.coop/cholmes/trimet/rail-stops/collection.json).
 
 ## Visualization
 
 | Style | What it shows |
 |---|---|
-| [`default.json`](./styles/default.json) | Station marks filled with the color of the line that serves them, using the same palette as TriMet's `ott:rail` style so this layer sits correctly on top of the rail-lines default style. Stations on shared track take the trunk line's color; the LINE code itself records the full set of services. |
-| [`by-type.json`](./styles/by-type.json) | Three marks instead of eighteen: light rail, streetcar and commuter rail. MAX platforms are drawn largest and WES smallest, matching the relative prominence TriMet gives each mode in its own line styling. |
-| [`labeled.json`](./styles/labeled.json) | Line-colored station marks with STATION names. Unlike the bus stop names, these are real station names, which makes this the most useful style for orienting a reader on the rail network. |
+| [`default.json`](https://data.source.coop/cholmes/trimet/rail-stops/styles/default.json) | Station marks filled with the color of the line that serves them, using the same palette as TriMet's `ott:rail` style so this layer sits correctly on top of the rail-lines default style. Stations on shared track take the trunk line's color; the LINE code itself records the full set of services. |
+| [`by-type.json`](https://data.source.coop/cholmes/trimet/rail-stops/styles/by-type.json) | Three marks instead of eighteen: light rail, streetcar and commuter rail. MAX platforms are drawn largest and WES smallest, matching the relative prominence TriMet gives each mode in its own line styling. |
+| [`labeled.json`](https://data.source.coop/cholmes/trimet/rail-stops/styles/labeled.json) | Line-colored station marks with STATION names. Unlike the bus stop names, these are real station names, which makes this the most useful style for orienting a reader on the rail network. |
 
 The PMTiles layer is named `rail-stops`. Styles reference it as `../rail-stops.pmtiles`,
 so they load unmodified against this directory.
@@ -85,14 +85,14 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`rail-stops.parquet`](./rail-stops.parquet) | 11.3 KB | GeoParquet 1.1, 169 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`rail-stops.pmtiles`](./rail-stops.pmtiles) | 60.7 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](./thumbnail.webp) | 48.7 KB | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`](./collection.json) | — | STAC Collection metadata |
+| [`rail-stops.parquet`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.parquet) | 11.3 KB | GeoParquet 1.1, 169 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`rail-stops.pmtiles`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.pmtiles) | 60.7 KB | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/rail-stops/thumbnail.webp) | 48.7 KB | Rendered from `styles/default.json` over a light basemap |
+| [`collection.json`](https://data.source.coop/cholmes/trimet/rail-stops/collection.json) | — | STAC Collection metadata |
 
 ## Provenance
 
-[![TriMet](../_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
+[![TriMet](https://data.source.coop/cholmes/trimet/_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
 
 Produced by **TriMet GIS** (4012 SE 17th Ave, GIS3,
 Portland, OR 97202, gis@trimet.org) and distributed at

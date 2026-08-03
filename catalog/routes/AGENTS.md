@@ -120,9 +120,9 @@ ORDER BY rte;
 
 ## Related collections
 
-- [`route-stops`](../route-stops/AGENTS.md) — the stops along each of these route-directions, joined on `(rte, dir)`
-- [`rail-lines`](../rail-lines/AGENTS.md) — rail drawn for cartography, with per-line colors
-- [`stops`](../stops/AGENTS.md) — the deduplicated stop list
+- [`route-stops`](https://data.source.coop/cholmes/trimet/route-stops/AGENTS.md) — the stops along each of these route-directions, joined on `(rte, dir)`
+- [`rail-lines`](https://data.source.coop/cholmes/trimet/rail-lines/AGENTS.md) — rail drawn for cartography, with per-line colors
+- [`stops`](https://data.source.coop/cholmes/trimet/stops/AGENTS.md) — the deduplicated stop list
 
 ## Provenance
 

@@ -139,6 +139,16 @@ def check_collection(path):
           f"{rel}: default style is not listed first")
 
 
+# Only Markdown link and image targets, `](...)`. The same URLs also appear
+# inside SQL snippets, where they are quoted strings rather than links.
+DOC_LINK = re.compile(r"\]\(" + re.escape(M.PUBLIC_BASE) + r"/([^)\s]*)\)")
+
+
+def doc_links(text):
+    """Catalog-relative paths named by Markdown links into the published base."""
+    return [m.rstrip("/") for m in DOC_LINK.findall(text) if m.strip("/")]
+
+
 def check_docs():
     """Documentation must not contradict the metadata it describes."""
     for coll in M.COLLECTIONS:
@@ -148,10 +158,18 @@ def check_docs():
             if not check(p.exists(), f"{coll['id']}: missing {fn}"):
                 continue
             text = p.read_text()
-            # Every local link in the docs must resolve.
-            for href in re.findall(r"\]\((\./[^)]+)\)", text):
-                target = (d / href[2:]).resolve()
-                check(target.exists(), f"{coll['id']}/{fn}: link {href} does not resolve")
+            # Doc links are absolute into the published catalog (see
+            # make_docs.url) rather than relative, because Source Cooperative
+            # renders a README on a page whose URL is not the README's own
+            # directory. Check each one still names a file that exists here.
+            for href in doc_links(text):
+                target = (CATALOG / href).resolve()
+                check(target.exists(),
+                      f"{coll['id']}/{fn}: {M.PUBLIC_BASE}/{href} has no local file")
+            # Nothing should still be relative; those render broken.
+            for href in re.findall(r"\]\((\.\.?/[^)]+)\)", text):
+                failures.append(f"{coll['id']}/{fn}: relative link {href} "
+                                f"will not render on Source Cooperative")
         # Feature counts stated in the manifest must match the parquet.
         import pyarrow.parquet as pq
         rows = pq.ParquetFile(d / f"{coll['id']}.parquet").metadata.num_rows
@@ -175,7 +193,16 @@ def main():
             check_collection(p)
 
     for fn in ("README.md", "AGENTS.md"):
-        check((CATALOG / fn).exists(), f"catalog: missing {fn}")
+        p = CATALOG / fn
+        if not check(p.exists(), f"catalog: missing {fn}"):
+            continue
+        text = p.read_text()
+        for href in doc_links(text):
+            target = (CATALOG / href).resolve()
+            check(target.exists(), f"catalog/{fn}: {M.PUBLIC_BASE}/{href} has no local file")
+        for href in re.findall(r"\]\((\.\.?/[^)]+)\)", text):
+            failures.append(f"catalog/{fn}: relative link {href} "
+                            f"will not render on Source Cooperative")
     check_docs()
 
     if failures:

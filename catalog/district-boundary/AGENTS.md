@@ -93,8 +93,8 @@ FROM 'district-boundary/district-boundary.parquet';
 
 ## Related collections
 
-- [`stops`](../stops/AGENTS.md) — the service the district exists to deliver
-- [`routes`](../routes/AGENTS.md) — alignments, a few of which run beyond the district edge
+- [`stops`](https://data.source.coop/cholmes/trimet/stops/AGENTS.md) — the service the district exists to deliver
+- [`routes`](https://data.source.coop/cholmes/trimet/routes/AGENTS.md) — alignments, a few of which run beyond the district edge
 
 ## Provenance
 

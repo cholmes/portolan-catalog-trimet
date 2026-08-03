@@ -113,8 +113,8 @@ ORDER BY rail_modes NULLS LAST;
 
 ## Related collections
 
-- [`park-and-rides`](../park-and-rides/AGENTS.md) — parking at many of the same facilities
-- [`route-stops`](../route-stops/AGENTS.md) — the routes that actually call at each hub
+- [`park-and-rides`](https://data.source.coop/cholmes/trimet/park-and-rides/AGENTS.md) — parking at many of the same facilities
+- [`route-stops`](https://data.source.coop/cholmes/trimet/route-stops/AGENTS.md) — the routes that actually call at each hub
 
 ## Provenance
 

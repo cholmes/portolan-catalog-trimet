@@ -128,8 +128,8 @@ ORDER BY type, segments DESC;
 
 ## Related collections
 
-- [`rail-stops`](../rail-stops/AGENTS.md) — the stations on these lines, sharing the same `line` codes and colors
-- [`routes`](../routes/AGENTS.md) — the operational, non-generalized alignment of the same rail service
+- [`rail-stops`](https://data.source.coop/cholmes/trimet/rail-stops/AGENTS.md) — the stations on these lines, sharing the same `line` codes and colors
+- [`routes`](https://data.source.coop/cholmes/trimet/routes/AGENTS.md) — the operational, non-generalized alignment of the same rail service
 
 ## Provenance
 

@@ -1,6 +1,6 @@
 # TriMet Geospatial Data
 
-[![TriMet](./_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
+[![TriMet](https://data.source.coop/cholmes/trimet/_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
 
 TriMet — the Tri-County Metropolitan Transportation District of Oregon — runs
 bus, light rail (MAX), commuter rail (WES) and streetcar service across the
@@ -15,20 +15,20 @@ KML and metadata page linked from every collection. Nothing has been added to th
 data and no features were dropped.
 
 
-> **Agents:** start at [AGENTS.md](./AGENTS.md).
+> **Agents:** start at [AGENTS.md](https://data.source.coop/cholmes/trimet/AGENTS.md).
 
 ## Collections
 
 | Collection | Features | Geometry | Description |
 |---|---|---|---|
-| [TriMet District Boundary](./district-boundary/) | 1 | Polygon | TriMet service district boundary. |
-| [TriMet Routes](./routes/) | 200 | LineString | TriMet fixed route alignments (includes bus and rail.) |
-| [TriMet Rail Lines](./rail-lines/) | 171 | LineString | TriMet rail service optimized for cartographic display. |
-| [TriMet Stops](./stops/) | 6,316 | Point | Active TriMet stops (includes bus and rail.) |
-| [TriMet Route Stops](./route-stops/) | 8,314 | Point | Active TriMet stops (includes bus and rail) by route and direction. |
-| [TriMet Rail Stops](./rail-stops/) | 169 | Point | TriMet rail stops optimized for cartographic display. |
-| [TriMet Transit Centers](./transit-centers/) | 15 | Point | TriMet transit center locations. |
-| [TriMet Park and Rides](./park-and-rides/) | 46 | Point | TriMet park and ride locations. |
+| [TriMet District Boundary](https://data.source.coop/cholmes/trimet/district-boundary/) | 1 | Polygon | TriMet service district boundary. |
+| [TriMet Routes](https://data.source.coop/cholmes/trimet/routes/) | 200 | LineString | TriMet fixed route alignments (includes bus and rail.) |
+| [TriMet Rail Lines](https://data.source.coop/cholmes/trimet/rail-lines/) | 171 | LineString | TriMet rail service optimized for cartographic display. |
+| [TriMet Stops](https://data.source.coop/cholmes/trimet/stops/) | 6,316 | Point | Active TriMet stops (includes bus and rail.) |
+| [TriMet Route Stops](https://data.source.coop/cholmes/trimet/route-stops/) | 8,314 | Point | Active TriMet stops (includes bus and rail) by route and direction. |
+| [TriMet Rail Stops](https://data.source.coop/cholmes/trimet/rail-stops/) | 169 | Point | TriMet rail stops optimized for cartographic display. |
+| [TriMet Transit Centers](https://data.source.coop/cholmes/trimet/transit-centers/) | 15 | Point | TriMet transit center locations. |
+| [TriMet Park and Rides](https://data.source.coop/cholmes/trimet/park-and-rides/) | 46 | Point | TriMet park and ride locations. |
 
 ## Quick start
 

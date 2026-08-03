@@ -13,10 +13,10 @@ owners and hold 929.
 The largest is the 750-space Clackamas Town Center garage; the median lot is far
 smaller, so capacity is heavily concentrated in a handful of facilities.
 
-> **Agents:** see [AGENTS.md](./AGENTS.md) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md](https://data.source.coop/cholmes/trimet/park-and-rides/AGENTS.md) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![TriMet Park and Rides](./thumbnail.webp)
+![TriMet Park and Rides](https://data.source.coop/cholmes/trimet/park-and-rides/thumbnail.webp)
 
 ## Quick start
 
@@ -72,16 +72,16 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/park-and-rides/p
 
 Column descriptions are TriMet's own, taken verbatim from
 [meta_tm_parkride.shtml](https://developer.trimet.org/gis/meta_tm_parkride.shtml). The same text is carried in
-`table:columns` in [collection.json](./collection.json).
+`table:columns` in [collection.json](https://data.source.coop/cholmes/trimet/park-and-rides/collection.json).
 
 ## Visualization
 
 | Style | What it shows |
 |---|---|
-| [`default.json`](./styles/default.json) | The 46 park and ride facilities in TriMet blue. A steady mark size makes this the right style when the question is where the lots are rather than how big they are. |
-| [`by-capacity.json`](./styles/by-capacity.json) | Scales each mark by SPACES and ramps its color with it, over a range that runs from small lots up to the 750-space Clackamas Town Center garage. Area, not radius, tracks capacity, so a lot that looks twice as big holds roughly twice as many cars. The whole system holds 12,501 spaces. |
-| [`by-owner.json`](./styles/by-owner.json) | Separates the 32 TriMet-owned lots from the 14 shared-use facilities. The distinction matters in practice: shared lots are much smaller, 929 spaces between them against 11,572 in the TriMet-owned lots, and their availability depends on an agreement with the property owner. |
-| [`labeled.json`](./styles/labeled.json) | Capacity-scaled marks labeled with the facility name and its space count, so a reader can identify a specific lot without clicking it. |
+| [`default.json`](https://data.source.coop/cholmes/trimet/park-and-rides/styles/default.json) | The 46 park and ride facilities in TriMet blue. A steady mark size makes this the right style when the question is where the lots are rather than how big they are. |
+| [`by-capacity.json`](https://data.source.coop/cholmes/trimet/park-and-rides/styles/by-capacity.json) | Scales each mark by SPACES and ramps its color with it, over a range that runs from small lots up to the 750-space Clackamas Town Center garage. Area, not radius, tracks capacity, so a lot that looks twice as big holds roughly twice as many cars. The whole system holds 12,501 spaces. |
+| [`by-owner.json`](https://data.source.coop/cholmes/trimet/park-and-rides/styles/by-owner.json) | Separates the 32 TriMet-owned lots from the 14 shared-use facilities. The distinction matters in practice: shared lots are much smaller, 929 spaces between them against 11,572 in the TriMet-owned lots, and their availability depends on an agreement with the property owner. |
+| [`labeled.json`](https://data.source.coop/cholmes/trimet/park-and-rides/styles/labeled.json) | Capacity-scaled marks labeled with the facility name and its space count, so a reader can identify a specific lot without clicking it. |
 
 The PMTiles layer is named `park-and-rides`. Styles reference it as `../park-and-rides.pmtiles`,
 so they load unmodified against this directory.
@@ -90,14 +90,14 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`park-and-rides.parquet`](./park-and-rides.parquet) | 9.3 KB | GeoParquet 1.1, 46 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`park-and-rides.pmtiles`](./park-and-rides.pmtiles) | 61.1 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](./thumbnail.webp) | 46.8 KB | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`](./collection.json) | — | STAC Collection metadata |
+| [`park-and-rides.parquet`](https://data.source.coop/cholmes/trimet/park-and-rides/park-and-rides.parquet) | 9.3 KB | GeoParquet 1.1, 46 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`park-and-rides.pmtiles`](https://data.source.coop/cholmes/trimet/park-and-rides/park-and-rides.pmtiles) | 61.1 KB | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/park-and-rides/thumbnail.webp) | 46.8 KB | Rendered from `styles/default.json` over a light basemap |
+| [`collection.json`](https://data.source.coop/cholmes/trimet/park-and-rides/collection.json) | — | STAC Collection metadata |
 
 ## Provenance
 
-[![TriMet](../_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
+[![TriMet](https://data.source.coop/cholmes/trimet/_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
 
 Produced by **TriMet GIS** (4012 SE 17th Ave, GIS3,
 Portland, OR 97202, gis@trimet.org) and distributed at

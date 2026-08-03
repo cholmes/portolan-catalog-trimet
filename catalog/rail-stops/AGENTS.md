@@ -120,8 +120,8 @@ LIMIT 10;
 
 ## Related collections
 
-- [`rail-lines`](../rail-lines/AGENTS.md) — the track these stations sit on, sharing the `line` code space and palette
-- [`stops`](../stops/AGENTS.md) — the full stop list, with public `stop_id` values but no station names
+- [`rail-lines`](https://data.source.coop/cholmes/trimet/rail-lines/AGENTS.md) — the track these stations sit on, sharing the `line` code space and palette
+- [`stops`](https://data.source.coop/cholmes/trimet/stops/AGENTS.md) — the full stop list, with public `stop_id` values but no station names
 
 ## Provenance
 
