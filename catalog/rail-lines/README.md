@@ -15,10 +15,12 @@ Blue, Green and Red lines all share that track. That is why TriMet draws it with
 a solid base stroke plus one dashed overlay per additional line, and why
 `styles/default.json` here does the same.
 
-> **Agents:** see [AGENTS.md](https://data.source.coop/cholmes/trimet/rail-lines/AGENTS.md) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md](https://source.coop/cholmes/trimet/rail-lines/AGENTS.md) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![TriMet Rail Lines](https://data.source.coop/cholmes/trimet/rail-lines/thumbnail.webp)
+[![TriMet Rail Lines](https://data.source.coop/cholmes/trimet/rail-lines/thumbnail.webp)](https://cholmes.github.io/trimet-data-browser)
+
+### 🗺️ [Explore this collection on an interactive map →](https://cholmes.github.io/trimet-data-browser)
 
 ## Quick start
 
@@ -69,20 +71,20 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/rail-lines/rail-
 | `status` | string | Operational status of the segment.<br>Values: `Existing` Service currently provided on rail segment; `Planned` Rail segment in advanced planning stages; `UC` Rail segment is under construction. |
 | `type` | string | Type of service.<br>Values: `CR` Commuter rail; `MAX` Light rail; `MAX/SC` Shared light rail and streetcar; `SC` Streetcar. |
 | `geometry` | binary | Feature geometry, WGS84 lon/lat. |
-| `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> |  |
+| `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from
 [meta_tm_rail_lines.shtml](https://developer.trimet.org/gis/meta_tm_rail_lines.shtml). The same text is carried in
-`table:columns` in [collection.json](https://data.source.coop/cholmes/trimet/rail-lines/collection.json).
+`table:columns` in [collection.json](https://source.coop/cholmes/trimet/rail-lines/collection.json).
 
 ## Visualization
 
 | Style | What it shows |
 |---|---|
-| [`default.json`](https://data.source.coop/cholmes/trimet/rail-lines/styles/default.json) | A direct reproduction of TriMet's published GeoServer style `ott:rail`, whose rules key on exactly the LINE values this layer carries. Each segment gets a solid base stroke in its trunk line's color, then one dashed overlay per additional line sharing the track — so the four-line trunk through downtown Portland reads as blue under red, green and yellow dashes, the way it does on TriMet's own maps. Widths step at zoom 12, standing in for the SLD's scale break at denominator 151181. Dash lengths are converted from SLD pixels into MapLibre line-widths using the low-zoom width, so they match exactly below zoom 12 and run proportionally shorter above it. AUX segments carry no SLD rule and are drawn neutral gray rather than dropped. |
-| [`by-passage.json`](https://data.source.coop/cholmes/trimet/rail-lines/styles/by-passage.json) | Encodes the PASSAGE attribute — whether a segment runs at surface level, over a bridge, or through a tunnel. Bridges are drawn heavy and dark, tunnels dashed, surface track light. TriMet notes that PASSAGE is intended for cartographic display rather than analysis, so read this as a drawing hint and not an infrastructure inventory. |
-| [`by-type.json`](https://data.source.coop/cholmes/trimet/rail-lines/styles/by-type.json) | Collapses the twenty LINE values into the four TYPE values: light rail, streetcar, commuter rail, and the shared MAX/streetcar segment. Colors come from TriMet's GTFS route_color. Simpler than the default style and easier to read at metro-wide zooms. |
-| [`labeled.json`](https://data.source.coop/cholmes/trimet/rail-lines/styles/labeled.json) | TriMet's rail cartography with the LINE code drawn along each segment. Because a code such as BGR means three lines share that track, the labels are the fastest way to read which services run where. |
+| [`default.json`](https://source.coop/cholmes/trimet/rail-lines/styles/default.json) | A direct reproduction of TriMet's published GeoServer style `ott:rail`, whose rules key on exactly the LINE values this layer carries. Each segment gets a solid base stroke in its trunk line's color, then one dashed overlay per additional line sharing the track — so the four-line trunk through downtown Portland reads as blue under red, green and yellow dashes, the way it does on TriMet's own maps. Widths step at zoom 12, standing in for the SLD's scale break at denominator 151181. Dash lengths are converted from SLD pixels into MapLibre line-widths using the low-zoom width, so they match exactly below zoom 12 and run proportionally shorter above it. AUX segments carry no SLD rule and are drawn neutral gray rather than dropped. |
+| [`by-passage.json`](https://source.coop/cholmes/trimet/rail-lines/styles/by-passage.json) | Encodes the PASSAGE attribute — whether a segment runs at surface level, over a bridge, or through a tunnel. Bridges are drawn heavy and dark, tunnels dashed, surface track light. TriMet notes that PASSAGE is intended for cartographic display rather than analysis, so read this as a drawing hint and not an infrastructure inventory. |
+| [`by-type.json`](https://source.coop/cholmes/trimet/rail-lines/styles/by-type.json) | Collapses the twenty LINE values into the four TYPE values: light rail, streetcar, commuter rail, and the shared MAX/streetcar segment. Colors come from TriMet's GTFS route_color. Simpler than the default style and easier to read at metro-wide zooms. |
+| [`labeled.json`](https://source.coop/cholmes/trimet/rail-lines/styles/labeled.json) | TriMet's rail cartography with the LINE code drawn along each segment. Because a code such as BGR means three lines share that track, the labels are the fastest way to read which services run where. |
 
 The PMTiles layer is named `rail-lines`. Styles reference it as `../rail-lines.pmtiles`,
 so they load unmodified against this directory.
@@ -91,17 +93,18 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`rail-lines.parquet`](https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.parquet) | 87.1 KB | GeoParquet 1.1, 171 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`rail-lines.pmtiles`](https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.pmtiles) | 60.7 KB | Vector tiles for display, every feature kept at every zoom |
+| [`rail-lines.parquet`](https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.parquet) | 89.6 KB | GeoParquet 1.1, 171 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`rail-lines.pmtiles`](https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.pmtiles) | 60.8 KB | Vector tiles for display, every feature kept at every zoom |
 | [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/rail-lines/thumbnail.webp) | 47.7 KB | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`](https://data.source.coop/cholmes/trimet/rail-lines/collection.json) | — | STAC Collection metadata |
+| [`collection.json`](https://source.coop/cholmes/trimet/rail-lines/collection.json) | — | STAC Collection metadata |
 
 ## Provenance
 
 [![TriMet](https://data.source.coop/cholmes/trimet/_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
 
 Produced by **TriMet GIS** (4012 SE 17th Ave, GIS3,
-Portland, OR 97202, gis@trimet.org) and distributed at
+Portland, OR 97202,
+[gis@trimet.org](mailto:gis@trimet.org)) and distributed at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/) as `tm_rail_lines`.
 
 The originals are linked as assets and are the authoritative copy:
@@ -123,7 +126,7 @@ Services API, not these GIS downloads. The collections therefore declare
 `"license": "other"` with a link to those terms, rather than claiming an open
 license the source does not offer.
 
-Practically: use the data, and contact **gis@trimet.org** before redistributing
+Practically: use the data, and contact **[gis@trimet.org](mailto:gis@trimet.org)** before redistributing
 it or building a product on it. If you need transit data under clear open terms,
 TriMet's [GTFS feed](https://developer.trimet.org/GTFS.shtml) is the better
 starting point.

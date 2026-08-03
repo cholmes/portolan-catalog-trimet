@@ -35,7 +35,7 @@ not go in.
 ```bash
 python3 tools/build.py            # from local sources
 python3 tools/build.py --fetch    # re-download from TriMet first
-python3 tests/run_all.py          # five gates
+python3 tests/run_all.py          # six gates
 ```
 
 Step order matters and `build.py` encodes it: convert → styles → thumbnails →
@@ -65,13 +65,13 @@ The catalog's design rule: **where TriMet publishes a style for a layer,
 reproduce it.** Two sources, both mirrored into the collections they style so the
 reproduction can be diffed against its origin:
 
-- **`ott:rail`** (GeoServer SLD, via `ws.trimet.org` WMS `GetStyles`). Its rules
+- **`ott:rail`** (GeoServer SLD, via [`ws.trimet.org`](https://ws.trimet.org/geoserver/ows?service=WMS&version=1.1.1&request=GetStyles&layers=ott:current_rail) WMS `GetStyles`). Its rules
   filter on exactly the `line` values `rail-lines` and `rail-stops` carry — this
   is not a coincidence, it is the style written for this data. It draws shared
   trackage as a solid base stroke plus one dashed overlay per additional line;
   `make_styles.py:rail_lines()` reconstructs that from `RAIL_BASE` and
   `RAIL_OVERLAYS` in the manifest.
-- **`trimet-routes`** (MapLibre, `tiles.trimet.org`). Bus is a flat `#136390`;
+- **`trimet-routes`** (MapLibre, [tiles.trimet.org](https://tiles.trimet.org/styles.json)). Bus is a flat `#136390`;
   MAX, streetcar and BRT resolve `route_color` from GTFS at draw time, so the
   equivalent colors come from GTFS `routes.txt`.
 
@@ -91,9 +91,16 @@ and would catch a regression.
 
 ## Data notes worth knowing before you touch anything
 
-- Source CRS is **EPSG:2913, in international feet**. Published as EPSG:4326.
-  DuckDB's `ST_Transform` needs `always_xy := true` or every coordinate comes
-  back `Infinity` — EPSG:4326's authority axis order is latitude-first.
+- **The GeoParquet stays in TriMet's native EPSG:2913, international feet.** It
+  is deliberately not reprojected: measurements come out in feet with no
+  projection step, and the computed district area matches TriMet's own `acres`
+  column exactly. Only the PMTiles are WGS84, because tiles are. If you ever do
+  transform, DuckDB's `ST_Transform` needs `always_xy := true` or every
+  coordinate comes back `Infinity` — EPSG:4326's authority axis order is
+  latitude-first.
+- The GeoParquet covering column is named **`geometry_bbox`**, not `bbox` —
+  GDAL names it after the geometry column. A pruning example that says `bbox`
+  fails; `tests/test_doc_sql.py` exists partly because one did.
 - `routes` mixes `LINESTRING` and `MULTILINESTRING`, and `ST_Length_Spheroid`
   returns `nan` on it. Project and use `ST_Length`.
 - `stops` ↔ `route-stops` join on `stop_id` **exactly** (6,316 both sides).
@@ -105,12 +112,19 @@ and would catch a regression.
 These and more are in each collection's AGENTS.md, which is the right place for
 them — this file should not duplicate the catalog's own documentation.
 
-## SQL recipes are tested
+## SQL is tested, all of it
 
-Every snippet in `docs_content.py:RECIPES` is executed by `tests/test_recipes.py`
-against the real files. Add a recipe, run the test. A query that merely *looks*
-right is not good enough — two of the original recipes returned `nan` and zero
-rows respectively, and only running them surfaced it.
+Two gates. `tests/test_recipes.py` runs every curated recipe in
+`docs_content.py`. `tests/test_doc_sql.py` runs every ```sql block in the
+*generated* docs, which is where the Quick Start and the boilerplate in
+`make_docs.py` live — those are queries too, and nobody thinks of them that way
+until one is wrong in front of a user. Both rewrite the published URL to a local
+path, so they test the working tree and run offline.
+
+A query that merely *looks* right is not good enough. Three shipped-looking
+examples were broken: two returned `nan` and zero rows, and the row-group
+pruning snippet named the covering column `bbox` when GDAL writes
+`geometry_bbox`.
 
 ## Conformance
 
@@ -118,6 +132,18 @@ Targets **Portolan 0.1.0 + [spec#121](https://github.com/portolan-sdi/portolan-s
 (WebP thumbnails). `tests/test_conformance.py` runs `rashid` and fails on
 anything not in its `ACCEPTED` list. **Never grow `ACCEPTED` without adding the
 reasoning to [`docs/conformance.md`](docs/conformance.md).**
+
+## Two URL hosts, and which to use
+
+- **`data.source.coop/...`** serves raw bytes. Use it for data files, images,
+  and anything a program fetches. `M.PUBLIC_BASE`, `make_docs.url()`.
+- **`source.coop/...`** is the rendered UI. Use it for links a person clicks: a
+  directory on the data host has no listing and a README arrives as a download
+  rather than a page. `M.BROWSE_BASE`, `make_docs.browse()`.
+
+Getting this backwards is what made the published collection links dead. The
+STAC links and asset hrefs in `collection.json` stay **relative** regardless —
+that is the spec requirement that keeps the catalog relocatable.
 
 ## Publish
 

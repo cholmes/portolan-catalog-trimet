@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TESTS = ["test_catalog.py", "test_conformance.py", "test_styles.py",
-         "test_recipes.py", "test_regen.py"]
+         "test_recipes.py", "test_doc_sql.py", "test_regen.py"]
 
 
 def main():

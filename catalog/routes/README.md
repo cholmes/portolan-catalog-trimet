@@ -13,10 +13,12 @@ The `frequent` flag marks TriMet's Frequent Service network — 51 of the 200
 route-directions — which is the set of lines scheduled often enough that riders
 are told not to consult a timetable.
 
-> **Agents:** see [AGENTS.md](https://data.source.coop/cholmes/trimet/routes/AGENTS.md) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md](https://source.coop/cholmes/trimet/routes/AGENTS.md) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![TriMet Routes](https://data.source.coop/cholmes/trimet/routes/thumbnail.webp)
+[![TriMet Routes](https://data.source.coop/cholmes/trimet/routes/thumbnail.webp)](https://cholmes.github.io/trimet-data-browser)
+
+### 🗺️ [Explore this collection on an interactive map →](https://cholmes.github.io/trimet-data-browser)
 
 ## Quick start
 
@@ -74,20 +76,20 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/routes/routes.pa
 | `frequent` | string | Indicates whether a route or route segment has frequent service.<br>Values: `True` Route segment has frequent service; `False` Route segment does not have frequent service. |
 | `type` | string | Type of service.<br>Values: `AT` Aerial Tram; `BUS` Bus; `CR` Commuter rail; `MAX` Light rail; `SC` Streetcar. |
 | `geometry` | binary | Feature geometry, WGS84 lon/lat. |
-| `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> |  |
+| `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from
 [meta_tm_routes.shtml](https://developer.trimet.org/gis/meta_tm_routes.shtml). The same text is carried in
-`table:columns` in [collection.json](https://data.source.coop/cholmes/trimet/routes/collection.json).
+`table:columns` in [collection.json](https://source.coop/cholmes/trimet/routes/collection.json).
 
 ## Visualization
 
 | Style | What it shows |
 |---|---|
-| [`default.json`](https://data.source.coop/cholmes/trimet/routes/styles/default.json) | Every fixed-route alignment colored by TYPE, following TriMet's own `trimet-routes` MapLibre style: bus lines thin and blue, MAX heaviest, streetcar thin, commuter rail gray. Colors are TriMet's GTFS route_color values, which is what that style resolves at draw time. |
-| [`by-direction.json`](https://data.source.coop/cholmes/trimet/routes/styles/by-direction.json) | Colors the two DIR values apart. Each route appears twice in this layer, once per direction, and the two alignments are rarely identical because of one-way streets — this style makes those divergences visible. Offsetting the two directions by a couple of pixels keeps coincident segments from hiding each other. |
-| [`frequent-service.json`](https://data.source.coop/cholmes/trimet/routes/styles/frequent-service.json) | Splits the network on the FREQUENT flag. The 51 route-direction segments flagged True are drawn heavy in TriMet's FX green; the remaining 149 recede to a thin gray, so the frequent-service spine stands out against the rest of the system. |
-| [`labeled.json`](https://data.source.coop/cholmes/trimet/routes/styles/labeled.json) | The service-type styling with PUBLIC_RTE drawn along each alignment. Use PUBLIC_RTE rather than RTE for display: it is the number riders see, and it is where lettered services such as FX2 appear. |
+| [`default.json`](https://source.coop/cholmes/trimet/routes/styles/default.json) | Every fixed-route alignment colored by TYPE, following TriMet's own `trimet-routes` MapLibre style: bus lines thin and blue, MAX heaviest, streetcar thin, commuter rail gray. Colors are TriMet's GTFS route_color values, which is what that style resolves at draw time. |
+| [`by-direction.json`](https://source.coop/cholmes/trimet/routes/styles/by-direction.json) | Colors the two DIR values apart. Each route appears twice in this layer, once per direction, and the two alignments are rarely identical because of one-way streets — this style makes those divergences visible. Offsetting the two directions by a couple of pixels keeps coincident segments from hiding each other. |
+| [`frequent-service.json`](https://source.coop/cholmes/trimet/routes/styles/frequent-service.json) | Splits the network on the FREQUENT flag. The 51 route-direction segments flagged True are drawn heavy in TriMet's FX green; the remaining 149 recede to a thin gray, so the frequent-service spine stands out against the rest of the system. |
+| [`labeled.json`](https://source.coop/cholmes/trimet/routes/styles/labeled.json) | The service-type styling with PUBLIC_RTE drawn along each alignment. Use PUBLIC_RTE rather than RTE for display: it is the number riders see, and it is where lettered services such as FX2 appear. |
 
 The PMTiles layer is named `routes`. Styles reference it as `../routes.pmtiles`,
 so they load unmodified against this directory.
@@ -96,17 +98,18 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`routes.parquet`](https://data.source.coop/cholmes/trimet/routes/routes.parquet) | 1.3 MB | GeoParquet 1.1, 200 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`routes.pmtiles`](https://data.source.coop/cholmes/trimet/routes/routes.pmtiles) | 829.8 KB | Vector tiles for display, every feature kept at every zoom |
+| [`routes.parquet`](https://data.source.coop/cholmes/trimet/routes/routes.parquet) | 794.0 KB | GeoParquet 1.1, 200 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`routes.pmtiles`](https://data.source.coop/cholmes/trimet/routes/routes.pmtiles) | 830.3 KB | Vector tiles for display, every feature kept at every zoom |
 | [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/routes/thumbnail.webp) | 48.4 KB | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`](https://data.source.coop/cholmes/trimet/routes/collection.json) | — | STAC Collection metadata |
+| [`collection.json`](https://source.coop/cholmes/trimet/routes/collection.json) | — | STAC Collection metadata |
 
 ## Provenance
 
 [![TriMet](https://data.source.coop/cholmes/trimet/_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
 
 Produced by **TriMet GIS** (4012 SE 17th Ave, GIS3,
-Portland, OR 97202, gis@trimet.org) and distributed at
+Portland, OR 97202,
+[gis@trimet.org](mailto:gis@trimet.org)) and distributed at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/) as `tm_routes`.
 
 The originals are linked as assets and are the authoritative copy:
@@ -128,7 +131,7 @@ Services API, not these GIS downloads. The collections therefore declare
 `"license": "other"` with a link to those terms, rather than claiming an open
 license the source does not offer.
 
-Practically: use the data, and contact **gis@trimet.org** before redistributing
+Practically: use the data, and contact **[gis@trimet.org](mailto:gis@trimet.org)** before redistributing
 it or building a product on it. If you need transit data under clear open terms,
 TriMet's [GTFS feed](https://developer.trimet.org/GTFS.shtml) is the better
 starting point.

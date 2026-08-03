@@ -1,7 +1,7 @@
 # TriMet Routes — agent guide
 
 All existing bus and rail lines. 200 LineString features, WGS84, one
-GeoParquet file of 1.3 MB in 1 row group(s).
+GeoParquet file of 794.0 KB in 1 row group(s).
 
 ## Access
 
@@ -13,17 +13,20 @@ SELECT * FROM 'https://data.source.coop/cholmes/trimet/routes/routes.parquet' LI
 
 Reads stream over HTTP range requests — query in place, do not download. The file
 is Hilbert-ordered and carries a GeoParquet 1.1 `bbox` covering column, so a
-spatial filter on `bbox.xmin` / `bbox.ymin` / `bbox.xmax` / `bbox.ymax` prunes
-row groups from metadata alone:
+spatial filter on `geometry_bbox` prunes row groups from metadata alone. Note
+the column name: GDAL writes the covering as `<geometry column>_bbox`, so it is
+`geometry_bbox` here, not `bbox`.
 
 ```sql
+-- Coordinates are EPSG:2913 feet, not degrees. This collection spans
+-- x 7,531,765–7,730,400, y 595,331–727,211.
 SELECT * FROM 'https://data.source.coop/cholmes/trimet/routes/routes.parquet'
-WHERE bbox.xmin > -122.70 AND bbox.xmax < -122.60
-  AND bbox.ymin >   45.50 AND bbox.ymax <   45.55;
+WHERE geometry_bbox.xmin > 7630000 AND geometry_bbox.xmax < 7650000
+  AND geometry_bbox.ymin >  680000 AND geometry_bbox.ymax <  700000;
 ```
 
 The recipes below use bare relative paths (`'routes/routes.parquet'`) for
-readability. Prefix them with `https://data.source.coop/cholmes/trimet/` to run remotely.
+readability. Prefix them with [`https://data.source.coop/cholmes/trimet/`](https://source.coop/cholmes/trimet/routes/) to run remotely.
 
 Other formats: `routes.pmtiles` for map display (layer name `routes`), and TriMet's
 original Shapefile and KML, linked from `collection.json` as `source_shapefile`
@@ -31,23 +34,45 @@ and `source_kml`.
 
 ## Coordinate system, and what follows from it
 
-TriMet publishes all eight layers in **EPSG:2913**, NAD83(HARN) / Oregon North,
-**in international feet**. This catalog republishes them in **EPSG:4326**, so
-coordinates are degrees.
+The GeoParquet is in **EPSG:2913** — NAD83(HARN) / Oregon North, **international
+feet** — which is what TriMet surveys and publishes in. It is deliberately *not*
+reprojected. Only the PMTiles are in WGS84, because vector tiles are Web Mercator
+by definition.
 
-That matters the moment you measure anything. `ST_Length` and `ST_Area` on the
-published geometry return *degrees*, which is not a unit of distance. Project
-back to the source CRS first, and note the `always_xy := true` argument — without
-it DuckDB applies EPSG:4326's authority-declared latitude-first axis order and
-every transformed coordinate comes back `Infinity`:
+The practical consequence is a good one: **measurements just work, in feet.**
 
 ```sql
-ST_Transform(geometry, 'EPSG:4326', 'EPSG:2913', always_xy := true)
+ST_Length(geometry)              -- feet
+ST_Area(geometry)                -- square feet
+ST_Distance(a.geometry, b.geometry)  -- feet
+ST_DWithin(a.geometry, b.geometry, 1312.34)  -- within 400 m
 ```
 
-The result is in feet. Multiply by 0.3048 for metres. Nothing in this catalog
-carries a pre-computed length or area column except the district boundary, which
-carries TriMet's own `area_sq_mi` and `acres`.
+Useful conversions: × 0.3048 for metres, ÷ 5280 for miles, ÷ 43560 for acres,
+÷ 27878400 for square miles. 400 m is 1312.34 ft, a quarter mile is 1320 ft.
+
+Two things to watch:
+
+- **Coordinates are not longitude and latitude.** An x of 7633099 is feet east
+  of the projection's false origin, not a degree. Anything expecting lon/lat —
+  a web map, a geocoder, most `GeoJSON` consumers — needs a transform first.
+- **`always_xy := true` when you do transform.** Without it DuckDB honours
+  EPSG:4326's authority-declared latitude-first axis order and every result
+  comes back `Infinity`:
+
+```sql
+SELECT ST_AsText(ST_Transform(geometry, 'EPSG:2913', 'EPSG:4326',
+                              always_xy := true)) AS lonlat
+FROM 'stops/stops.parquet' LIMIT 5;
+```
+
+The `bbox` covering column is in the same feet, so a spatial filter written
+against it uses projected coordinates, not degrees. The collection's STAC
+`extent` stays in WGS84, because STAC requires that regardless of the data's own
+CRS.
+
+Nothing here carries a pre-computed length or area except the district boundary,
+which has TriMet's own `area_sq_mi` and `acres`.
 
 
 ## Quirks and caveats
@@ -87,13 +112,13 @@ Sherwood, for example. Do not assume `routes` is contained by
 ### Longest routes in kilometres, one direction only
 
 ```sql
+-- ST_Length returns feet directly; 5280 ft to the mile.
 SELECT rte, any_value(rte_desc) AS name,
-       round(sum(ST_Length(ST_Transform(geometry, 'EPSG:4326', 'EPSG:2913',
-                                        always_xy := true))) * 0.3048 / 1000, 1) AS km
+       round(sum(ST_Length(geometry)) / 5280.0, 1) AS miles
 FROM 'routes/routes.parquet'
 WHERE dir = 0
 GROUP BY rte
-ORDER BY km DESC
+ORDER BY miles DESC
 LIMIT 10;
 ```
 
@@ -101,12 +126,11 @@ LIMIT 10;
 
 ```sql
 SELECT type,
-       round(sum(ST_Length(ST_Transform(geometry, 'EPSG:4326', 'EPSG:2913',
-                                        always_xy := true))) * 0.3048 / 1000, 1) AS km,
+       round(sum(ST_Length(geometry)) / 5280.0, 1) AS miles,
        count(*) AS segments
 FROM 'routes/routes.parquet'
 GROUP BY type
-ORDER BY km DESC;
+ORDER BY miles DESC;
 ```
 
 ### The Frequent Service network, as displayed to riders
@@ -120,9 +144,9 @@ ORDER BY rte;
 
 ## Related collections
 
-- [`route-stops`](https://data.source.coop/cholmes/trimet/route-stops/AGENTS.md) — the stops along each of these route-directions, joined on `(rte, dir)`
-- [`rail-lines`](https://data.source.coop/cholmes/trimet/rail-lines/AGENTS.md) — rail drawn for cartography, with per-line colors
-- [`stops`](https://data.source.coop/cholmes/trimet/stops/AGENTS.md) — the deduplicated stop list
+- [`route-stops`](https://source.coop/cholmes/trimet/route-stops/AGENTS.md) — the stops along each of these route-directions, joined on `(rte, dir)`
+- [`rail-lines`](https://source.coop/cholmes/trimet/rail-lines/AGENTS.md) — rail drawn for cartography, with per-line colors
+- [`stops`](https://source.coop/cholmes/trimet/stops/AGENTS.md) — the deduplicated stop list
 
 ## Provenance
 
@@ -148,7 +172,7 @@ Services API, not these GIS downloads. The collections therefore declare
 `"license": "other"` with a link to those terms, rather than claiming an open
 license the source does not offer.
 
-Practically: use the data, and contact **gis@trimet.org** before redistributing
+Practically: use the data, and contact **[gis@trimet.org](mailto:gis@trimet.org)** before redistributing
 it or building a product on it. If you need transit data under clear open terms,
 TriMet's [GTFS feed](https://developer.trimet.org/GTFS.shtml) is the better
 starting point.

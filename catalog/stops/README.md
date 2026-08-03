@@ -13,10 +13,12 @@ shared bus/streetcar stops, 6 WES platforms and 2 aerial tram terminals.
 the arrivals API, which makes this collection the natural bridge between this
 catalog and TriMet's real-time services.
 
-> **Agents:** see [AGENTS.md](https://data.source.coop/cholmes/trimet/stops/AGENTS.md) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md](https://source.coop/cholmes/trimet/stops/AGENTS.md) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![TriMet Stops](https://data.source.coop/cholmes/trimet/stops/thumbnail.webp)
+[![TriMet Stops](https://data.source.coop/cholmes/trimet/stops/thumbnail.webp)](https://cholmes.github.io/trimet-data-browser)
+
+### 🗺️ [Explore this collection on an interactive map →](https://cholmes.github.io/trimet-data-browser)
 
 ## Quick start
 
@@ -70,20 +72,20 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/stops/stops.parq
 | `zipcode` | string | Zipcode in which stop is located. |
 | `type` | string | Type of service.<br>Values: `AT` Aerial Tram; `BUS` Bus; `CR` Commuter rail; `MAX` Light rail; `SC` Streetcar; `BSC` Shared Bus and Streetcar. |
 | `geometry` | binary | Feature geometry, WGS84 lon/lat. |
-| `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> |  |
+| `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from
 [meta_tm_stops.shtml](https://developer.trimet.org/gis/meta_tm_stops.shtml). The same text is carried in
-`table:columns` in [collection.json](https://data.source.coop/cholmes/trimet/stops/collection.json).
+`table:columns` in [collection.json](https://source.coop/cholmes/trimet/stops/collection.json).
 
 ## Visualization
 
 | Style | What it shows |
 |---|---|
-| [`default.json`](https://data.source.coop/cholmes/trimet/stops/styles/default.json) | TriMet's own stop symbol, taken from the GeoServer style `ott:stops`: a white circle with a dark stroke. Radius grows with zoom so all 6,316 stops stay separable in dense corridors. |
-| [`by-type.json`](https://data.source.coop/cholmes/trimet/stops/styles/by-type.json) | The same mark filled by TYPE, so the 6,075 bus stops read apart from the 161 MAX platforms, 58 streetcar stops, 14 shared bus/streetcar stops, 6 WES platforms and 2 aerial tram terminals. Colors are TriMet's GTFS route_color values for each mode. |
-| [`density.json`](https://data.source.coop/cholmes/trimet/stops/styles/density.json) | A heatmap of stop density that fades into individual marks past zoom 13. Useful for seeing where the network is dense without drawing thousands of overlapping circles at metro-wide zooms. |
-| [`labeled.json`](https://data.source.coop/cholmes/trimet/stops/styles/labeled.json) | Stops colored by mode with STOP_NAME shown from zoom 14. Stop names are intersections or street addresses, so they read as cross-streets rather than as station names. |
+| [`default.json`](https://source.coop/cholmes/trimet/stops/styles/default.json) | TriMet's own stop symbol, taken from the GeoServer style `ott:stops`: a white circle with a dark stroke. Radius grows with zoom so all 6,316 stops stay separable in dense corridors. |
+| [`by-type.json`](https://source.coop/cholmes/trimet/stops/styles/by-type.json) | The same mark filled by TYPE, so the 6,075 bus stops read apart from the 161 MAX platforms, 58 streetcar stops, 14 shared bus/streetcar stops, 6 WES platforms and 2 aerial tram terminals. Colors are TriMet's GTFS route_color values for each mode. |
+| [`density.json`](https://source.coop/cholmes/trimet/stops/styles/density.json) | A heatmap of stop density that fades into individual marks past zoom 13. Useful for seeing where the network is dense without drawing thousands of overlapping circles at metro-wide zooms. |
+| [`labeled.json`](https://source.coop/cholmes/trimet/stops/styles/labeled.json) | Stops colored by mode with STOP_NAME shown from zoom 14. Stop names are intersections or street addresses, so they read as cross-streets rather than as station names. |
 
 The PMTiles layer is named `stops`. Styles reference it as `../stops.pmtiles`,
 so they load unmodified against this directory.
@@ -92,17 +94,18 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`stops.parquet`](https://data.source.coop/cholmes/trimet/stops/stops.parquet) | 268.9 KB | GeoParquet 1.1, 6,316 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`stops.parquet`](https://data.source.coop/cholmes/trimet/stops/stops.parquet) | 287.9 KB | GeoParquet 1.1, 6,316 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
 | [`stops.pmtiles`](https://data.source.coop/cholmes/trimet/stops/stops.pmtiles) | 1.5 MB | Vector tiles for display, every feature kept at every zoom |
 | [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/stops/thumbnail.webp) | 48.4 KB | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`](https://data.source.coop/cholmes/trimet/stops/collection.json) | — | STAC Collection metadata |
+| [`collection.json`](https://source.coop/cholmes/trimet/stops/collection.json) | — | STAC Collection metadata |
 
 ## Provenance
 
 [![TriMet](https://data.source.coop/cholmes/trimet/_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
 
 Produced by **TriMet GIS** (4012 SE 17th Ave, GIS3,
-Portland, OR 97202, gis@trimet.org) and distributed at
+Portland, OR 97202,
+[gis@trimet.org](mailto:gis@trimet.org)) and distributed at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/) as `tm_stops`.
 
 The originals are linked as assets and are the authoritative copy:
@@ -124,7 +127,7 @@ Services API, not these GIS downloads. The collections therefore declare
 `"license": "other"` with a link to those terms, rather than claiming an open
 license the source does not offer.
 
-Practically: use the data, and contact **gis@trimet.org** before redistributing
+Practically: use the data, and contact **[gis@trimet.org](mailto:gis@trimet.org)** before redistributing
 it or building a product on it. If you need transit data under clear open terms,
 TriMet's [GTFS feed](https://developer.trimet.org/GTFS.shtml) is the better
 starting point.

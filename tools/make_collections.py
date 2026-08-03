@@ -86,11 +86,12 @@ def table_columns(coll, path):
             entry["description"] = desc
         elif name == "geometry":
             entry["description"] = (
-                f"Feature geometry, WGS84 longitude and latitude. Reprojected "
-                f"from TriMet's {M.SOURCE_CRS} ({M.SOURCE_CRS_NAME})."
+                f"Feature geometry in TriMet's native {M.SOURCE_CRS} "
+                f"({M.SOURCE_CRS_NAME}). Coordinates are feet, not degrees."
             )
-        elif name == "bbox":
-            entry["description"] = "Per-feature bounding box struct, the GeoParquet covering column."
+        elif name.endswith("_bbox"):
+            entry["description"] = ("Per-feature bounding box struct, the GeoParquet "
+                                    "covering column. Same projected feet as the geometry.")
         cols.append(entry)
     return cols
 
@@ -140,16 +141,17 @@ def assets_for(coll):
         "type": MEDIA[".parquet"],
         "title": f"{coll['title']} (GeoParquet)",
         "description": (
-            f"{coll['description']} Reprojected to WGS84 from TriMet's "
-            f"{M.SOURCE_CRS_NAME} source, Hilbert-ordered, zstd-compressed, with "
-            f"a GeoParquet 1.1 bbox covering column for row-group pruning."
+            f"{coll['description']} In TriMet's native {M.SOURCE_CRS} "
+            f"({M.SOURCE_CRS_NAME}), not reprojected, so lengths and areas are "
+            f"in feet. Hilbert-ordered, zstd-compressed, with a GeoParquet 1.1 "
+            f"bbox covering column for row-group pruning."
         ),
         "roles": ["data"],
         **file_meta(parquet),
         "table:columns": table_columns(coll, parquet),
         "table:primary_geometry": "geometry",
         "table:row_count": parquet_rows(parquet),
-        "proj:code": "EPSG:4326",
+        "proj:code": M.SOURCE_CRS,
         # The same object over the bucket-native scheme, for readers that
         # prefer direct S3 access to https.
         "alternate": {
@@ -163,9 +165,10 @@ def assets_for(coll):
         "type": MEDIA[".pmtiles"],
         "title": f"{coll['title']} (PMTiles)",
         "description": (
-            f"Vector tiles for web display, layer name `{coll['id']}`. Built "
-            f"with tippecanoe keeping every feature at every zoom, so what a map "
-            f"draws matches the GeoParquet exactly."
+            f"Vector tiles for web display, layer name `{coll['id']}`, "
+            f"reprojected to WGS84 as tiles require. Built with tippecanoe "
+            f"keeping every feature at every zoom, so what a map draws matches "
+            f"the GeoParquet exactly."
         ),
         "roles": ["visual"],
         **file_meta(pmtiles),
@@ -340,6 +343,12 @@ def collection_json(coll):
         },
         # A mirror records when it last synced from its source.
         "updated": SYNCED,
+        # Also at the collection level, not only on the data asset: STAC
+        # Browser and similar clients render a collection's schema from here,
+        # and an agent reading collection.json alone then sees the fields.
+        "table:columns": table_columns(coll, OUT / coll["id"] / f"{coll['id']}.parquet"),
+        "table:primary_geometry": "geometry",
+        "table:row_count": parquet_rows(OUT / coll["id"] / f"{coll['id']}.parquet"),
         "links": links_for(coll),
         "assets": assets_for(coll),
     }
@@ -347,19 +356,36 @@ def collection_json(coll):
 
 def description_for(coll):
     """The STAC description and the README opening are two views of the same
-    facts, so both are generated from this."""
+    facts, so both are generated from this.
+
+    STAC Browser renders this as Markdown, so every reference is a real link
+    rather than a bare URL a reader has to copy."""
     src = M.source_links(coll)
     n = f"{coll['count']:,}"
     return (
         f"{coll['description']} {n} {coll['geometry']} feature"
-        f"{'' if coll['count'] == 1 else 's'} covering TriMet's service district "
-        f"in the Portland, Oregon metropolitan area, published by TriMet as "
-        f"`{coll['source']}` and last updated at the source on "
-        f"{coll['source_updated_text']}. This is a cloud-native mirror: the same "
-        f"data as GeoParquet and PMTiles, reprojected to WGS84 from TriMet's "
-        f"{M.SOURCE_CRS_NAME}. The original Shapefile, KML and metadata page are "
-        f"linked as assets. Column descriptions and code lists are TriMet's own, "
-        f"taken from {src['metadata']}."
+        f"{'' if coll['count'] == 1 else 's'} covering "
+        f"[TriMet]({M.GIS_PAGE})'s service district in the Portland, Oregon "
+        f"metropolitan area, published by TriMet as "
+        f"[`{coll['source']}`]({src['shapefile']}) and last updated at the "
+        f"source on {coll['source_updated_text']}.\n\n"
+        f"This is a cloud-native mirror: the same data as GeoParquet and "
+        f"PMTiles. The GeoParquet keeps TriMet's native {M.SOURCE_CRS} "
+        f"({M.SOURCE_CRS_NAME}), so lengths and areas are in feet; only the "
+        f"PMTiles are reprojected to WGS84. The original "
+        f"[Shapefile]({src['shapefile']}), [KML]({src['kml']}) and "
+        f"[metadata page]({src['metadata']}) are linked as assets, and column "
+        f"descriptions and code lists are TriMet's own, taken from that page.\n\n"
+        f"Explore it on the [interactive map]({M.BROWSER_URL}), or read the "
+        f"[collection README]({M.BROWSE_BASE}/{coll['id']}/README.md) for "
+        f"suggested uses, limitations and the full schema.\n\n"
+        f"**Agents:** [`AGENTS.md`]({M.BROWSE_BASE}/{coll['id']}/AGENTS.md) is "
+        f"the guide written for you — what joins to what and on which column, "
+        f"the quirks that produce silently wrong answers (documented codes that "
+        f"do not appear in the data, columns TriMet's metadata omits, counts "
+        f"that mean different things in different collections), what the "
+        f"coordinate system implies for measurement, and query recipes that "
+        f"have each been run against these files."
     )
 
 

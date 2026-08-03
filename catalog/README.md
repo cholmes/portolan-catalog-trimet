@@ -10,25 +10,34 @@ KML, each with a metadata page carrying full attribute definitions and code
 lists.
 
 This catalog is a cloud-native mirror of all eight: the same features as
-GeoParquet and PMTiles, reprojected to WGS84, with TriMet's original Shapefile,
-KML and metadata page linked from every collection. Nothing has been added to the
-data and no features were dropped.
+GeoParquet and PMTiles, with TriMet's original Shapefile, KML and metadata page
+linked from every collection. Nothing has been added to the data and no features
+were dropped.
+
+The GeoParquet keeps TriMet's native **EPSG:2913** (NAD83(HARN) / Oregon North,
+international feet), so lengths and areas come out in feet without a projection
+step. The PMTiles are WGS84, because vector tiles are.
 
 
-> **Agents:** start at [AGENTS.md](https://data.source.coop/cholmes/trimet/AGENTS.md).
+### 🗺️ [Explore the catalog on an interactive map →](https://cholmes.github.io/trimet-data-browser)
+
+All eight collections, drawn with TriMet's own cartography, with no setup.
+
+> **Agents:** start at [AGENTS.md](https://source.coop/cholmes/trimet/AGENTS.md) for join keys, the
+> quirks that produce silently wrong answers, and verified query recipes.
 
 ## Collections
 
 | Collection | Features | Geometry | Description |
 |---|---|---|---|
-| [TriMet District Boundary](https://data.source.coop/cholmes/trimet/district-boundary/) | 1 | Polygon | TriMet service district boundary. |
-| [TriMet Routes](https://data.source.coop/cholmes/trimet/routes/) | 200 | LineString | TriMet fixed route alignments (includes bus and rail.) |
-| [TriMet Rail Lines](https://data.source.coop/cholmes/trimet/rail-lines/) | 171 | LineString | TriMet rail service optimized for cartographic display. |
-| [TriMet Stops](https://data.source.coop/cholmes/trimet/stops/) | 6,316 | Point | Active TriMet stops (includes bus and rail.) |
-| [TriMet Route Stops](https://data.source.coop/cholmes/trimet/route-stops/) | 8,314 | Point | Active TriMet stops (includes bus and rail) by route and direction. |
-| [TriMet Rail Stops](https://data.source.coop/cholmes/trimet/rail-stops/) | 169 | Point | TriMet rail stops optimized for cartographic display. |
-| [TriMet Transit Centers](https://data.source.coop/cholmes/trimet/transit-centers/) | 15 | Point | TriMet transit center locations. |
-| [TriMet Park and Rides](https://data.source.coop/cholmes/trimet/park-and-rides/) | 46 | Point | TriMet park and ride locations. |
+| [TriMet District Boundary](https://source.coop/cholmes/trimet/district-boundary/) | 1 | Polygon | TriMet service district boundary. |
+| [TriMet Routes](https://source.coop/cholmes/trimet/routes/) | 200 | LineString | TriMet fixed route alignments (includes bus and rail.) |
+| [TriMet Rail Lines](https://source.coop/cholmes/trimet/rail-lines/) | 171 | LineString | TriMet rail service optimized for cartographic display. |
+| [TriMet Stops](https://source.coop/cholmes/trimet/stops/) | 6,316 | Point | Active TriMet stops (includes bus and rail.) |
+| [TriMet Route Stops](https://source.coop/cholmes/trimet/route-stops/) | 8,314 | Point | Active TriMet stops (includes bus and rail) by route and direction. |
+| [TriMet Rail Stops](https://source.coop/cholmes/trimet/rail-stops/) | 169 | Point | TriMet rail stops optimized for cartographic display. |
+| [TriMet Transit Centers](https://source.coop/cholmes/trimet/transit-centers/) | 15 | Point | TriMet transit center locations. |
+| [TriMet Park and Rides](https://source.coop/cholmes/trimet/park-and-rides/) | 46 | Point | TriMet park and ride locations. |
 
 ## Quick start
 
@@ -59,11 +68,13 @@ than inventing one. Two TriMet sources are used, and both are mirrored into the
 collections they style so the reproduction can be checked against its origin:
 
 - **`ott:rail`**, the GeoServer SLD behind TriMet's rail maps, fetched from
-  `ws.trimet.org` via WMS `GetStyles`. Its rules key on exactly the `line` values
+  [`ws.trimet.org`](https://ws.trimet.org/geoserver/ows?service=WMS&version=1.1.1&request=GetStyles&layers=ott:current_rail)
+  via WMS `GetStyles`. Its rules key on exactly the `line` values
   the rail layers carry, so `rail-lines/styles/default.json` reproduces it
   segment for segment — including the layered dashed overlays that show which
   services share a track.
-- **`trimet-routes`**, TriMet's MapLibre style at `tiles.trimet.org`, which gives
+- **[`trimet-routes`](https://tiles.trimet.org/styles/trimet-routes/style.json)**,
+  TriMet's MapLibre style at [tiles.trimet.org](https://tiles.trimet.org/styles.json), which gives
   the line weights and the flat bus color `#136390`. Where it resolves
   `route_color` from GTFS, the equivalent colors are taken from TriMet's GTFS
   `routes.txt`.
@@ -89,7 +100,8 @@ here to EPSG:4326. TriMet's note on the GIS page:
 > TriMet provides these datasets free of charge in shapefile and KML format. All geospatial datasets created and distributed by TriMet are in NAD83, Oregon State Plane North projection and coordinate system. Refer to the metadata for additional information regarding a specific data layer. TriMet provides data to the general public under certain terms and conditions.
 
 Contact for the source data: **TriMet GIS**, 4012 SE 17th Ave, GIS3,
-Portland, OR 97202 — gis@trimet.org.
+Portland, OR 97202 —
+[gis@trimet.org](mailto:gis@trimet.org).
 
 ## License, and a warning
 
@@ -102,7 +114,7 @@ Services API, not these GIS downloads. The collections therefore declare
 `"license": "other"` with a link to those terms, rather than claiming an open
 license the source does not offer.
 
-Practically: use the data, and contact **gis@trimet.org** before redistributing
+Practically: use the data, and contact **[gis@trimet.org](mailto:gis@trimet.org)** before redistributing
 it or building a product on it. If you need transit data under clear open terms,
 TriMet's [GTFS feed](https://developer.trimet.org/GTFS.shtml) is the better
 starting point.
@@ -110,10 +122,12 @@ starting point.
 
 ## About this mirror
 
-Maintained by Chris Holmes (cholmes@9eo.org), **not affiliated with
+Maintained by Chris Holmes
+([cholmes@9eo.org](mailto:cholmes@9eo.org)), **not affiliated with
 TriMet**. Built and regenerated with the scripts in
 [`tools/`](https://github.com/cholmes/portolan-catalog-trimet/tree/main/tools).
 Conforms to the [Portolan](https://www.portolan-sdi.org/) specification v0.1.0.
 
 The TriMet name and logo are trademarks of TriMet, used here solely as a link
-back to trimet.org, which section 6 of TriMet's Terms of Use permits.
+back to [trimet.org](https://trimet.org/), which section 6 of TriMet's
+[Terms of Use](https://developer.trimet.org/terms_of_use.shtml) permits.

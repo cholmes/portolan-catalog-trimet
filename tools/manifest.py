@@ -23,19 +23,36 @@ PORTOLAN_SCHEMA = "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json"
 
 CATALOG_ID = "trimet"
 CATALOG_TITLE = "TriMet Geospatial Data"
+# STAC Browser renders descriptions as Markdown, so references are links.
 CATALOG_DESCRIPTION = (
     "A cloud-native mirror of the eight geospatial datasets TriMet publishes at "
-    "developer.trimet.org/gis — the transit district boundary, fixed-route "
-    "alignments, rail lines, stops, route stops, rail stops, transit centers and "
-    "park and rides for the Portland, Oregon metropolitan area. TriMet distributes "
-    "these as Shapefile and KML; this catalog republishes them as GeoParquet and "
-    "PMTiles with the original files, KML and metadata linked from every "
-    "collection. Visualization styles reproduce TriMet's own published cartography."
+    "[developer.trimet.org/gis](https://developer.trimet.org/gis/) — the transit "
+    "district boundary, fixed-route alignments, rail lines, stops, route stops, "
+    "rail stops, transit centers and park and rides for the Portland, Oregon "
+    "metropolitan area. TriMet distributes these as Shapefile and KML; this "
+    "catalog republishes them as GeoParquet and PMTiles with the original files, "
+    "KML and metadata linked from every collection. The GeoParquet keeps TriMet's "
+    "native EPSG:2913 (NAD83(HARN) / Oregon North, international feet), so "
+    "lengths and areas are in feet; only the PMTiles are reprojected to WGS84. "
+    "Visualization styles reproduce TriMet's own published cartography.\n\n"
+    "Explore it on the [interactive map](https://cholmes.github.io/trimet-data-browser). "
+    "Each collection carries an **AGENTS.md** agent guide alongside its README — "
+    "join keys, the quirks that produce silently wrong answers, and query recipes "
+    "that have each been run against the published files. Start at the "
+    "[catalog agent guide](https://source.coop/cholmes/trimet/AGENTS.md)."
 )
 
 # The base URL the published catalog will live at.
+# Raw bytes. Use for data files, images, and anything a program fetches.
 PUBLIC_BASE = "https://data.source.coop/cholmes/trimet"
+# The rendered Source Cooperative UI. Use for links a person clicks: it shows
+# READMEs and directory listings, where the data host returns raw bytes or 404s
+# on a directory.
+BROWSE_BASE = "https://source.coop/cholmes/trimet"
 S3_BASE = "s3://us-west-2.opendata.source.coop/cholmes/trimet"
+
+# An interactive map browser for this catalog.
+BROWSER_URL = "https://cholmes.github.io/trimet-data-browser"
 
 GIS_PAGE = "https://developer.trimet.org/gis/"
 TERMS_URL = "https://developer.trimet.org/terms_of_use.shtml"
@@ -68,6 +85,8 @@ HOST = {
 # downloads, so the SPDX value is `other` and a license link is required.
 LICENSE = "other"
 
+# The GeoParquet keeps this, TriMet's native CRS. Only the PMTiles are
+# reprojected, because tiles are WGS84 by definition.
 SOURCE_CRS = "EPSG:2913"
 SOURCE_CRS_NAME = "NAD83(HARN) / Oregon North (ft)"
 # Reproduced from the "Spatial Reference Information" block on every page.
@@ -208,6 +227,7 @@ COLLECTIONS = [
         "source_updated_text": "January 09, 2013",
         "count": 1,
         "bbox": [-123.153536, 45.255802, -122.277052, 45.657213],
+        "native_bbox": [7522268.6, 584745.1, 7744957.3, 733815.2],
         "columns": [
             {"name": "area_sq_mi", "type": "int64", "description": "Area in square miles"},
             {"name": "acres", "type": "int64", "description": "Area in acres."},
@@ -225,6 +245,7 @@ COLLECTIONS = [
         "source_updated_text": "July 13, 2026",
         "count": 200,
         "bbox": [-123.11573, 45.28495, -122.332951, 45.639118],
+        "native_bbox": [7531764.7, 595330.7, 7730400.1, 727210.8],
         "columns": [
             {"name": "rte", "type": "int32", "description": "Route number."},
             {"name": "dir", "type": "int32", "description": "Direction of route.",
@@ -256,6 +277,7 @@ COLLECTIONS = [
         "source_updated_text": "September 26, 2024",
         "count": 171,
         "bbox": [-122.991049, 45.311167, -122.418509, 45.605455],
+        "native_bbox": [7563740.0, 607778.2, 7710256.6, 714400.3],
         "columns": [
             {"name": "line", "type": "string", "description": "Line(s) serving a particular segment.",
              "values": {
@@ -309,6 +331,7 @@ COLLECTIONS = [
         "source_updated_text": "July 30, 2026",
         "count": 6316,
         "bbox": [-123.115462, 45.285222, -122.333062, 45.637731],
+        "native_bbox": [7531831.2, 595429.4, 7730367.6, 726731.3],
         "columns": [
             {"name": "stop_id", "type": "int32", "description": "Unique identifier."},
             {"name": "stop_name", "type": "string", "description": "Intersection or street address of stop."},
@@ -333,6 +356,7 @@ COLLECTIONS = [
         "source_updated_text": "July 30, 2026",
         "count": 8314,
         "bbox": [-123.115462, 45.285222, -122.333062, 45.637731],
+        "native_bbox": [7531831.2, 595429.4, 7730367.6, 726731.3],
         "columns": [
             {"name": "rte", "type": "int32", "description": "Route number."},
             {"name": "dir", "type": "int32", "description": "Direction of line serving this stop.",
@@ -371,6 +395,7 @@ COLLECTIONS = [
         "source_updated_text": "December 04, 2024",
         "count": 169,
         "bbox": [-122.991035, 45.311167, -122.418509, 45.605455],
+        "native_bbox": [7563749.3, 607778.2, 7710256.6, 714400.3],
         "columns": [
             {"name": "station", "type": "string", "description": "Name of station."},
             {"name": "line", "type": "string", "description": "Line(s) serving a particular stop.",
@@ -414,6 +439,7 @@ COLLECTIONS = [
         "source_updated_text": "July 31, 2024",
         "count": 15,
         "bbox": [-122.985278, 45.360144, -122.426856, 45.577122],
+        "native_bbox": [7565216.0, 624437.2, 7708126.4, 704049.3],
         "columns": [
             {"name": "name", "type": "string", "description": "Name of Transit Center."},
             {"name": "address", "type": "string", "description": "Transit Center street address or major intersection."},
@@ -438,6 +464,7 @@ COLLECTIONS = [
         "source_updated_text": "June 23, 2026",
         "count": 46,
         "bbox": [-122.990552, 45.284869, -122.332396, 45.605293],
+        "native_bbox": [7563860.3, 595297.0, 7730536.0, 714343.3],
         "columns": [
             {"name": "name", "type": "string", "description": "Name of park and ride."},
             {"name": "address", "type": "string", "description": "Park and ride street address or major intersection."},
@@ -461,6 +488,8 @@ BY_ID = {c["id"]: c for c in COLLECTIONS}
 
 # Catalog extent is the union of the collection extents, which is the district
 # boundary since every other layer sits inside it.
+# STAC requires the collection and catalog extent in WGS84 regardless of the
+# data's own CRS, so these stay in degrees while the data stays in feet.
 CATALOG_BBOX = [-123.153536, 45.255802, -122.277052, 45.657213]
 
 

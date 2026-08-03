@@ -12,10 +12,12 @@ and ZIP code.
 They span all three counties of the district: 7 in Multnomah, 5 in Washington and
 3 in Clackamas.
 
-> **Agents:** see [AGENTS.md](https://data.source.coop/cholmes/trimet/transit-centers/AGENTS.md) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md](https://source.coop/cholmes/trimet/transit-centers/AGENTS.md) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![TriMet Transit Centers](https://data.source.coop/cholmes/trimet/transit-centers/thumbnail.webp)
+[![TriMet Transit Centers](https://data.source.coop/cholmes/trimet/transit-centers/thumbnail.webp)](https://cholmes.github.io/trimet-data-browser)
+
+### 🗺️ [Explore this collection on an interactive map →](https://cholmes.github.io/trimet-data-browser)
 
 ## Quick start
 
@@ -66,19 +68,19 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/transit-centers/
 | `zipcode` | string | Zipcode in which Transit Center is located. |
 | `status` | string | Operational status of segment.<br>Values: `Existing` Transit Center is operational; `Planned` Transit Center is in advanced planning stages; `UC` Transit Center is under construction. |
 | `geometry` | binary | Feature geometry, WGS84 lon/lat. |
-| `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> |  |
+| `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from
 [meta_tm_tran_cen.shtml](https://developer.trimet.org/gis/meta_tm_tran_cen.shtml). The same text is carried in
-`table:columns` in [collection.json](https://data.source.coop/cholmes/trimet/transit-centers/collection.json).
+`table:columns` in [collection.json](https://source.coop/cholmes/trimet/transit-centers/collection.json).
 
 ## Visualization
 
 | Style | What it shows |
 |---|---|
-| [`default.json`](https://data.source.coop/cholmes/trimet/transit-centers/styles/default.json) | The fifteen transit centers as prominent marks in TriMet brand orange. These are the network's timed-transfer hubs, so they are drawn larger than ordinary stops and stay visible at low zoom. |
-| [`by-county.json`](https://data.source.coop/cholmes/trimet/transit-centers/styles/by-county.json) | Colors the hubs by COUNTY. TriMet's district spans Multnomah, Washington and Clackamas counties, and this style shows how the transfer hubs are distributed across the three. |
-| [`labeled.json`](https://data.source.coop/cholmes/trimet/transit-centers/styles/labeled.json) | Transit center marks with NAME shown from zoom 9. Fifteen labels never collide, so this style works as a standalone overview of the network's hub structure. |
+| [`default.json`](https://source.coop/cholmes/trimet/transit-centers/styles/default.json) | The fifteen transit centers as prominent marks in TriMet brand orange. These are the network's timed-transfer hubs, so they are drawn larger than ordinary stops and stay visible at low zoom. |
+| [`by-county.json`](https://source.coop/cholmes/trimet/transit-centers/styles/by-county.json) | Colors the hubs by COUNTY. TriMet's district spans Multnomah, Washington and Clackamas counties, and this style shows how the transfer hubs are distributed across the three. |
+| [`labeled.json`](https://source.coop/cholmes/trimet/transit-centers/styles/labeled.json) | Transit center marks with NAME shown from zoom 9. Fifteen labels never collide, so this style works as a standalone overview of the network's hub structure. |
 
 The PMTiles layer is named `transit-centers`. Styles reference it as `../transit-centers.pmtiles`,
 so they load unmodified against this directory.
@@ -87,17 +89,18 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`transit-centers.parquet`](https://data.source.coop/cholmes/trimet/transit-centers/transit-centers.parquet) | 6.4 KB | GeoParquet 1.1, 15 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`transit-centers.parquet`](https://data.source.coop/cholmes/trimet/transit-centers/transit-centers.parquet) | 11.7 KB | GeoParquet 1.1, 15 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
 | [`transit-centers.pmtiles`](https://data.source.coop/cholmes/trimet/transit-centers/transit-centers.pmtiles) | 21.8 KB | Vector tiles for display, every feature kept at every zoom |
 | [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/transit-centers/thumbnail.webp) | 47.3 KB | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`](https://data.source.coop/cholmes/trimet/transit-centers/collection.json) | — | STAC Collection metadata |
+| [`collection.json`](https://source.coop/cholmes/trimet/transit-centers/collection.json) | — | STAC Collection metadata |
 
 ## Provenance
 
 [![TriMet](https://data.source.coop/cholmes/trimet/_assets/trimet-logo.png)](https://developer.trimet.org/gis/)
 
 Produced by **TriMet GIS** (4012 SE 17th Ave, GIS3,
-Portland, OR 97202, gis@trimet.org) and distributed at
+Portland, OR 97202,
+[gis@trimet.org](mailto:gis@trimet.org)) and distributed at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/) as `tm_tran_cen`.
 
 The originals are linked as assets and are the authoritative copy:
@@ -119,7 +122,7 @@ Services API, not these GIS downloads. The collections therefore declare
 `"license": "other"` with a link to those terms, rather than claiming an open
 license the source does not offer.
 
-Practically: use the data, and contact **gis@trimet.org** before redistributing
+Practically: use the data, and contact **[gis@trimet.org](mailto:gis@trimet.org)** before redistributing
 it or building a product on it. If you need transit data under clear open terms,
 TriMet's [GTFS feed](https://developer.trimet.org/GTFS.shtml) is the better
 starting point.

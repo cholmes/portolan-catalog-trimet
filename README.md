@@ -11,6 +11,15 @@ TriMet distributes these as Shapefile and KML. This catalog republishes them as
 every collection, column definitions mined from TriMet's own metadata pages, and
 visualization styles that reproduce **TriMet's own published cartography**.
 
+The GeoParquet keeps TriMet's native **EPSG:2913** (NAD83(HARN) / Oregon North,
+international feet), so lengths and areas come out in feet with no projection
+step — the district area computed from the geometry matches TriMet's own `acres`
+value exactly. Only the PMTiles are reprojected, because vector tiles are WGS84
+by definition.
+
+**[🗺️ Explore the catalog on an interactive map](https://cholmes.github.io/trimet-data-browser)**
+· [Browse on Source Cooperative](https://source.coop/cholmes/trimet)
+
 **This repository holds the catalog metadata.** The data itself is generated from
 TriMet's sources and published to object storage; `.parquet` and `.pmtiles` are
 never committed.
@@ -34,13 +43,13 @@ Services API, not these files.
 
 Collections therefore declare `"license": "other"` with a link to those terms
 rather than claiming an open license the source does not offer. **Contact
-gis@trimet.org before redistributing this data or publishing it further.** For
+[gis@trimet.org](mailto:gis@trimet.org) before redistributing this data or publishing it further.** For
 transit data under clear open terms, TriMet's
 [GTFS feed](https://developer.trimet.org/GTFS.shtml) is the better starting
 point.
 
 The TriMet name and logo are trademarks of TriMet. The logo appears in this
-catalog solely as a link back to trimet.org, which section 6 of those terms
+catalog solely as a link back to [trimet.org](https://trimet.org/), which section 6 of those terms
 permits. This project is **not affiliated with TriMet**.
 
 ## Layout
@@ -102,12 +111,15 @@ python3 tests/run_all.py
 | `test_catalog.py` | Links and asset hrefs resolve; sizes and checksums match the bytes; providers, license, bbox, PMTiles link and style assets are well-formed; docs agree with the data |
 | `test_conformance.py` | `rashid check` — only documented deviations may fail. SKIPs without rashid |
 | `test_styles.py` | Every style validates against the real MapLibre style spec. SKIPs without chiitiler installed |
-| `test_recipes.py` | Every SQL snippet published in the docs actually runs |
+| `test_recipes.py` | Every curated recipe in `docs_content.py` runs |
+| `test_doc_sql.py` | Every SQL block in the *generated* docs runs, Quick Starts included |
 | `test_regen.py` | Regenerating reproduces the committed catalog byte-for-byte |
 
-`test_recipes.py` is the one that matters most in practice: a broken example
-costs more trust than no example, so every query in every AGENTS.md is executed
-against the real files before it ships.
+The two SQL gates matter most in practice: a broken example costs more trust
+than no example, so every query in every README and AGENTS.md is executed
+against the real files before it ships. Three that looked fine were not — two
+returned `nan` and zero rows, and the row-group pruning snippet named the
+covering column `bbox` when GDAL writes `geometry_bbox`.
 
 ## Publish
 
@@ -127,11 +139,13 @@ than inventing one, and mirrors the source style alongside so the reproduction
 can be checked against its origin.
 
 - **`ott:rail`** — the GeoServer SLD behind TriMet's rail maps, retrieved from
-  `ws.trimet.org` via WMS `GetStyles`. Its rules key on exactly the `line` values
+  [`ws.trimet.org`](https://ws.trimet.org/geoserver/ows?service=WMS&version=1.1.1&request=GetStyles&layers=ott:current_rail)
+  via WMS `GetStyles`. Its rules key on exactly the `line` values
   the rail layers carry, so `rail-lines/styles/default.json` reproduces it rule
   for rule, including the layered dashed overlays that show which services share
   a track. Mirrored at `catalog/rail-lines/styles/trimet-rail.sld.xml`.
-- **`trimet-routes`** — TriMet's MapLibre style at `tiles.trimet.org`, source of
+- **[`trimet-routes`](https://tiles.trimet.org/styles/trimet-routes/style.json)** —
+  TriMet's MapLibre style at [tiles.trimet.org](https://tiles.trimet.org/styles.json), source of
   the line weights and the flat bus color `#136390`. Where it resolves
   `route_color` at draw time from GTFS, the equivalent colors come from TriMet's
   GTFS `routes.txt`. Mirrored at
@@ -150,6 +164,6 @@ Passes `rashid check` with one documented deviation — WebP thumbnails, pending
 
 ## Credits
 
-Data © TriMet. Catalog maintained by Chris Holmes (cholmes@9eo.org), not
+Data © TriMet. Catalog maintained by Chris Holmes ([cholmes@9eo.org](mailto:cholmes@9eo.org)), not
 affiliated with TriMet. Basemap in the thumbnails © OpenStreetMap contributors,
 © CARTO.

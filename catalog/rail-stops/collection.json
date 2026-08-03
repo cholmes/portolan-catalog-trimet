@@ -11,7 +11,7 @@
   ],
   "id": "rail-stops",
   "title": "TriMet Rail Stops",
-  "description": "Public transit rail stops. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar stops. The data have been generalized to improve cartographic display at smaller scales. 169 Point features covering TriMet's service district in the Portland, Oregon metropolitan area, published by TriMet as `tm_rail_stops` and last updated at the source on December 04, 2024. This is a cloud-native mirror: the same data as GeoParquet and PMTiles, reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft). The original Shapefile, KML and metadata page are linked as assets. Column descriptions and code lists are TriMet's own, taken from https://developer.trimet.org/gis/meta_tm_rail_stops.shtml.",
+  "description": "Public transit rail stops. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar stops. The data have been generalized to improve cartographic display at smaller scales. 169 Point features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_rail_stops`](https://developer.trimet.org/gis/data/tm_rail_stops.zip) and last updated at the source on December 04, 2024.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_rail_stops.zip), [KML](https://developer.trimet.org/gis/data/tm_rail_stops.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_rail_stops.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nExplore it on the [interactive map](https://cholmes.github.io/trimet-data-browser), or read the [collection README](https://source.coop/cholmes/trimet/rail-stops/README.md) for suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/rail-stops/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
   "license": "other",
   "keywords": [
     "transit",
@@ -63,6 +63,40 @@
     }
   },
   "updated": "2026-08-02T18:02:50Z",
+  "table:columns": [
+    {
+      "name": "station",
+      "type": "string",
+      "description": "Name of station."
+    },
+    {
+      "name": "line",
+      "type": "string",
+      "description": "Line(s) serving a particular stop. Values: AL = Portland Streetcar A Loop; AL/BL = Portland Streetcar A & B Loops; B = MAX Blue Line; BGR = MAX Blue, Green, and Red Lines; BGRY = MAX Blue, Green, Red, and Yellow Lines; BL = Portland Streetcar B Loop; BL/NS = Portland Streetcar B Loop and North/South Line; BR = MAX Blue and Red Lines; G = MAX Green Line; GO = MAX Green and Orange Lines; GY = MAX Green and Yellow Lines; NS = Portland Streetcar North/South Line; NS/AL = Portland Streetcar A Loop and North/South Line; NS/AL/BL = Portland Streetcar A & B Loops and North/South Line; O = MAX Orange Line; R = MAX Red Line; WES = WES (Westside Express Service); Y = MAX Yellow Line."
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "description": "Operational status of the stop. Values: Existing = Service currently provided at rail stop; Planned = Rail stop in advanced planning stages; UC = Rail stop is under construction."
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "description": "Type of service. Values: CR = Commuter rail; MAX = Light rail; SC = Streetcar."
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)). Coordinates are feet, not degrees."
+    },
+    {
+      "name": "geometry_bbox",
+      "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>",
+      "description": "Per-feature bounding box struct, the GeoParquet covering column. Same projected feet as the geometry."
+    }
+  ],
+  "table:primary_geometry": "geometry",
+  "table:row_count": 169,
   "links": [
     {
       "rel": "root",
@@ -127,12 +161,12 @@
       "href": "./rail-stops.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "TriMet Rail Stops (GeoParquet)",
-      "description": "Public transit rail stops. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar stops. The data have been generalized to improve cartographic display at smaller scales. Reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft) source, Hilbert-ordered, zstd-compressed, with a GeoParquet 1.1 bbox covering column for row-group pruning.",
+      "description": "Public transit rail stops. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar stops. The data have been generalized to improve cartographic display at smaller scales. In TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), not reprojected, so lengths and areas are in feet. Hilbert-ordered, zstd-compressed, with a GeoParquet 1.1 bbox covering column for row-group pruning.",
       "roles": [
         "data"
       ],
-      "file:size": 11613,
-      "file:checksum": "12209e9020230fdbda8745f6ea490654752b194f97c512674502d10a76475cbf5019",
+      "file:size": 17476,
+      "file:checksum": "1220c53371f22997e2737128ec68aa61cf0649b59b7c6a463f768ba48f9033ea82ba",
       "table:columns": [
         {
           "name": "station",
@@ -157,16 +191,17 @@
         {
           "name": "geometry",
           "type": "binary",
-          "description": "Feature geometry, WGS84 longitude and latitude. Reprojected from TriMet's EPSG:2913 (NAD83(HARN) / Oregon North (ft))."
+          "description": "Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)). Coordinates are feet, not degrees."
         },
         {
           "name": "geometry_bbox",
-          "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>"
+          "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>",
+          "description": "Per-feature bounding box struct, the GeoParquet covering column. Same projected feet as the geometry."
         }
       ],
       "table:primary_geometry": "geometry",
       "table:row_count": 169,
-      "proj:code": "EPSG:4326",
+      "proj:code": "EPSG:2913",
       "alternate": {
         "s3": {
           "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/rail-stops/rail-stops.parquet",
@@ -178,12 +213,12 @@
       "href": "./rail-stops.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "TriMet Rail Stops (PMTiles)",
-      "description": "Vector tiles for web display, layer name `rail-stops`. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
+      "description": "Vector tiles for web display, layer name `rail-stops`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
         "visual"
       ],
-      "file:size": 62122,
-      "file:checksum": "1220f4a83ce0b791c76555604392de9a3829d5c2698f2d869e18b239959e1569de1c",
+      "file:size": 62188,
+      "file:checksum": "12201d5bcdd4eed4e8bedec73b673eee9a2ac795f1bae941ba4700b9cbda735372bc",
       "alternate": {
         "s3": {
           "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/rail-stops/rail-stops.pmtiles",

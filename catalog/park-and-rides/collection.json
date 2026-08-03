@@ -11,7 +11,7 @@
   ],
   "id": "park-and-rides",
   "title": "TriMet Park and Rides",
-  "description": "TriMet park and ride locations. 46 Point features covering TriMet's service district in the Portland, Oregon metropolitan area, published by TriMet as `tm_parkride` and last updated at the source on June 23, 2026. This is a cloud-native mirror: the same data as GeoParquet and PMTiles, reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft). The original Shapefile, KML and metadata page are linked as assets. Column descriptions and code lists are TriMet's own, taken from https://developer.trimet.org/gis/meta_tm_parkride.shtml.",
+  "description": "TriMet park and ride locations. 46 Point features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_parkride`](https://developer.trimet.org/gis/data/tm_parkride.zip) and last updated at the source on June 23, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_parkride.zip), [KML](https://developer.trimet.org/gis/data/tm_parkride.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_parkride.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nExplore it on the [interactive map](https://cholmes.github.io/trimet-data-browser), or read the [collection README](https://source.coop/cholmes/trimet/park-and-rides/README.md) for suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/park-and-rides/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
   "license": "other",
   "keywords": [
     "transit",
@@ -63,6 +63,60 @@
     }
   },
   "updated": "2026-08-02T18:02:50Z",
+  "table:columns": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Name of park and ride."
+    },
+    {
+      "name": "address",
+      "type": "string",
+      "description": "Park and ride street address or major intersection."
+    },
+    {
+      "name": "city",
+      "type": "string",
+      "description": "City in which park and ride is located."
+    },
+    {
+      "name": "county",
+      "type": "string",
+      "description": "County in which park and ride is located."
+    },
+    {
+      "name": "zipcode",
+      "type": "string",
+      "description": "Zipcode in which park and ride is located."
+    },
+    {
+      "name": "owner",
+      "type": "string",
+      "description": "Indicates whether a park and ride is TriMet owned or a shared use facility. Values: TriMet = TriMet owned; Shared = Shared use."
+    },
+    {
+      "name": "spaces",
+      "type": "int32",
+      "description": "Indicates number of parking spaces available at park and ride."
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "description": "Operational status of park and ride. Values: Existing = Park and ride is operational; Planned = Park and ride is in advanced planning stages; UC = Park and ride is under construction."
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)). Coordinates are feet, not degrees."
+    },
+    {
+      "name": "geometry_bbox",
+      "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>",
+      "description": "Per-feature bounding box struct, the GeoParquet covering column. Same projected feet as the geometry."
+    }
+  ],
+  "table:primary_geometry": "geometry",
+  "table:row_count": 46,
   "links": [
     {
       "rel": "root",
@@ -127,12 +181,12 @@
       "href": "./park-and-rides.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "TriMet Park and Rides (GeoParquet)",
-      "description": "TriMet park and ride locations. Reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft) source, Hilbert-ordered, zstd-compressed, with a GeoParquet 1.1 bbox covering column for row-group pruning.",
+      "description": "TriMet park and ride locations. In TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), not reprojected, so lengths and areas are in feet. Hilbert-ordered, zstd-compressed, with a GeoParquet 1.1 bbox covering column for row-group pruning.",
       "roles": [
         "data"
       ],
-      "file:size": 9526,
-      "file:checksum": "122098819c53bd56f1d5d3592ae6feca81f38d56e98df82b414ab32b91a1f0629b7f",
+      "file:size": 15056,
+      "file:checksum": "12204f805dc17250339d0ebe2f5a6f2042b0777bba4952fc65920bd2d4f67c6f0a0a",
       "table:columns": [
         {
           "name": "name",
@@ -177,16 +231,17 @@
         {
           "name": "geometry",
           "type": "binary",
-          "description": "Feature geometry, WGS84 longitude and latitude. Reprojected from TriMet's EPSG:2913 (NAD83(HARN) / Oregon North (ft))."
+          "description": "Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)). Coordinates are feet, not degrees."
         },
         {
           "name": "geometry_bbox",
-          "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>"
+          "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>",
+          "description": "Per-feature bounding box struct, the GeoParquet covering column. Same projected feet as the geometry."
         }
       ],
       "table:primary_geometry": "geometry",
       "table:row_count": 46,
-      "proj:code": "EPSG:4326",
+      "proj:code": "EPSG:2913",
       "alternate": {
         "s3": {
           "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/park-and-rides/park-and-rides.parquet",
@@ -198,7 +253,7 @@
       "href": "./park-and-rides.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "TriMet Park and Rides (PMTiles)",
-      "description": "Vector tiles for web display, layer name `park-and-rides`. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
+      "description": "Vector tiles for web display, layer name `park-and-rides`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
         "visual"
       ],

@@ -40,9 +40,11 @@ def to_geoparquet(coll):
         dst.unlink()
     run([
         "ogr2ogr", "-f", "Parquet", str(dst), str(src),
-        # Everything TriMet ships is EPSG:2913 (NAD83 HARN / Oregon North, intl
-        # feet). WGS84 is what GeoParquet readers and tippecanoe expect.
-        "-t_srs", "EPSG:4326",
+        # No -t_srs: the GeoParquet keeps TriMet's native EPSG:2913
+        # (NAD83(HARN) / Oregon North, international feet). Reprojecting would
+        # throw away the CRS the data was surveyed and published in, and put
+        # every measurement in degrees. PMTiles carries the Web Mercator
+        # rendering, which is where a projected copy actually belongs.
         "-nln", coll["id"],
         "-lco", "COMPRESSION=ZSTD",
         "-lco", "GEOMETRY_ENCODING=WKB",
@@ -60,7 +62,10 @@ def to_pmtiles(coll):
     parquet = OUT / coll["id"] / f"{coll['id']}.parquet"
     dst = OUT / coll["id"] / f"{coll['id']}.pmtiles"
     tmp = dst.with_suffix(".geojsonl")
-    run(["ogr2ogr", "-f", "GeoJSONSeq", str(tmp), str(parquet)])
+    # Tiles are WGS84 by definition, so the reprojection happens here rather
+    # than in the archival GeoParquet.
+    run(["ogr2ogr", "-f", "GeoJSONSeq", str(tmp), str(parquet),
+         "-s_srs", "EPSG:2913", "-t_srs", "EPSG:4326"])
     maxzoom = MAXZOOM.get(coll["id"], DEFAULT_MAXZOOM)
     run([
         "tippecanoe", "-o", str(dst), "--force",

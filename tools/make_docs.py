@@ -23,10 +23,11 @@ import docs_content as C  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "catalog"
 BASE = M.PUBLIC_BASE
+BROWSE = M.BROWSE_BASE
 
 
 def url(*parts):
-    """An absolute URL into the published catalog.
+    """A raw-bytes URL on the data host. For images and files a program fetches.
 
     Links inside the generated Markdown are absolute, not relative. Source
     Cooperative renders a README on a page whose URL is not the README's own
@@ -38,6 +39,17 @@ def url(*parts):
     is what the spec requires and what keeps the catalog relocatable.
     """
     return "/".join([BASE, *(str(p).strip("/") for p in parts)])
+
+
+def browse(*parts):
+    """A URL on the Source Cooperative UI. For links a person clicks.
+
+    data.source.coop serves raw bytes: a directory there has no listing, and a
+    README arrives as a text download rather than a rendered page. source.coop
+    renders both. So navigation — collections, READMEs, agent guides, styles —
+    points at the browse host, while images and data files point at `url()`.
+    """
+    return "/".join([BROWSE, *(str(p).strip("/") for p in parts)])
 
 
 def coll_stats(cid):
@@ -74,8 +86,9 @@ def schema_table(coll):
                 desc += f"<br>Values: {codes}."
         elif name == "geometry":
             desc = "Feature geometry, WGS84 lon/lat."
-        elif name == "bbox":
-            desc = "GeoParquet 1.1 covering column, for row-group pruning."
+        elif name.endswith("_bbox"):
+            desc = ("GeoParquet 1.1 covering column, for row-group pruning. "
+                    "Same projected feet as the geometry.")
         else:
             desc = ""
         rows.append(f"| `{name}` | {t} | {desc} |")
@@ -91,7 +104,7 @@ def styles_table(cid):
     for n in names:
         meta = json.loads((sdir / n).read_text())
         desc = meta.get("metadata", {}).get("description", "")
-        rows.append(f"| [`{n}`]({url(cid, 'styles', n)}) | {desc} |")
+        rows.append(f"| [`{n}`]({browse(cid, 'styles', n)}) | {desc} |")
     return "\n".join(rows)
 
 
@@ -119,10 +132,12 @@ as `{coll['source']}` and last updated at the source on
 
 {c['summary']}
 
-> **Agents:** see [AGENTS.md]({url(cid, "AGENTS.md")}) for join keys, verified query recipes
+> **Agents:** see [AGENTS.md]({browse(cid, "AGENTS.md")}) for join keys, verified query recipes
 > and the caveats that will otherwise cost you a wrong answer.
 
-![{coll['title']}]({url(cid, 'thumbnail.webp')})
+[![{coll['title']}]({url(cid, 'thumbnail.webp')})]({M.BROWSER_URL})
+
+### 🗺️ [Explore this collection on an interactive map →]({M.BROWSER_URL})
 
 ## Quick start
 
@@ -157,7 +172,7 @@ gdf = gpd.read_parquet("{BASE}/{cid}/{cid}.parquet")
 
 Column descriptions are TriMet's own, taken verbatim from
 [{s['metadata'].split('/')[-1]}]({s['metadata']}). The same text is carried in
-`table:columns` in [collection.json]({url(cid, "collection.json")}).
+`table:columns` in [collection.json]({browse(cid, "collection.json")}).
 
 ## Visualization
 
@@ -173,14 +188,15 @@ so they load unmodified against this directory.
 | [`{cid}.parquet`]({url(cid, cid + ".parquet")}) | {human(st['size'])} | GeoParquet 1.1, {st['rows']:,} rows in {st['row_groups']} row group(s), zstd, Hilbert-ordered, bbox covering column |
 | [`{cid}.pmtiles`]({url(cid, cid + ".pmtiles")}) | {human(st['pmtiles'])} | Vector tiles for display, every feature kept at every zoom |
 | [`thumbnail.webp`]({url(cid, "thumbnail.webp")}) | {human(st["thumb"])} | Rendered from `styles/default.json` over a light basemap |
-| [`collection.json`]({url(cid, "collection.json")}) | — | STAC Collection metadata |
+| [`collection.json`]({browse(cid, "collection.json")}) | — | STAC Collection metadata |
 
 ## Provenance
 
 [![TriMet]({url("_assets/trimet-logo.png")})]({M.GIS_PAGE})
 
 Produced by **TriMet GIS** ({M.TRIMET_CONTACT['address']},
-{M.TRIMET_CONTACT['city']}, {M.TRIMET_CONTACT['email']}) and distributed at
+{M.TRIMET_CONTACT['city']},
+[{M.TRIMET_CONTACT['email']}](mailto:{M.TRIMET_CONTACT['email']})) and distributed at
 [developer.trimet.org/gis]({M.GIS_PAGE}) as `{coll['source']}`.
 
 The originals are linked as assets and are the authoritative copy:
@@ -202,7 +218,7 @@ def collection_agents(coll):
 
     quirks = "\n\n".join(f"### {h}\n\n{b}" for h, b in c["quirks"])
     recipes = "\n\n".join(f"### {t}\n\n```sql\n{q}\n```" for t, q in c["recipes"])
-    related = "\n".join(f"- [`{r}`]({url(r, 'AGENTS.md')}) — {why}" for r, why in c["related"])
+    related = "\n".join(f"- [`{r}`]({browse(r, 'AGENTS.md')}) — {why}" for r, why in c["related"])
 
     return f"""# {coll['title']} — agent guide
 
@@ -219,17 +235,20 @@ SELECT * FROM '{BASE}/{cid}/{cid}.parquet' LIMIT 10;
 
 Reads stream over HTTP range requests — query in place, do not download. The file
 is Hilbert-ordered and carries a GeoParquet 1.1 `bbox` covering column, so a
-spatial filter on `bbox.xmin` / `bbox.ymin` / `bbox.xmax` / `bbox.ymax` prunes
-row groups from metadata alone:
+spatial filter on `geometry_bbox` prunes row groups from metadata alone. Note
+the column name: GDAL writes the covering as `<geometry column>_bbox`, so it is
+`geometry_bbox` here, not `bbox`.
 
 ```sql
+-- Coordinates are EPSG:2913 feet, not degrees. This collection spans
+-- x {coll['native_bbox'][0]:,.0f}–{coll['native_bbox'][2]:,.0f}, y {coll['native_bbox'][1]:,.0f}–{coll['native_bbox'][3]:,.0f}.
 SELECT * FROM '{BASE}/{cid}/{cid}.parquet'
-WHERE bbox.xmin > -122.70 AND bbox.xmax < -122.60
-  AND bbox.ymin >   45.50 AND bbox.ymax <   45.55;
+WHERE geometry_bbox.xmin > 7630000 AND geometry_bbox.xmax < 7650000
+  AND geometry_bbox.ymin >  680000 AND geometry_bbox.ymax <  700000;
 ```
 
 The recipes below use bare relative paths (`'{cid}/{cid}.parquet'`) for
-readability. Prefix them with `{BASE}/` to run remotely.
+readability. Prefix them with [`{BASE}/`]({browse(cid)}/) to run remotely.
 
 Other formats: `{cid}.pmtiles` for map display (layer name `{cid}`), and TriMet's
 original Shapefile and KML, linked from `collection.json` as `source_shapefile`
@@ -271,7 +290,7 @@ SORT_BY_BBOX=YES -lco WRITE_COVERING_BBOX=YES`, then tippecanoe with `-r1
 def catalog_readme():
     rows = ["| Collection | Features | Geometry | Description |", "|---|---|---|---|"]
     for c in M.COLLECTIONS:
-        rows.append(f"| [{c['title']}]({url(c['id'])}/) | {c['count']:,} | "
+        rows.append(f"| [{c['title']}]({browse(c['id'])}/) | {c['count']:,} | "
                     f"{c['geometry']} | {c['blurb']} |")
     table = "\n".join(rows)
 
@@ -287,7 +306,12 @@ def catalog_readme():
 
 {C.CATALOG_INTRO}
 
-> **Agents:** start at [AGENTS.md]({url("AGENTS.md")}).
+### 🗺️ [Explore the catalog on an interactive map →]({M.BROWSER_URL})
+
+All eight collections, drawn with TriMet's own cartography, with no setup.
+
+> **Agents:** start at [AGENTS.md]({browse("AGENTS.md")}) for join keys, the
+> quirks that produce silently wrong answers, and verified query recipes.
 
 ## Collections
 
@@ -322,11 +346,13 @@ than inventing one. Two TriMet sources are used, and both are mirrored into the
 collections they style so the reproduction can be checked against its origin:
 
 - **`ott:rail`**, the GeoServer SLD behind TriMet's rail maps, fetched from
-  `ws.trimet.org` via WMS `GetStyles`. Its rules key on exactly the `line` values
+  [`ws.trimet.org`](https://ws.trimet.org/geoserver/ows?service=WMS&version=1.1.1&request=GetStyles&layers=ott:current_rail)
+  via WMS `GetStyles`. Its rules key on exactly the `line` values
   the rail layers carry, so `rail-lines/styles/default.json` reproduces it
   segment for segment — including the layered dashed overlays that show which
   services share a track.
-- **`trimet-routes`**, TriMet's MapLibre style at `tiles.trimet.org`, which gives
+- **[`trimet-routes`](https://tiles.trimet.org/styles/trimet-routes/style.json)**,
+  TriMet's MapLibre style at [tiles.trimet.org](https://tiles.trimet.org/styles.json), which gives
   the line weights and the flat bus color `#136390`. Where it resolves
   `route_color` from GTFS, the equivalent colors are taken from TriMet's GTFS
   `routes.txt`.
@@ -343,19 +369,22 @@ here to EPSG:4326. TriMet's note on the GIS page:
 > {M.GIS_PAGE_NOTE}
 
 Contact for the source data: **TriMet GIS**, {M.TRIMET_CONTACT['address']},
-{M.TRIMET_CONTACT['city']} — {M.TRIMET_CONTACT['email']}.
+{M.TRIMET_CONTACT['city']} —
+[{M.TRIMET_CONTACT['email']}](mailto:{M.TRIMET_CONTACT['email']}).
 
 {C.LICENSE_NOTE}
 
 ## About this mirror
 
-Maintained by {M.HOST['name']} ({M.HOST['email']}), **not affiliated with
+Maintained by {M.HOST['name']}
+([{M.HOST['email']}](mailto:{M.HOST['email']})), **not affiliated with
 TriMet**. Built and regenerated with the scripts in
 [`tools/`](https://github.com/cholmes/portolan-catalog-trimet/tree/main/tools).
 Conforms to the [Portolan](https://www.portolan-sdi.org/) specification v0.1.0.
 
 The TriMet name and logo are trademarks of TriMet, used here solely as a link
-back to trimet.org, which section 6 of TriMet's Terms of Use permits.
+back to [trimet.org](https://trimet.org/), which section 6 of TriMet's
+[Terms of Use]({M.TERMS_URL}) permits.
 """
 
 
@@ -373,7 +402,7 @@ def catalog_agents():
     }
     for c in M.COLLECTIONS:
         k, note = keys[c["id"]]
-        rows.append(f"| [`{c['id']}`]({url(c['id'], 'AGENTS.md')}) | {c['count']:,} | "
+        rows.append(f"| [`{c['id']}`]({browse(c['id'], 'AGENTS.md')}) | {c['count']:,} | "
                     f"{c['geometry']} | {k} | {note} |")
     table = "\n".join(rows)
 
@@ -402,6 +431,9 @@ a query engine beyond DuckDB.
 **The join that does not exist:** `rail-stops` carries no `stop_id`, so it cannot
 be joined to `stops` or `route-stops` by key. Match spatially and check the
 distance; the rail layers are generalized.
+
+There is an interactive map browser at [{M.BROWSER_URL}]({M.BROWSER_URL}) if
+you need to show a human what a query returned.
 
 ## Access
 

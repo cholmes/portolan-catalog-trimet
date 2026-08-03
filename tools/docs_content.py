@@ -15,23 +15,45 @@ example.
 CRS_NOTE = """\
 ## Coordinate system, and what follows from it
 
-TriMet publishes all eight layers in **EPSG:2913**, NAD83(HARN) / Oregon North,
-**in international feet**. This catalog republishes them in **EPSG:4326**, so
-coordinates are degrees.
+The GeoParquet is in **EPSG:2913** — NAD83(HARN) / Oregon North, **international
+feet** — which is what TriMet surveys and publishes in. It is deliberately *not*
+reprojected. Only the PMTiles are in WGS84, because vector tiles are Web Mercator
+by definition.
 
-That matters the moment you measure anything. `ST_Length` and `ST_Area` on the
-published geometry return *degrees*, which is not a unit of distance. Project
-back to the source CRS first, and note the `always_xy := true` argument — without
-it DuckDB applies EPSG:4326's authority-declared latitude-first axis order and
-every transformed coordinate comes back `Infinity`:
+The practical consequence is a good one: **measurements just work, in feet.**
 
 ```sql
-ST_Transform(geometry, 'EPSG:4326', 'EPSG:2913', always_xy := true)
+ST_Length(geometry)              -- feet
+ST_Area(geometry)                -- square feet
+ST_Distance(a.geometry, b.geometry)  -- feet
+ST_DWithin(a.geometry, b.geometry, 1312.34)  -- within 400 m
 ```
 
-The result is in feet. Multiply by 0.3048 for metres. Nothing in this catalog
-carries a pre-computed length or area column except the district boundary, which
-carries TriMet's own `area_sq_mi` and `acres`.
+Useful conversions: × 0.3048 for metres, ÷ 5280 for miles, ÷ 43560 for acres,
+÷ 27878400 for square miles. 400 m is 1312.34 ft, a quarter mile is 1320 ft.
+
+Two things to watch:
+
+- **Coordinates are not longitude and latitude.** An x of 7633099 is feet east
+  of the projection's false origin, not a degree. Anything expecting lon/lat —
+  a web map, a geocoder, most `GeoJSON` consumers — needs a transform first.
+- **`always_xy := true` when you do transform.** Without it DuckDB honours
+  EPSG:4326's authority-declared latitude-first axis order and every result
+  comes back `Infinity`:
+
+```sql
+SELECT ST_AsText(ST_Transform(geometry, 'EPSG:2913', 'EPSG:4326',
+                              always_xy := true)) AS lonlat
+FROM 'stops/stops.parquet' LIMIT 5;
+```
+
+The `bbox` covering column is in the same feet, so a spatial filter written
+against it uses projected coordinates, not degrees. The collection's STAC
+`extent` stays in WGS84, because STAC requires that regardless of the data's own
+CRS.
+
+Nothing here carries a pre-computed length or area except the district boundary,
+which has TriMet's own `area_sq_mi` and `acres`.
 """
 
 LICENSE_NOTE = """\
@@ -46,7 +68,7 @@ Services API, not these GIS downloads. The collections therefore declare
 `"license": "other"` with a link to those terms, rather than claiming an open
 license the source does not offer.
 
-Practically: use the data, and contact **gis@trimet.org** before redistributing
+Practically: use the data, and contact **[gis@trimet.org](mailto:gis@trimet.org)** before redistributing
 it or building a product on it. If you need transit data under clear open terms,
 TriMet's [GTFS feed](https://developer.trimet.org/GTFS.shtml) is the better
 starting point.
@@ -61,9 +83,13 @@ KML, each with a metadata page carrying full attribute definitions and code
 lists.
 
 This catalog is a cloud-native mirror of all eight: the same features as
-GeoParquet and PMTiles, reprojected to WGS84, with TriMet's original Shapefile,
-KML and metadata page linked from every collection. Nothing has been added to the
-data and no features were dropped.
+GeoParquet and PMTiles, with TriMet's original Shapefile, KML and metadata page
+linked from every collection. Nothing has been added to the data and no features
+were dropped.
+
+The GeoParquet keeps TriMet's native **EPSG:2913** (NAD83(HARN) / Oregon North,
+international feet), so lengths and areas come out in feet without a projection
+step. The PMTiles are WGS84, because vector tiles are.
 """
 
 # ---------------------------------------------------------------------------
@@ -126,9 +152,11 @@ FROM 'stops/stops.parquet' s
 CROSS JOIN 'district-boundary/district-boundary.parquet' b
 GROUP BY 1;"""),
 ("Confirm TriMet's stated area against the geometry", """\
+-- The geometry is already in feet, so no transform is needed.
 SELECT area_sq_mi AS trimet_says,
-       round(ST_Area(ST_Transform(geometry, 'EPSG:4326', 'EPSG:2913',
-                                  always_xy := true)) / 27878400.0, 1) AS computed
+       round(ST_Area(geometry) / 27878400.0, 1) AS computed_sq_mi,
+       round(ST_Area(geometry) / 43560.0)       AS computed_acres,
+       acres AS trimet_acres
 FROM 'district-boundary/district-boundary.parquet';"""),
 ],
 related=[("stops", "the service the district exists to deliver"),
@@ -190,22 +218,21 @@ Sherwood, for example. Do not assume `routes` is contained by
 ],
 recipes=[
 ("Longest routes in kilometres, one direction only", """\
+-- ST_Length returns feet directly; 5280 ft to the mile.
 SELECT rte, any_value(rte_desc) AS name,
-       round(sum(ST_Length(ST_Transform(geometry, 'EPSG:4326', 'EPSG:2913',
-                                        always_xy := true))) * 0.3048 / 1000, 1) AS km
+       round(sum(ST_Length(geometry)) / 5280.0, 1) AS miles
 FROM 'routes/routes.parquet'
 WHERE dir = 0
 GROUP BY rte
-ORDER BY km DESC
+ORDER BY miles DESC
 LIMIT 10;"""),
 ("Route-kilometres by mode", """\
 SELECT type,
-       round(sum(ST_Length(ST_Transform(geometry, 'EPSG:4326', 'EPSG:2913',
-                                        always_xy := true))) * 0.3048 / 1000, 1) AS km,
+       round(sum(ST_Length(geometry)) / 5280.0, 1) AS miles,
        count(*) AS segments
 FROM 'routes/routes.parquet'
 GROUP BY type
-ORDER BY km DESC;"""),
+ORDER BY miles DESC;"""),
 ("The Frequent Service network, as displayed to riders", """\
 SELECT DISTINCT public_rte, rte_desc, type
 FROM 'routes/routes.parquet'
@@ -359,14 +386,12 @@ GROUP BY ALL
 HAVING count(*) > 20
 ORDER BY stops DESC;"""),
 ("Stops within 400 m of a transit center — note the reprojection", """\
--- 400 m is 1312.34 international feet, the unit of EPSG:2913.
+-- Both layers are in feet, so the radius is just a number of feet.
+-- 1312.34 ft = 400 m. Use 1320 for a quarter mile.
 SELECT tc.name, count(*) AS stops_within_400m
 FROM 'transit-centers/transit-centers.parquet' tc
 JOIN 'stops/stops.parquet' s
-  ON ST_DWithin(
-       ST_Transform(tc.geometry, 'EPSG:4326', 'EPSG:2913', always_xy := true),
-       ST_Transform(s.geometry,  'EPSG:4326', 'EPSG:2913', always_xy := true),
-       1312.34)
+  ON ST_DWithin(tc.geometry, s.geometry, 1312.34)
 GROUP BY tc.name
 ORDER BY stops_within_400m DESC;"""),
 ("How many routes serve each stop, by joining to route-stops", """\
@@ -520,13 +545,11 @@ ORDER BY stations DESC;"""),
 -- No shared key exists, so this is a nearest-neighbour join. Check the distance
 -- column before trusting a match; the geometry here is generalized.
 SELECT rs.station, s.stop_id, s.stop_name,
-       round(ST_Distance(
-         ST_Transform(rs.geometry, 'EPSG:4326', 'EPSG:2913', always_xy := true),
-         ST_Transform(s.geometry,  'EPSG:4326', 'EPSG:2913', always_xy := true)) * 0.3048, 1) AS metres
+       round(ST_Distance(rs.geometry, s.geometry), 1) AS feet
 FROM 'rail-stops/rail-stops.parquet' rs
 JOIN 'stops/stops.parquet' s ON s.type IN ('MAX','CR','SC','BSC')
-QUALIFY row_number() OVER (PARTITION BY rs.station, rs.geometry ORDER BY metres) = 1
-ORDER BY metres DESC
+QUALIFY row_number() OVER (PARTITION BY rs.station, rs.geometry ORDER BY feet) = 1
+ORDER BY feet DESC
 LIMIT 10;"""),
 ],
 related=[("rail-lines", "the track these stations sit on, sharing the `line` code space and palette"),
@@ -583,20 +606,14 @@ SELECT tc.name,
        count(DISTINCT rs.stop_id) AS stops
 FROM 'transit-centers/transit-centers.parquet' tc
 JOIN 'route-stops/route-stops.parquet' rs
-  ON ST_DWithin(
-       ST_Transform(tc.geometry, 'EPSG:4326', 'EPSG:2913', always_xy := true),
-       ST_Transform(rs.geometry, 'EPSG:4326', 'EPSG:2913', always_xy := true),
-       1312.34)
+  ON ST_DWithin(tc.geometry, rs.geometry, 1312.34)
 GROUP BY tc.name
 ORDER BY routes DESC;"""),
 ("Which hubs have rail", """\
 SELECT tc.name, string_agg(DISTINCT rst.type, ', ') AS rail_modes
 FROM 'transit-centers/transit-centers.parquet' tc
 LEFT JOIN 'rail-stops/rail-stops.parquet' rst
-  ON ST_DWithin(
-       ST_Transform(tc.geometry,  'EPSG:4326', 'EPSG:2913', always_xy := true),
-       ST_Transform(rst.geometry, 'EPSG:4326', 'EPSG:2913', always_xy := true),
-       1312.34)
+  ON ST_DWithin(tc.geometry, rst.geometry, 1312.34)
 GROUP BY tc.name
 ORDER BY rail_modes NULLS LAST;"""),
 ],
@@ -661,10 +678,7 @@ SELECT CASE WHEN r.station IS NULL THEN 'bus only' ELSE 'rail-served' END AS acc
        count(DISTINCT p.name) AS lots, sum(DISTINCT p.spaces) AS spaces
 FROM 'park-and-rides/park-and-rides.parquet' p
 LEFT JOIN 'rail-stops/rail-stops.parquet' r
-  ON ST_DWithin(
-       ST_Transform(p.geometry, 'EPSG:4326', 'EPSG:2913', always_xy := true),
-       ST_Transform(r.geometry, 'EPSG:4326', 'EPSG:2913', always_xy := true),
-       1312.34)
+  ON ST_DWithin(p.geometry, r.geometry, 1312.34)
 GROUP BY 1;"""),
 ],
 related=[("transit-centers", "many park and rides sit at a transit center"),

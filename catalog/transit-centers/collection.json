@@ -11,7 +11,7 @@
   ],
   "id": "transit-centers",
   "title": "TriMet Transit Centers",
-  "description": "Transit Centers. 15 Point features covering TriMet's service district in the Portland, Oregon metropolitan area, published by TriMet as `tm_tran_cen` and last updated at the source on July 31, 2024. This is a cloud-native mirror: the same data as GeoParquet and PMTiles, reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft). The original Shapefile, KML and metadata page are linked as assets. Column descriptions and code lists are TriMet's own, taken from https://developer.trimet.org/gis/meta_tm_tran_cen.shtml.",
+  "description": "Transit Centers. 15 Point features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_tran_cen`](https://developer.trimet.org/gis/data/tm_tran_cen.zip) and last updated at the source on July 31, 2024.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_tran_cen.zip), [KML](https://developer.trimet.org/gis/data/tm_tran_cen.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_tran_cen.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nExplore it on the [interactive map](https://cholmes.github.io/trimet-data-browser), or read the [collection README](https://source.coop/cholmes/trimet/transit-centers/README.md) for suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/transit-centers/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
   "license": "other",
   "keywords": [
     "transit",
@@ -63,6 +63,50 @@
     }
   },
   "updated": "2026-08-02T18:02:50Z",
+  "table:columns": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Name of Transit Center."
+    },
+    {
+      "name": "address",
+      "type": "string",
+      "description": "Transit Center street address or major intersection."
+    },
+    {
+      "name": "city",
+      "type": "string",
+      "description": "City in which Transit Center is located."
+    },
+    {
+      "name": "county",
+      "type": "string",
+      "description": "County in which Transit Center is located."
+    },
+    {
+      "name": "zipcode",
+      "type": "string",
+      "description": "Zipcode in which Transit Center is located."
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "description": "Operational status of segment. Values: Existing = Transit Center is operational; Planned = Transit Center is in advanced planning stages; UC = Transit Center is under construction."
+    },
+    {
+      "name": "geometry",
+      "type": "binary",
+      "description": "Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)). Coordinates are feet, not degrees."
+    },
+    {
+      "name": "geometry_bbox",
+      "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>",
+      "description": "Per-feature bounding box struct, the GeoParquet covering column. Same projected feet as the geometry."
+    }
+  ],
+  "table:primary_geometry": "geometry",
+  "table:row_count": 15,
   "links": [
     {
       "rel": "root",
@@ -127,12 +171,12 @@
       "href": "./transit-centers.parquet",
       "type": "application/vnd.apache.parquet",
       "title": "TriMet Transit Centers (GeoParquet)",
-      "description": "Transit Centers. Reprojected to WGS84 from TriMet's NAD83(HARN) / Oregon North (ft) source, Hilbert-ordered, zstd-compressed, with a GeoParquet 1.1 bbox covering column for row-group pruning.",
+      "description": "Transit Centers. In TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), not reprojected, so lengths and areas are in feet. Hilbert-ordered, zstd-compressed, with a GeoParquet 1.1 bbox covering column for row-group pruning.",
       "roles": [
         "data"
       ],
-      "file:size": 6511,
-      "file:checksum": "12205019423cb44d9aadf094192e90849981e90ac8f5645d0a7b391beb0492367f49",
+      "file:size": 12027,
+      "file:checksum": "122084cd25c8e3edaddfd0a0abfd4693262f3c16e81946d55b0b1a1e706996167499",
       "table:columns": [
         {
           "name": "name",
@@ -167,16 +211,17 @@
         {
           "name": "geometry",
           "type": "binary",
-          "description": "Feature geometry, WGS84 longitude and latitude. Reprojected from TriMet's EPSG:2913 (NAD83(HARN) / Oregon North (ft))."
+          "description": "Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)). Coordinates are feet, not degrees."
         },
         {
           "name": "geometry_bbox",
-          "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>"
+          "type": "struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null>",
+          "description": "Per-feature bounding box struct, the GeoParquet covering column. Same projected feet as the geometry."
         }
       ],
       "table:primary_geometry": "geometry",
       "table:row_count": 15,
-      "proj:code": "EPSG:4326",
+      "proj:code": "EPSG:2913",
       "alternate": {
         "s3": {
           "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/transit-centers/transit-centers.parquet",
@@ -188,7 +233,7 @@
       "href": "./transit-centers.pmtiles",
       "type": "application/vnd.pmtiles",
       "title": "TriMet Transit Centers (PMTiles)",
-      "description": "Vector tiles for web display, layer name `transit-centers`. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
+      "description": "Vector tiles for web display, layer name `transit-centers`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
         "visual"
       ],
