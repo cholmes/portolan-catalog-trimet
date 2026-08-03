@@ -111,7 +111,7 @@ python3 tests/run_all.py
 |---|---|
 | `test_catalog.py` | Links and asset hrefs resolve; sizes and checksums match the bytes; providers, license, bbox, PMTiles link and style assets are well-formed; docs agree with the data |
 | `test_conformance.py` | `rashid check` — only documented deviations may fail. SKIPs without rashid |
-| `test_styles.py` | Every style validates against the real MapLibre style spec. SKIPs without chiitiler installed |
+| `test_styles.py` | Every style validates against the real MapLibre style spec, and every legend uses an expression the browser can actually read. SKIPs without chiitiler installed |
 | `test_recipes.py` | Every curated recipe in `docs_content.py` runs |
 | `test_doc_sql.py` | Every SQL block in the *generated* docs runs, Quick Starts included |
 | `test_regen.py` | Regenerating reproduces the committed catalog byte-for-byte |
@@ -156,6 +156,14 @@ Two approximations are made converting SLD to MapLibre, both recorded in each
 style's `description`: SLD dash arrays are in pixels while MapLibre's are in
 multiples of line width, and the SLD's scale break at denominator 151181 is
 rendered as zoom 12.
+
+## Styles and legends
+
+29 MapLibre styles, 3–5 per collection, reproducing TriMet's own cartography.
+21 carry a legend; the other 8 encode nothing in color, so a legend would be a
+fiction. Legends in Portolan are *derived* from the style rather than declared,
+and the rules are narrow enough to get wrong silently —
+[`docs/style-legends.md`](docs/style-legends.md) writes them down.
 
 ## Conformance
 

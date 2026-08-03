@@ -18,15 +18,11 @@
       "source-layer": "route-stops",
       "paint": {
         "fill-color": [
-          "interpolate",
-          [
-            "linear"
-          ],
+          "step",
           [
             "get",
             "stop_seq"
           ],
-          1,
           "#FFC52F",
           20,
           "#D05F27",

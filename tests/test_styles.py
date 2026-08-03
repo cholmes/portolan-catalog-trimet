@@ -12,6 +12,7 @@ fresh clone still runs the suite.
 
     python3 tests/test_styles.py
 """
+import json
 import os
 import shutil
 import subprocess
@@ -58,6 +59,33 @@ def pick_node():
     return None
 
 
+# portolan-browser's extractLegend() reads the FIRST `fill` layer's
+# `fill-color` and understands only these two expression types. Anything else —
+# `interpolate` most temptingly — returns an empty legend with no error, so a
+# style can look finished and show nothing. Verified against
+# src/utils/portolanStyles.js in portolan-sdi/portolan-browser.
+LEGEND_EXPRESSIONS = ("step", "match")
+
+
+def check_legends(styles):
+    """Every legend layer must use an expression the browser can actually read."""
+    problems = []
+    for p in styles:
+        style = json.loads(p.read_text())
+        fill = next((l for l in style.get("layers", []) if l.get("type") == "fill"), None)
+        if not fill:
+            continue
+        color = fill.get("paint", {}).get("fill-color")
+        if not isinstance(color, list):
+            continue          # a constant color legends nothing, which is fine
+        if color[0] not in LEGEND_EXPRESSIONS:
+            problems.append(
+                f"{p.parent.parent.name}/{p.name}: first fill layer uses "
+                f"'{color[0]}'; extractLegend reads only "
+                f"{' or '.join(LEGEND_EXPRESSIONS)}, so this legend renders empty")
+    return problems
+
+
 def main():
     styles = sorted(
         p for p in CATALOG.glob("*/styles/*.json")
@@ -89,6 +117,19 @@ def main():
         n = len(styles)
         bad = proc.stdout.count("FAIL ")
         print(f"\n{n - bad}/{n} styles valid")
+
+        legend_problems = check_legends(styles)
+        if legend_problems:
+            print(f"\n{len(legend_problems)} unreadable legend(s):")
+            for msg in legend_problems:
+                print(f"  - {msg}")
+            sys.exit(1)
+        with_legend = sum(
+            1 for p in styles
+            if any(l.get("id", "").endswith("-legend")
+                   for l in json.loads(p.read_text()).get("layers", []))
+        )
+        print(f"{with_legend}/{n} styles carry a legend the browser can read")
         sys.exit(proc.returncode)
     finally:
         os.unlink(script)

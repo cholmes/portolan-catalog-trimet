@@ -297,8 +297,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 2681,
-      "file:checksum": "1220fd4f0090bd513f001b93aeb603f436427dc471c1685a9d39d3d0d3d7ec51836f"
+      "file:size": 2615,
+      "file:checksum": "12201ba57c710845788318970a5403d140668643bedbf3aa7466715698e7317f9788"
     },
     "style-by-owner": {
       "href": "./styles/by-owner.json",
@@ -319,8 +319,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 3341,
-      "file:checksum": "12202789170c95795624509ec2b7d1dbd8465237e8130d39ee8b455b92bf9d396ff5"
+      "file:size": 3275,
+      "file:checksum": "1220fd70ec88d8d2fc3ac03070aebde8529ed38caed3d863c5d6df433c8115b31809"
     },
     "source_shapefile": {
       "href": "https://developer.trimet.org/gis/data/tm_parkride.zip",

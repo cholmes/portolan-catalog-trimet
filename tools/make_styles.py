@@ -585,8 +585,12 @@ def route_stops():
                 "circle-opacity": 0.85,
             },
         }],
-        legend=["interpolate", ["linear"], ["get", "stop_seq"],
-                1, "#FFC52F", 20, "#D05F27", 45, "#C41F3E", 80, "#5B2A86"]))
+        # `step`, not `interpolate`: the browser's legend extractor reads only
+        # `step` and `match`, and drops anything else without a word. The
+        # visible layer keeps its smooth interpolate; this is the classed
+        # summary of it.
+        legend=["step", ["get", "stop_seq"],
+                "#FFC52F", 20, "#D05F27", 45, "#C41F3E", 80, "#5B2A86"]))
 
 
 def rail_stops():
@@ -714,8 +718,9 @@ def park_and_rides():
                 "circle-stroke-width": 1,
             },
         }],
-        legend=["interpolate", ["linear"], ["get", "spaces"],
-                0, "#D5EEF8", 150, "#7FB6D9", 350, "#4679AA",
+        # `step`, not `interpolate` — see the note in route-stops by-sequence.
+        legend=["step", ["get", "spaces"],
+                "#D5EEF8", 150, "#7FB6D9", 350, "#4679AA",
                 550, "#D4451F", 750, "#8C2A10"]))
 
     write(cid, "by-owner.json", style(
@@ -750,8 +755,9 @@ def park_and_rides():
                         "text-anchor": "top", "text-offset": [0, 1], "text-max-width": 10},
              "paint": {"text-color": INK, "text-halo-color": HALO, "text-halo-width": 1.4}},
         ],
-        legend=["interpolate", ["linear"], ["get", "spaces"],
-                0, "#D5EEF8", 150, "#7FB6D9", 350, "#4679AA",
+        # `step`, not `interpolate` — see the note in route-stops by-sequence.
+        legend=["step", ["get", "spaces"],
+                "#D5EEF8", 150, "#7FB6D9", 350, "#4679AA",
                 550, "#D4451F", 750, "#8C2A10"]))
 
 

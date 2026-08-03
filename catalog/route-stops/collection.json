@@ -338,8 +338,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1737,
-      "file:checksum": "1220006026a5190f085f11c9624ad80aa03f805aa2ad9149b21712f8ac97384683f3"
+      "file:size": 1671,
+      "file:checksum": "1220b372a37e98c4ad270cffe1c0a89f454d709972c812ead809f1ffa7034c523242"
     },
     "style-frequent-service": {
       "href": "./styles/frequent-service.json",

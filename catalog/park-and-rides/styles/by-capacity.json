@@ -18,15 +18,11 @@
       "source-layer": "park-and-rides",
       "paint": {
         "fill-color": [
-          "interpolate",
-          [
-            "linear"
-          ],
+          "step",
           [
             "get",
             "spaces"
           ],
-          0,
           "#D5EEF8",
           150,
           "#7FB6D9",
