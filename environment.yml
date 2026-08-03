@@ -1,0 +1,18 @@
+# Build environment for the catalog. Used by CI; usable locally with
+#   micromamba create -f environment.yml && micromamba activate portolan-trimet
+#
+# The Parquet driver is the reason this file exists. Ubuntu's `gdal-bin` is
+# built without it, so `ogr2ogr -f Parquet` fails with "Unable to find driver
+# `Parquet'". conda-forge ships it as a separate package,
+# `libgdal-arrow-parquet`, which must be installed alongside gdal.
+name: portolan-trimet
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - gdal>=3.9          # SORT_BY_BBOX needs 3.9+
+  - libgdal-arrow-parquet
+  - tippecanoe
+  - duckdb             # CLI, for the recipe tests
+  - pyarrow
+  - pillow
