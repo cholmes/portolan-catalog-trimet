@@ -129,6 +129,12 @@
       "title": "TriMet Terms of Use"
     },
     {
+      "rel": "alternate",
+      "href": "https://source.coop/cholmes/trimet/rail-stops/",
+      "type": "text/html",
+      "title": "TriMet Rail Stops on Source Cooperative"
+    },
+    {
       "rel": "via",
       "href": "https://developer.trimet.org/gis/meta_tm_rail_stops.shtml",
       "type": "text/html",

@@ -110,6 +110,15 @@ def links_for(coll):
          "title": f"{coll['title']} agent guide"},
         {"rel": "license", "href": M.TERMS_URL, "type": "text/html",
          "title": "TriMet Terms of Use"},
+        # The rendered Source Cooperative page for this collection. The
+        # `describedby` and `agents` links above MUST stay relative
+        # (PTL-FIL-002 / PTL-FIL-003), which means a browser resolves them
+        # against the data host and a reader gets raw Markdown. This gives the
+        # same reader one absolute link to a page that actually renders, with
+        # the file listing alongside it.
+        {"rel": "alternate", "href": f"{M.BROWSE_BASE}/{coll['id']}/",
+         "type": "text/html",
+         "title": f"{coll['title']} on Source Cooperative"},
         # `via` is required: TriMet produced this data, this catalog only hosts
         # a cloud-native copy of it.
         {"rel": "via", "href": src["metadata"], "type": "text/html",
@@ -425,6 +434,10 @@ def catalog_json():
              "title": "Catalog agent guide"},
             {"rel": "license", "href": M.TERMS_URL, "type": "text/html",
              "title": "TriMet Terms of Use"},
+            # See the note in links_for(): the required documentation links are
+            # relative, so this is the one that renders.
+            {"rel": "alternate", "href": f"{M.BROWSE_BASE}/", "type": "text/html",
+             "title": "Browse this catalog on Source Cooperative"},
             {"rel": "via", "href": M.GIS_PAGE, "type": "text/html",
              "title": "TriMet Geospatial Data"},
             {"rel": "icon", "href": "./_assets/trimet-logo.png", "type": "image/png",

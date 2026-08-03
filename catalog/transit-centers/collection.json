@@ -139,6 +139,12 @@
       "title": "TriMet Terms of Use"
     },
     {
+      "rel": "alternate",
+      "href": "https://source.coop/cholmes/trimet/transit-centers/",
+      "type": "text/html",
+      "title": "TriMet Transit Centers on Source Cooperative"
+    },
+    {
       "rel": "via",
       "href": "https://developer.trimet.org/gis/meta_tm_tran_cen.shtml",
       "type": "text/html",

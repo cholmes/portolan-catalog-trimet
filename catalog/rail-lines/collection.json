@@ -129,6 +129,12 @@
       "title": "TriMet Terms of Use"
     },
     {
+      "rel": "alternate",
+      "href": "https://source.coop/cholmes/trimet/rail-lines/",
+      "type": "text/html",
+      "title": "TriMet Rail Lines on Source Cooperative"
+    },
+    {
       "rel": "via",
       "href": "https://developer.trimet.org/gis/meta_tm_rail_lines.shtml",
       "type": "text/html",

@@ -75,6 +75,12 @@
       "title": "TriMet Terms of Use"
     },
     {
+      "rel": "alternate",
+      "href": "https://source.coop/cholmes/trimet/",
+      "type": "text/html",
+      "title": "Browse this catalog on Source Cooperative"
+    },
+    {
       "rel": "via",
       "href": "https://developer.trimet.org/gis/",
       "type": "text/html",

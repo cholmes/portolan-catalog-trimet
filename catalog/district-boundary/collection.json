@@ -119,6 +119,12 @@
       "title": "TriMet Terms of Use"
     },
     {
+      "rel": "alternate",
+      "href": "https://source.coop/cholmes/trimet/district-boundary/",
+      "type": "text/html",
+      "title": "TriMet District Boundary on Source Cooperative"
+    },
+    {
       "rel": "via",
       "href": "https://developer.trimet.org/gis/meta_tm_boundary.shtml",
       "type": "text/html",
