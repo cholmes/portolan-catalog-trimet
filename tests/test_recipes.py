@@ -3,8 +3,13 @@
 
 A broken Quick Start costs more trust than no Quick Start, so this is a gate:
 every snippet in docs_content.RECIPES executes, and must return without error.
-Run from the repo root with plain python3; needs the `duckdb` CLI.
+
+Uses the `duckdb` Python module if it is installed, else the `duckdb` CLI, so
+this runs both in CI (conda-forge ships the module) and on a machine that only
+has the binary. SKIPs if neither is present.
 """
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -15,17 +20,52 @@ import docs_content as C  # noqa: E402
 
 CATALOG = ROOT / "catalog"
 
+PREAMBLE = "INSTALL spatial; LOAD spatial;\n"
 
-def run_sql(sql):
-    """Recipes are written with catalog-relative paths, so run from catalog/."""
-    proc = subprocess.run(
-        ["duckdb", "-c", "INSTALL spatial; LOAD spatial;\n" + sql],
-        cwd=CATALOG, capture_output=True, text=True,
-    )
+
+def run_sql_module(sql):
+    """Recipes use catalog-relative paths, so resolve them from catalog/."""
+    import duckdb
+    cwd = os.getcwd()
+    os.chdir(CATALOG)
+    try:
+        con = duckdb.connect()
+        try:
+            con.execute(PREAMBLE)
+            rows = con.execute(sql).fetchall()
+            return 0, repr(rows), ""
+        finally:
+            con.close()
+    except Exception as e:  # noqa: BLE001
+        return 1, "", str(e)
+    finally:
+        os.chdir(cwd)
+
+
+def run_sql_cli(sql):
+    proc = subprocess.run(["duckdb", "-c", PREAMBLE + sql],
+                          cwd=CATALOG, capture_output=True, text=True)
     return proc.returncode, proc.stdout, proc.stderr
 
 
+def pick_runner():
+    try:
+        import duckdb  # noqa: F401
+        return run_sql_module, "duckdb python module"
+    except ImportError:
+        pass
+    if shutil.which("duckdb"):
+        return run_sql_cli, "duckdb CLI"
+    return None, None
+
+
 def main():
+    run_sql, how = pick_runner()
+    if not run_sql:
+        print("SKIP: neither the duckdb Python module nor the duckdb CLI is available")
+        return
+    print(f"using {how}\n")
+
     failures = []
     total = 0
     for cid, content in C.COLLECTIONS.items():

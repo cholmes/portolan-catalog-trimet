@@ -13,6 +13,6 @@ dependencies:
   - gdal>=3.9          # SORT_BY_BBOX needs 3.9+
   - libgdal-arrow-parquet
   - tippecanoe
-  - duckdb             # CLI, for the recipe tests
+  - duckdb             # Python module; test_recipes.py prefers it over the CLI
   - pyarrow
   - pillow
