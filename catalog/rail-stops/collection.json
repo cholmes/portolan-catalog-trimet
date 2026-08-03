@@ -215,7 +215,8 @@
       "title": "TriMet Rail Stops (PMTiles)",
       "description": "Vector tiles for web display, layer name `rail-stops`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
-        "visual"
+        "visual",
+        "data"
       ],
       "file:size": 62188,
       "file:checksum": "12201d5bcdd4eed4e8bedec73b673eee9a2ac795f1bae941ba4700b9cbda735372bc",
@@ -245,8 +246,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1922,
-      "file:checksum": "122006e805038acec8c312716371f08d88148f4fac8625394a5d0f75fda9293e0476"
+      "file:size": 3035,
+      "file:checksum": "122079488723860502e16f95c52edffd7c24438e57ec44a0a3c0ba210b083da356bd"
     },
     "style-by-type": {
       "href": "./styles/by-type.json",
@@ -256,8 +257,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 2085,
-      "file:checksum": "1220dfd9a84f0894103894ff0fbd587100f7849484b7567eb848d3a588476817e857"
+      "file:size": 2513,
+      "file:checksum": "1220d3fc6ee2de4538abe560e8b8616bdd690ec8085a417ee8694a6b07659c4237ee"
     },
     "style-labeled": {
       "href": "./styles/labeled.json",
@@ -267,8 +268,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 2438,
-      "file:checksum": "122079b5777aab5e6d695601195a59e29b4787fddd754a795af18aecb86d86c0a249"
+      "file:size": 3551,
+      "file:checksum": "122022edec7efddaa61de102f226bad68763444c9535de47e4d2fb4b9aa52adafa06"
     },
     "source_shapefile": {
       "href": "https://developer.trimet.org/gis/data/tm_rail_stops.zip",

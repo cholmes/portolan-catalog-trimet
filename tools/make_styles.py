@@ -46,8 +46,34 @@ HALO = "#FFFFFF"
 TRIMET_ORANGE = "#D4451F"
 
 
-def style(coll_id, name, description, layers):
-    """Wrap layers in a complete, self-contained MapLibre GL style."""
+def style(coll_id, name, description, layers, legend=None):
+    """Wrap layers in a complete, self-contained MapLibre GL style.
+
+    `legend` is a data-driven color expression describing what the style
+    encodes. When given, it is emitted as an inert `fill` layer ahead of the
+    visible ones.
+
+    That indirection is not decoration. portolan-browser derives a legend by
+    reading the first `fill` layer's `fill-color` — it does not look at
+    `line-color` or `circle-color`, so a line or point style otherwise shows no
+    legend at all, which is nearly every style in this catalog. A `fill` layer
+    draws nothing on line or point geometry, and `fill-opacity` is 0 besides, so
+    the layer is invisible on the map and exists only to be read. The same
+    workaround is used in the portolan-nl catalog; see
+    portolan-sdi/portolan-browser#13.
+
+    Styles whose color carries no meaning — a single constant, or a heatmap
+    ramp that has no per-feature expression — pass no legend, because inventing
+    one would describe a classification that does not exist.
+    """
+    if legend is not None:
+        layers = [{
+            "id": f"{coll_id}-legend",
+            "type": "fill",
+            "source": "data",
+            "source-layer": coll_id,
+            "paint": {"fill-color": legend, "fill-opacity": 0},
+        }] + layers
     return {
         "version": 8,
         "name": name,
@@ -211,7 +237,8 @@ def routes():
                                           [8, 0.6, 12, 1.0, 16, 1.8]),
                  "line-opacity": 0.9,
              }},
-        ]))
+        ],
+        legend=match("type", type_color, "#999999")))
 
     write(cid, "frequent-service.json", style(
         cid, "TriMet Routes — Frequent Service",
@@ -230,7 +257,11 @@ def routes():
              "layout": {"line-cap": "round", "line-join": "round"},
              "paint": {"line-color": M.GTFS_ROUTE_COLORS["FX2 Division"],
                        "line-width": ["interpolate", ["linear"], ["zoom"], 8, 1.4, 14, 3.6]}},
-        ]))
+        ],
+        # The visible layers are filtered rather than data-driven, so the
+        # classification is restated here for the legend.
+        legend=match("frequent", {"True": M.GTFS_ROUTE_COLORS["FX2 Division"],
+                                  "False": "#B8C2CC"}, "#B8C2CC")))
 
     write(cid, "by-direction.json", style(
         cid, "TriMet Routes by direction",
@@ -250,7 +281,8 @@ def routes():
              "layout": {"line-cap": "round", "line-join": "round"},
              "paint": {"line-color": "#D05F27", "line-offset": -1.5,
                        "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.6, 14, 2]}},
-        ]))
+        ],
+        legend=["match", ["get", "dir"], 0, "#1359AE", 1, "#D05F27", "#999999"]))
 
     write(cid, "labeled.json", style(
         cid, "TriMet Routes with route numbers",
@@ -272,7 +304,8 @@ def routes():
                         "text-font": ["Noto Sans Regular"], "text-size": 11,
                         "symbol-spacing": 220, "text-rotation-alignment": "map"},
              "paint": {"text-color": INK, "text-halo-color": HALO, "text-halo-width": 1.6}},
-        ]))
+        ],
+        legend=match("type", type_color, "#999999")))
 
 
 # ---------------------------------------------------------------------------
@@ -349,7 +382,8 @@ def rail_lines():
         "using the low-zoom width, so they match exactly below zoom 12 and run "
         "proportionally shorter above it. AUX segments carry no SLD rule and are "
         "drawn neutral gray rather than dropped.",
-        layers))
+        layers,
+        legend=match("line", base_colors, "#666666")))
 
     write(cid, "by-type.json", style(
         cid, "TriMet Rail Lines by service type",
@@ -367,7 +401,11 @@ def rail_lines():
                  }, "#999999"),
                  "line-width": ["interpolate", ["linear"], ["zoom"], 8, 1.2, 14, 4],
              }},
-        ]))
+        ],
+        legend=match("type", {
+            "MAX": M.TYPE_COLORS["MAX"], "SC": M.TYPE_COLORS["SC"],
+            "CR": M.TYPE_COLORS["CR"], "MAX/SC": M.TYPE_COLORS["MAX/SC"],
+        }, "#999999")))
 
     write(cid, "by-passage.json", style(
         cid, "TriMet Rail Lines by passage",
@@ -392,7 +430,9 @@ def rail_lines():
              "layout": {"line-join": "round", "line-cap": "butt"},
              "paint": {"line-color": "#14304F",
                        "line-width": ["interpolate", ["linear"], ["zoom"], 8, 2, 14, 5.5]}},
-        ]))
+        ],
+        legend=match("passage", {"surface": "#8A94A0", "tunnel": "#5B4B8A",
+                                 "bridge": "#14304F"}, "#8A94A0")))
 
     write(cid, "labeled.json", style(
         cid, "TriMet Rail Lines with line codes",
@@ -406,7 +446,8 @@ def rail_lines():
                        "text-font": ["Noto Sans Regular"], "text-size": 11,
                        "symbol-spacing": 200, "text-rotation-alignment": "map"},
             "paint": {"text-color": INK, "text-halo-color": HALO, "text-halo-width": 1.6},
-        }]))
+        }],
+        legend=match("line", base_colors, "#666666")))
 
 
 # ---------------------------------------------------------------------------
@@ -429,7 +470,8 @@ def stops():
         "the 161 MAX platforms, 58 streetcar stops, 14 shared bus/streetcar "
         "stops, 6 WES platforms and 2 aerial tram terminals. Colors are TriMet's "
         "GTFS route_color values for each mode.",
-        [stop_marker(cid, match("type", M.TYPE_COLORS, "#CCCCCC"))]))
+        [stop_marker(cid, match("type", M.TYPE_COLORS, "#CCCCCC"))],
+        legend=match("type", M.TYPE_COLORS, "#CCCCCC")))
 
     write(cid, "density.json", style(
         cid, "TriMet Stops — density",
@@ -464,7 +506,8 @@ def stops():
         "intersections or street addresses, so they read as cross-streets rather "
         "than as station names.",
         [stop_marker(cid, match("type", M.TYPE_COLORS, "#CCCCCC")),
-         label_layer(cid, "stop_name", size=10, minzoom=14, offset=[0, 0.8])]))
+         label_layer(cid, "stop_name", size=10, minzoom=14, offset=[0, 0.8])],
+        legend=match("type", M.TYPE_COLORS, "#CCCCCC")))
 
 
 def route_stops():
@@ -486,7 +529,8 @@ def route_stops():
                 "circle-stroke-width": 0.6,
                 "circle-stroke-opacity": 0.5,
             },
-        }]))
+        }],
+        legend=match("type", M.TYPE_COLORS, "#CCCCCC")))
 
     write(cid, "frequent-service.json", style(
         cid, "TriMet Route Stops — Frequent Service",
@@ -504,7 +548,9 @@ def route_stops():
              "paint": {"circle-radius": ["interpolate", ["linear"], ["zoom"], 9, 1.8, 15, 4.5],
                        "circle-color": M.GTFS_ROUTE_COLORS["FX2 Division"],
                        "circle-stroke-color": WHITE, "circle-stroke-width": 0.8}},
-        ]))
+        ],
+        legend=match("frequent", {"True": M.GTFS_ROUTE_COLORS["FX2 Division"],
+                                  "False": "#C3CBD3"}, "#C3CBD3")))
 
     write(cid, "by-direction.json", style(
         cid, "TriMet Route Stops by direction",
@@ -520,7 +566,8 @@ def route_stops():
                 "circle-stroke-color": WHITE,
                 "circle-stroke-width": 0.6,
             },
-        }]))
+        }],
+        legend=["match", ["get", "dir"], 0, "#1359AE", 1, "#D05F27", "#999999"]))
 
     write(cid, "by-sequence.json", style(
         cid, "TriMet Route Stops by stop sequence",
@@ -537,7 +584,9 @@ def route_stops():
                                  1, "#FFC52F", 20, "#D05F27", 45, "#C41F3E", 80, "#5B2A86"],
                 "circle-opacity": 0.85,
             },
-        }]))
+        }],
+        legend=["interpolate", ["linear"], ["get", "stop_seq"],
+                1, "#FFC52F", 20, "#D05F27", 45, "#C41F3E", 80, "#5B2A86"]))
 
 
 def rail_stops():
@@ -553,7 +602,8 @@ def rail_stops():
         "set of services.",
         [stop_marker(cid, match("line", line_colors, "#666666"),
                      radius=["interpolate", ["linear"], ["zoom"], 8, 2.5, 12, 4.5, 16, 8],
-                     stroke=1.8)]))
+                     stroke=1.8)],
+        legend=match("line", line_colors, "#666666")))
 
     write(cid, "labeled.json", style(
         cid, "TriMet Rail Stops with station names",
@@ -563,7 +613,8 @@ def rail_stops():
         [stop_marker(cid, match("line", line_colors, "#666666"),
                      radius=["interpolate", ["linear"], ["zoom"], 8, 2.5, 12, 4.5, 16, 8],
                      stroke=1.8),
-         label_layer(cid, "station", size=11, minzoom=11, offset=[0, 0.9])]))
+         label_layer(cid, "station", size=11, minzoom=11, offset=[0, 0.9])],
+        legend=match("line", line_colors, "#666666")))
 
     write(cid, "by-type.json", style(
         cid, "TriMet Rail Stops by service type",
@@ -583,7 +634,11 @@ def rail_stops():
                 "circle-stroke-color": WHITE,
                 "circle-stroke-width": 1.6,
             },
-        }]))
+        }],
+        legend=match("type", {
+            "MAX": M.TYPE_COLORS["MAX"], "SC": M.TYPE_COLORS["SC"],
+            "CR": M.TYPE_COLORS["CR"],
+        }, "#999999")))
 
 
 # ---------------------------------------------------------------------------
@@ -621,7 +676,10 @@ def transit_centers():
             "Multnomah": "#1359AE", "Washington": "#008342", "Clackamas": "#D05F27",
         }, "#999999"),
             radius=["interpolate", ["linear"], ["zoom"], 8, 4, 12, 7, 16, 12],
-            stroke=2)]))
+            stroke=2)],
+        legend=match("county", {
+            "Multnomah": "#1359AE", "Washington": "#008342", "Clackamas": "#D05F27",
+        }, "#999999")))
 
 
 def park_and_rides():
@@ -655,7 +713,10 @@ def park_and_rides():
                 "circle-stroke-color": WHITE,
                 "circle-stroke-width": 1,
             },
-        }]))
+        }],
+        legend=["interpolate", ["linear"], ["get", "spaces"],
+                0, "#D5EEF8", 150, "#7FB6D9", 350, "#4679AA",
+                550, "#D4451F", 750, "#8C2A10"]))
 
     write(cid, "by-owner.json", style(
         cid, "TriMet Park and Rides by ownership",
@@ -665,7 +726,8 @@ def park_and_rides():
         "their availability depends on an agreement with the property owner.",
         [stop_marker(cid, match("owner", {"TriMet": "#1359AE", "Shared": "#D05F27"}, "#999999"),
                      radius=["interpolate", ["linear"], ["zoom"], 8, 3.5, 12, 6, 16, 10],
-                     stroke=1.8)]))
+                     stroke=1.8)],
+        legend=match("owner", {"TriMet": "#1359AE", "Shared": "#D05F27"}, "#999999")))
 
     write(cid, "labeled.json", style(
         cid, "TriMet Park and Rides with names and capacity",
@@ -687,7 +749,10 @@ def park_and_rides():
                         "text-font": ["Noto Sans Regular"], "text-size": 10,
                         "text-anchor": "top", "text-offset": [0, 1], "text-max-width": 10},
              "paint": {"text-color": INK, "text-halo-color": HALO, "text-halo-width": 1.4}},
-        ]))
+        ],
+        legend=["interpolate", ["linear"], ["get", "spaces"],
+                0, "#D5EEF8", 150, "#7FB6D9", 350, "#4679AA",
+                550, "#D4451F", 750, "#8C2A10"]))
 
 
 BUILDERS = [district_boundary, routes, rail_lines, stops, route_stops,

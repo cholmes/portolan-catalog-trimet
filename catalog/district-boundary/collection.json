@@ -195,7 +195,8 @@
       "title": "TriMet District Boundary (PMTiles)",
       "description": "Vector tiles for web display, layer name `district-boundary`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
-        "visual"
+        "visual",
+        "data"
       ],
       "file:size": 27538,
       "file:checksum": "12201151886ed4877881db1477052c685fc9df3611c69c857be9d76e90ca95595bef",

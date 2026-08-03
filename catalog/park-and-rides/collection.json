@@ -255,7 +255,8 @@
       "title": "TriMet Park and Rides (PMTiles)",
       "description": "Vector tiles for web display, layer name `park-and-rides`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
-        "visual"
+        "visual",
+        "data"
       ],
       "file:size": 62549,
       "file:checksum": "1220ea9693a0527f8456e3505056fbd16db1b66b6466be3059b698d429955beadfc0",
@@ -296,8 +297,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 2146,
-      "file:checksum": "1220516401d070ad69e4904b35dc5a6735e16e41dadaeda70935674ee09a88fadbca"
+      "file:size": 2681,
+      "file:checksum": "1220fd4f0090bd513f001b93aeb603f436427dc471c1685a9d39d3d0d3d7ec51836f"
     },
     "style-by-owner": {
       "href": "./styles/by-owner.json",
@@ -307,8 +308,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1206,
-      "file:checksum": "12207a44e8a6760035f703bb306491cf9ab8e1ae575c6f26f1928e8b8fea546b4b38"
+      "file:size": 1613,
+      "file:checksum": "1220c0a8c6cef1626a5e3f8e0ad0530f353ecf72fb939af9e7384029fe55ef30eae4"
     },
     "style-labeled": {
       "href": "./styles/labeled.json",
@@ -318,8 +319,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 2806,
-      "file:checksum": "12209abb9d730b65ef3c64244ebb18519f50dc19de3fa6baa25eecbc441228355273"
+      "file:size": 3341,
+      "file:checksum": "12202789170c95795624509ec2b7d1dbd8465237e8130d39ee8b455b92bf9d396ff5"
     },
     "source_shapefile": {
       "href": "https://developer.trimet.org/gis/data/tm_parkride.zip",

@@ -80,6 +80,30 @@ Parsing note, if you ever re-derive the SLD: a single SLD `Rule` can hold severa
 parameters per rule instead of per symbolizer loses it and makes the shared-track
 codes look like they render as a single dashed line.
 
+### Legends are derived, not authored
+
+portolan-browser builds a legend by reading **the first `fill` layer's
+`fill-color`**. It does not look at `line-color` or `circle-color` — and this
+catalog is almost entirely lines and points, so none of its styles showed a
+legend at all until this was handled.
+
+The fix, same as the portolan-nl catalog uses (portolan-sdi/portolan-browser#13):
+pass `legend=<color expression>` to `style()` and it prepends an inert `fill`
+layer carrying that expression at `fill-opacity: 0`. A fill layer draws nothing
+on line or point geometry, so it is invisible twice over — re-rendering the
+thumbnails after adding them produced byte-identical files.
+
+Where the visible layers are *filtered* rather than data-driven (the
+frequent-service and by-direction styles paint two filtered layers in flat
+colors), the classification is restated as a `match` for the legend. Keep the
+two in sync by hand; nothing checks that they agree.
+
+21 of 29 styles carry one. The other 8 are correct without: three
+district-boundary styles and three point defaults use a single constant color,
+and `stops/density.json` is a heatmap whose ramp is over `heatmap-density`, not
+a per-feature attribute. **Do not add a legend to a style whose color means
+nothing** — it would describe a classification that does not exist.
+
 ### MapLibre gotcha that bit once
 
 `["zoom"]` may only be the **direct input of a top-level `step`/`interpolate`**.

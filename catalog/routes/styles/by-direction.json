@@ -12,6 +12,27 @@
   },
   "layers": [
     {
+      "id": "routes-legend",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "routes",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "get",
+            "dir"
+          ],
+          0,
+          "#1359AE",
+          1,
+          "#D05F27",
+          "#999999"
+        ],
+        "fill-opacity": 0
+      }
+    },
+    {
       "id": "routes-dir0",
       "type": "line",
       "source": "data",

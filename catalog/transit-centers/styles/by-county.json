@@ -12,6 +12,29 @@
   },
   "layers": [
     {
+      "id": "transit-centers-legend",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "transit-centers",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "get",
+            "county"
+          ],
+          "Multnomah",
+          "#1359AE",
+          "Washington",
+          "#008342",
+          "Clackamas",
+          "#D05F27",
+          "#999999"
+        ],
+        "fill-opacity": 0
+      }
+    },
+    {
       "id": "transit-centers",
       "type": "circle",
       "source": "data",

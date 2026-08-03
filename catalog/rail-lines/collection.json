@@ -215,7 +215,8 @@
       "title": "TriMet Rail Lines (PMTiles)",
       "description": "Vector tiles for web display, layer name `rail-lines`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
-        "visual"
+        "visual",
+        "data"
       ],
       "file:size": 62239,
       "file:checksum": "1220d3b4a9cd4d3bdc4f75c594f883724f737d92ee02201160e722477deb8d8f401d",
@@ -245,8 +246,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 15355,
-      "file:checksum": "1220ef77d3d140c96dae8790ee8e233e888ff507cc702a6e287ef2b8bc04135ad3de"
+      "file:size": 16506,
+      "file:checksum": "122024c1265ab6d3a1e3aa4be4dc3626887eabdba0bf552bd94c1d14eda777adb74b"
     },
     "style-by-passage": {
       "href": "./styles/by-passage.json",
@@ -256,8 +257,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 2404,
-      "file:checksum": "1220e557c9bde10ab57bae36d105b847ca24b1889b811863524b42fc8919c08f3bb2"
+      "file:size": 2847,
+      "file:checksum": "1220cc8942e22627629e998f2963f18bc239b5b4f9d0bb74cb33849e8bbb4ec67c8b"
     },
     "style-by-type": {
       "href": "./styles/by-type.json",
@@ -267,8 +268,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1212,
-      "file:checksum": "12209ac9c605811ca449f478ba0b79a98918eab03bc243c730c11e85b63a3c705aa5"
+      "file:size": 1681,
+      "file:checksum": "122085dcbdca2fb1a46518b98cc960a542ae8a1aa58855b9fae9648e8ce4e44b3a1e"
     },
     "style-labeled": {
       "href": "./styles/labeled.json",
@@ -278,8 +279,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 15373,
-      "file:checksum": "12209cdf07355ad83b472caad5d25b9011ae010b1b8a0a72ad4082f75f3b9305fb45"
+      "file:size": 16524,
+      "file:checksum": "1220be1fce4c014fc5ff9b48bf045c0c34d15a95aefe05a268041fb66d4230eb9ffa"
     },
     "source_shapefile": {
       "href": "https://developer.trimet.org/gis/data/tm_rail_lines.zip",

@@ -235,7 +235,8 @@
       "title": "TriMet Transit Centers (PMTiles)",
       "description": "Vector tiles for web display, layer name `transit-centers`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
-        "visual"
+        "visual",
+        "data"
       ],
       "file:size": 22319,
       "file:checksum": "1220e7ca823a3810d3eb66b38dfbfeef9c6c1c6006acc5e35e3b75cc611f47225732",
@@ -276,8 +277,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1155,
-      "file:checksum": "1220add67afc0581a8e1fe02e7654ff38e8954547a4eeeeccc0f0d7289626e58645d"
+      "file:size": 1616,
+      "file:checksum": "122084eab5e3a936919d3288b63aca8d3013dc4cd7bf63871650c835738e3607d2e1"
     },
     "style-labeled": {
       "href": "./styles/labeled.json",

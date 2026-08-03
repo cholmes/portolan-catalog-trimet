@@ -285,7 +285,8 @@
       "title": "TriMet Route Stops (PMTiles)",
       "description": "Vector tiles for web display, layer name `route-stops`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
-        "visual"
+        "visual",
+        "data"
       ],
       "file:size": 2379201,
       "file:checksum": "122071472e528a3ce8ec434fba558b4460591f0d43682e9c3e69132c484279c07875",
@@ -315,8 +316,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1405,
-      "file:checksum": "122005ca678f7459bdff74d7662595c6b030bc72052d7b24803cefbf8b7d8ace6831"
+      "file:size": 1989,
+      "file:checksum": "122096a238381dadd3a1715de869788891ccc5441b32e5d4d6268bc8f7a50dd79e80"
     },
     "style-by-direction": {
       "href": "./styles/by-direction.json",
@@ -326,8 +327,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1092,
-      "file:checksum": "1220dd1d2e556ff4ef3b85a095cdd74be584917767a5b08faab2c671884a07296604"
+      "file:size": 1477,
+      "file:checksum": "12206254e161608e7fb445fac49b1f4f45185cac2f89c3b6a97ecfc08c2ab186dc84"
     },
     "style-by-sequence": {
       "href": "./styles/by-sequence.json",
@@ -337,8 +338,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1245,
-      "file:checksum": "1220e0dcdc475992e2ce74b36d1867ba4d68a85672b297e09c96459e48acd4d4e37f"
+      "file:size": 1737,
+      "file:checksum": "1220006026a5190f085f11c9624ad80aa03f805aa2ad9149b21712f8ac97384683f3"
     },
     "style-frequent-service": {
       "href": "./styles/frequent-service.json",
@@ -348,8 +349,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1632,
-      "file:checksum": "122064140610ec4c5a40a7a055f6bce67ad8b508787ea574a8aa1b5261f6d211363c"
+      "file:size": 2033,
+      "file:checksum": "122090f7ba421c0f763f91f1aa84d64a7f2e9d1c2b286a0aaaca480b1c65efa05060"
     },
     "source_shapefile": {
       "href": "https://developer.trimet.org/gis/data/tm_route_stops.zip",

@@ -245,7 +245,8 @@
       "title": "TriMet Routes (PMTiles)",
       "description": "Vector tiles for web display, layer name `routes`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
-        "visual"
+        "visual",
+        "data"
       ],
       "file:size": 850179,
       "file:checksum": "12208aeba6fecdf9a1ee60774288bbe8dda8a91e716e70a22f25c67c4d52a2514105",
@@ -275,8 +276,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 2474,
-      "file:checksum": "12202035aab5c59097cb7004a831727a0e93d464eadd2ce622eaeca1010b78c6c22f"
+      "file:size": 2969,
+      "file:checksum": "1220ec55eb211b01c742f2329e3df52d051e9eb07fec2fc68db3d36c5647e0607865"
     },
     "style-by-direction": {
       "href": "./styles/by-direction.json",
@@ -286,8 +287,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1738,
-      "file:checksum": "12206e82cf7ca8d475404b85b8e3136fadd371b4c063df3ca8643c053f000cbeddf8"
+      "file:size": 2113,
+      "file:checksum": "1220e17a18f35553ec6be0f188888faa7000fe093775e53015fa421ae6676acaf758"
     },
     "style-frequent-service": {
       "href": "./styles/frequent-service.json",
@@ -297,8 +298,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1642,
-      "file:checksum": "1220bd1b33e00b19ae4d0814523424b2f3dcb139acdd3fcc13d8c50b0c19b2455c08"
+      "file:size": 2033,
+      "file:checksum": "1220c5469994e52efe41c0806b1b6730b8a215fcc8a04f1b2d5a69dc752cbba7f6bd"
     },
     "style-labeled": {
       "href": "./styles/labeled.json",
@@ -308,8 +309,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 2974,
-      "file:checksum": "1220bfd67d7b06d529419116c94a997d42823f49a981e2ca060f21b6df3fefd290e2"
+      "file:size": 3469,
+      "file:checksum": "1220945e8c7529478fe905fd868c1c72b118c0197e67f8fba5665a1b6decc5a6cf54"
     },
     "source_shapefile": {
       "href": "https://developer.trimet.org/gis/data/tm_routes.zip",

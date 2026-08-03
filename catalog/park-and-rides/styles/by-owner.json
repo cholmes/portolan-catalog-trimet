@@ -12,6 +12,27 @@
   },
   "layers": [
     {
+      "id": "park-and-rides-legend",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "park-and-rides",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "get",
+            "owner"
+          ],
+          "TriMet",
+          "#1359AE",
+          "Shared",
+          "#D05F27",
+          "#999999"
+        ],
+        "fill-opacity": 0
+      }
+    },
+    {
       "id": "park-and-rides",
       "type": "circle",
       "source": "data",

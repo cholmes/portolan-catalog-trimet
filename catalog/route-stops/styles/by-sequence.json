@@ -12,6 +12,33 @@
   },
   "layers": [
     {
+      "id": "route-stops-legend",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "route-stops",
+      "paint": {
+        "fill-color": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "get",
+            "stop_seq"
+          ],
+          1,
+          "#FFC52F",
+          20,
+          "#D05F27",
+          45,
+          "#C41F3E",
+          80,
+          "#5B2A86"
+        ],
+        "fill-opacity": 0
+      }
+    },
+    {
       "id": "route-stops",
       "type": "circle",
       "source": "data",

@@ -12,6 +12,29 @@
   },
   "layers": [
     {
+      "id": "rail-lines-legend",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "get",
+            "passage"
+          ],
+          "surface",
+          "#8A94A0",
+          "tunnel",
+          "#5B4B8A",
+          "bridge",
+          "#14304F",
+          "#8A94A0"
+        ],
+        "fill-opacity": 0
+      }
+    },
+    {
       "id": "rail-lines-surface",
       "type": "line",
       "source": "data",

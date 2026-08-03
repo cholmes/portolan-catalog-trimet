@@ -170,7 +170,13 @@ def assets_for(coll):
             f"keeping every feature at every zoom, so what a map draws matches "
             f"the GeoParquet exactly."
         ),
-        "roles": ["visual"],
+        # Both roles apply. `visual` is the rendering derivative Portolan asks
+        # for; `data` is also true — the PMTiles is a genuine distribution of
+        # these features, not just a picture of them — and it is the role
+        # clients key on when listing which formats a collection is available
+        # in. Without it, STAC Browser's format badges advertise the legacy
+        # Shapefile and KML but omit the cloud-native tiles.
+        "roles": ["visual", "data"],
         **file_meta(pmtiles),
         "alternate": {
             "s3": {"href": f"{M.S3_BASE}/{coll['id']}/{coll['id']}.pmtiles",

@@ -12,6 +12,31 @@
   },
   "layers": [
     {
+      "id": "rail-lines-legend",
+      "type": "fill",
+      "source": "data",
+      "source-layer": "rail-lines",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "get",
+            "type"
+          ],
+          "MAX",
+          "#1359AE",
+          "SC",
+          "#72A130",
+          "CR",
+          "#6E6E6E",
+          "MAX/SC",
+          "#D05F27",
+          "#999999"
+        ],
+        "fill-opacity": 0
+      }
+    },
+    {
       "id": "rail-lines",
       "type": "line",
       "source": "data",

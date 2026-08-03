@@ -225,7 +225,8 @@
       "title": "TriMet Stops (PMTiles)",
       "description": "Vector tiles for web display, layer name `stops`, reprojected to WGS84 as tiles require. Built with tippecanoe keeping every feature at every zoom, so what a map draws matches the GeoParquet exactly.",
       "roles": [
-        "visual"
+        "visual",
+        "data"
       ],
       "file:size": 1561493,
       "file:checksum": "1220cca5a0c8760fd24f5b882f219c23aab47283d8757a8004b2bb3e7d7a33a961a4",
@@ -266,8 +267,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1330,
-      "file:checksum": "1220adad9c4fc329aef73d35a7138af1c55611e6532cbfc064e3f84ce4cdb8266f7e"
+      "file:size": 1902,
+      "file:checksum": "1220c7236b6b94a986f1b087a097a7212d458914d6695636cb969e7d3d6e1c3e52df"
     },
     "style-density": {
       "href": "./styles/density.json",
@@ -288,8 +289,8 @@
       "roles": [
         "style"
       ],
-      "file:size": 1851,
-      "file:checksum": "1220eb765aca7141d16a7f69e93eb9ece44fc8710c866d6e351a74255a06c1c4f0df"
+      "file:size": 2423,
+      "file:checksum": "12206fc89e0a0f3dda1fa2d63fabf0c20de662c1839be766bd3b83f4648f86f2a272"
     },
     "source_shapefile": {
       "href": "https://developer.trimet.org/gis/data/tm_stops.zip",
