@@ -26,7 +26,6 @@ checksum in test_catalog.py.
     python3 tests/test_regen.py
 """
 import filecmp
-import os
 import shutil
 import subprocess
 import sys
