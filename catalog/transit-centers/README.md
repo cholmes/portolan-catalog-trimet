@@ -109,10 +109,20 @@ Portland, OR 97202,
 The originals are linked as assets and are the authoritative copy:
 [Shapefile](https://developer.trimet.org/gis/data/tm_tran_cen.zip) · [KML](https://developer.trimet.org/gis/data/tm_tran_cen.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_tran_cen.shtml)
 
-This collection was produced by reprojecting TriMet's Shapefile from
-EPSG:2913 (NAD83(HARN) / Oregon North (ft)) to EPSG:4326 and writing GeoParquet and
-PMTiles. No features were added, removed or edited. The exact commands are in
-[`tools/convert.py`](https://github.com/cholmes/portolan-catalog-trimet/blob/main/tools/convert.py).
+This collection was produced by converting TriMet's Shapefile to GeoParquet,
+keeping its native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), and to PMTiles in
+WGS84 for display. No features were added, removed or edited. The exact commands
+are in [`tools/convert.py`](https://github.com/cholmes/portolan-catalog-trimet/blob/main/tools/convert.py).
+
+## Contributing
+
+This catalog is generated, and both halves are open source: the catalog at
+[`cholmes/portolan-catalog-trimet`](https://github.com/cholmes/portolan-catalog-trimet) and the
+[data browser](https://cholmes.github.io/trimet-data-browser) at
+[`cholmes/trimet-data-browser`](https://github.com/cholmes/trimet-data-browser). If something here is wrong or
+could be better — a description, a column definition, a query, a style —
+[open an issue](https://github.com/cholmes/portolan-catalog-trimet/issues) or send a pull request. Corrections to
+the underlying data go to TriMet at [gis@trimet.org](mailto:gis@trimet.org).
 
 ## License, and a warning
 

@@ -144,11 +144,19 @@ than inventing a palette — the source SLD and MapLibre style are mirrored into
 the collections as assets with roles `["style", "source"]`, so a style can be
 diffed against its origin.
 
-## Provenance
+## Provenance and contributing
 
 TriMet is the producer; this catalog is a **mirror** and carries `via` links to
 TriMet's metadata page on every collection. TriMet's pages are the authority on
 what any field means, and every column description here was taken from them.
+
+The catalog is generated from [`cholmes/portolan-catalog-trimet`](https://github.com/cholmes/portolan-catalog-trimet)
+and the [data browser](https://cholmes.github.io/trimet-data-browser) from
+[`cholmes/trimet-data-browser`](https://github.com/cholmes/trimet-data-browser). If you find an error in this
+guide — a join that does not hold, a recipe that fails, a caveat that is missing
+— [open an issue](https://github.com/cholmes/portolan-catalog-trimet/issues) or send a pull request against the
+generator, not the published file. Data errors go to TriMet at
+[gis@trimet.org](mailto:gis@trimet.org).
 
 ## License, and a warning
 

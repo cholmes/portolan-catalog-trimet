@@ -56,6 +56,11 @@ S3_BASE = "s3://us-west-2.opendata.source.coop/cholmes/trimet"
 BROWSER_URL = "https://cholmes.github.io/trimet-data-browser"
 BROWSER_NAME = "data browser"
 
+# Both halves are open source and take contributions. Named in the published
+# docs so a reader who spots a problem knows where it is fixed.
+CATALOG_REPO = "https://github.com/cholmes/portolan-catalog-trimet"
+BROWSER_REPO = "https://github.com/cholmes/trimet-data-browser"
+
 GIS_PAGE = "https://developer.trimet.org/gis/"
 TERMS_URL = "https://developer.trimet.org/terms_of_use.shtml"
 DATA_BASE = "https://developer.trimet.org/gis/data"
