@@ -19,7 +19,10 @@ all three counties.
 
 [![TriMet District Boundary](https://data.source.coop/cholmes/trimet/district-boundary/thumbnail.webp)](https://cholmes.github.io/trimet-data-browser)
 
-### 🗺️ [Explore this collection on an interactive map →](https://cholmes.github.io/trimet-data-browser)
+### 🗺️ [Open this collection in the data browser →](https://cholmes.github.io/trimet-data-browser)
+
+Preview it on a map, inspect the schema and license, and download the
+GeoParquet or PMTiles directly.
 
 ## Quick start
 

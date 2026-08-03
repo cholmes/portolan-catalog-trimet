@@ -19,9 +19,11 @@ international feet), so lengths and areas come out in feet without a projection
 step. The PMTiles are WGS84, because vector tiles are.
 
 
-### 🗺️ [Explore the catalog on an interactive map →](https://cholmes.github.io/trimet-data-browser)
+### 🗺️ [Open the TriMet data browser →](https://cholmes.github.io/trimet-data-browser)
 
-All eight collections, drawn with TriMet's own cartography, with no setup.
+Preview all eight collections on a map drawn with TriMet's own cartography,
+inspect each one's schema and license, download the GeoParquet or PMTiles, and
+follow the links back to TriMet — no setup, nothing to install.
 
 > **Agents:** start at [AGENTS.md](https://source.coop/cholmes/trimet/AGENTS.md) for join keys, the
 > quirks that produce silently wrong answers, and verified query recipes.

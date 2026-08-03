@@ -17,7 +17,8 @@ step — the district area computed from the geometry matches TriMet's own `acre
 value exactly. Only the PMTiles are reprojected, because vector tiles are WGS84
 by definition.
 
-**[🗺️ Explore the catalog on an interactive map](https://cholmes.github.io/trimet-data-browser)**
+**[🗺️ Open the TriMet data browser](https://cholmes.github.io/trimet-data-browser)** —
+map preview, schema, license and direct downloads for all eight collections
 · [Browse on Source Cooperative](https://source.coop/cholmes/trimet)
 
 **This repository holds the catalog metadata.** The data itself is generated from

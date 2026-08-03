@@ -18,7 +18,10 @@ are told not to consult a timetable.
 
 [![TriMet Routes](https://data.source.coop/cholmes/trimet/routes/thumbnail.webp)](https://cholmes.github.io/trimet-data-browser)
 
-### 🗺️ [Explore this collection on an interactive map →](https://cholmes.github.io/trimet-data-browser)
+### 🗺️ [Open this collection in the data browser →](https://cholmes.github.io/trimet-data-browser)
+
+Preview it on a map, inspect the schema and license, and download the
+GeoParquet or PMTiles directly.
 
 ## Quick start
 

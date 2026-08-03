@@ -17,7 +17,10 @@ They span all three counties of the district: 7 in Multnomah, 5 in Washington an
 
 [![TriMet Transit Centers](https://data.source.coop/cholmes/trimet/transit-centers/thumbnail.webp)](https://cholmes.github.io/trimet-data-browser)
 
-### 🗺️ [Explore this collection on an interactive map →](https://cholmes.github.io/trimet-data-browser)
+### 🗺️ [Open this collection in the data browser →](https://cholmes.github.io/trimet-data-browser)
+
+Preview it on a map, inspect the schema and license, and download the
+GeoParquet or PMTiles directly.
 
 ## Quick start
 

@@ -33,8 +33,9 @@ a query engine beyond DuckDB.
 be joined to `stops` or `route-stops` by key. Match spatially and check the
 distance; the rail layers are generalized.
 
-There is an interactive map browser at [https://cholmes.github.io/trimet-data-browser](https://cholmes.github.io/trimet-data-browser) if
-you need to show a human what a query returned.
+There is a data browser at [https://cholmes.github.io/trimet-data-browser](https://cholmes.github.io/trimet-data-browser) — map preview,
+schema, license and direct downloads — if you need to show a human what a query
+returned, or point them at a file.
 
 ## Access
 

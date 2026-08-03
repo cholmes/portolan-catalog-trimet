@@ -137,7 +137,10 @@ as `{coll['source']}` and last updated at the source on
 
 [![{coll['title']}]({url(cid, 'thumbnail.webp')})]({M.BROWSER_URL})
 
-### 🗺️ [Explore this collection on an interactive map →]({M.BROWSER_URL})
+### 🗺️ [Open this collection in the data browser →]({M.BROWSER_URL})
+
+Preview it on a map, inspect the schema and license, and download the
+GeoParquet or PMTiles directly.
 
 ## Quick start
 
@@ -306,9 +309,11 @@ def catalog_readme():
 
 {C.CATALOG_INTRO}
 
-### 🗺️ [Explore the catalog on an interactive map →]({M.BROWSER_URL})
+### 🗺️ [Open the TriMet data browser →]({M.BROWSER_URL})
 
-All eight collections, drawn with TriMet's own cartography, with no setup.
+Preview all eight collections on a map drawn with TriMet's own cartography,
+inspect each one's schema and license, download the GeoParquet or PMTiles, and
+follow the links back to TriMet — no setup, nothing to install.
 
 > **Agents:** start at [AGENTS.md]({browse("AGENTS.md")}) for join keys, the
 > quirks that produce silently wrong answers, and verified query recipes.
@@ -432,8 +437,9 @@ a query engine beyond DuckDB.
 be joined to `stops` or `route-stops` by key. Match spatially and check the
 distance; the rail layers are generalized.
 
-There is an interactive map browser at [{M.BROWSER_URL}]({M.BROWSER_URL}) if
-you need to show a human what a query returned.
+There is a data browser at [{M.BROWSER_URL}]({M.BROWSER_URL}) — map preview,
+schema, license and direct downloads — if you need to show a human what a query
+returned, or point them at a file.
 
 ## Access
 

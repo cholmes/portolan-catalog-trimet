@@ -35,11 +35,11 @@ CATALOG_DESCRIPTION = (
     "native EPSG:2913 (NAD83(HARN) / Oregon North, international feet), so "
     "lengths and areas are in feet; only the PMTiles are reprojected to WGS84. "
     "Visualization styles reproduce TriMet's own published cartography.\n\n"
-    "Explore it on the [interactive map](https://cholmes.github.io/trimet-data-browser). "
-    "Each collection carries an **AGENTS.md** agent guide alongside its README — "
-    "join keys, the quirks that produce silently wrong answers, and query recipes "
-    "that have each been run against the published files. Start at the "
-    "[catalog agent guide](https://source.coop/cholmes/trimet/AGENTS.md)."
+    "Each collection carries an "
+    "[**AGENTS.md** agent guide](https://source.coop/cholmes/trimet/AGENTS.md) "
+    "alongside its README — join keys, the quirks that produce silently wrong "
+    "answers, and query recipes that have each been run against the published "
+    "files."
 )
 
 # The base URL the published catalog will live at.
@@ -51,8 +51,10 @@ PUBLIC_BASE = "https://data.source.coop/cholmes/trimet"
 BROWSE_BASE = "https://source.coop/cholmes/trimet"
 S3_BASE = "s3://us-west-2.opendata.source.coop/cholmes/trimet"
 
-# An interactive map browser for this catalog.
+# The catalog's data browser: map preview, per-collection downloads, schema,
+# license and outbound links. Not just a map, so it is not named as one.
 BROWSER_URL = "https://cholmes.github.io/trimet-data-browser"
+BROWSER_NAME = "data browser"
 
 GIS_PAGE = "https://developer.trimet.org/gis/"
 TERMS_URL = "https://developer.trimet.org/terms_of_use.shtml"

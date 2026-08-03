@@ -18,7 +18,10 @@ catalog and TriMet's real-time services.
 
 [![TriMet Stops](https://data.source.coop/cholmes/trimet/stops/thumbnail.webp)](https://cholmes.github.io/trimet-data-browser)
 
-### 🗺️ [Explore this collection on an interactive map →](https://cholmes.github.io/trimet-data-browser)
+### 🗺️ [Open this collection in the data browser →](https://cholmes.github.io/trimet-data-browser)
+
+Preview it on a map, inspect the schema and license, and download the
+GeoParquet or PMTiles directly.
 
 ## Quick start
 
