@@ -49,11 +49,9 @@ def run_sql_cli(sql):
 
 
 def pick_runner():
-    try:
-        import duckdb  # noqa: F401
+    import importlib.util
+    if importlib.util.find_spec("duckdb"):
         return run_sql_module, "duckdb python module"
-    except ImportError:
-        pass
     if shutil.which("duckdb"):
         return run_sql_cli, "duckdb CLI"
     return None, None
