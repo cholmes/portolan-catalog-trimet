@@ -9,7 +9,7 @@ The 15 transit centers — the timed-transfer hubs where many routes meet and wh
 riders are expected to change. Each carries a name, street address, city, county
 and ZIP code.
 
-They span all three counties of the district: 7 in Multnomah, 5 in Washington and
+They span all three counties of the district: 6 in Multnomah, 6 in Washington and
 3 in Clackamas.
 
 > **Agents:** see [AGENTS.md](https://source.coop/cholmes/trimet/transit-centers/AGENTS.md) for join keys, verified query recipes
@@ -98,7 +98,7 @@ so they load unmodified against this directory.
 |---|---|---|
 | [`transit-centers.parquet`](https://data.source.coop/cholmes/trimet/transit-centers/transit-centers.parquet) | 11.7 KB | GeoParquet 1.1, 15 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
 | [`transit-centers.pmtiles`](https://data.source.coop/cholmes/trimet/transit-centers/transit-centers.pmtiles) | 21.8 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/transit-centers/thumbnail.webp) | 47.3 KB | Rendered from `styles/default.json` over a light basemap |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/transit-centers/thumbnail.webp) | 21.2 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/transit-centers/collection.json) | — | STAC Collection metadata |
 
 ## Provenance

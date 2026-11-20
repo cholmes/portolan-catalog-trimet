@@ -1,12 +1,12 @@
 # TriMet Route Stops
 
-Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. **8,314 Point features** covering the TriMet
+Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. **7,728 Point features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_route_stops` and last updated at the source on
-**July 30, 2026**.
+**November 12, 2026**.
 
 The same stops as `stops`, but exploded by the service that calls at them: one
-row per stop per route-direction, 8,314 rows over 6,316 distinct stops. A stop
+row per stop per route-direction, 7,728 rows over 5,947 distinct stops. A stop
 served by four routes appears four times.
 
 This is the only layer in the catalog that connects a stop to a route, and it
@@ -56,7 +56,7 @@ with fsspec.open("https://data.source.coop/cholmes/trimet/route-stops/route-stop
 
 ## Limitations and inappropriate uses
 
-- **Every count is inflated unless you deduplicate.** `count(*)` is 8,314, which
+- **Every count is inflated unless you deduplicate.** `count(*)` is 7,728, which
   is not a number of stops. Use `count(DISTINCT stop_id)` for stops, or work from
   the `stops` collection.
 - **`stop_seq` restarts at every route-direction.** It is meaningful only within
@@ -105,9 +105,9 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`route-stops.parquet`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.parquet) | 343.6 KB | GeoParquet 1.1, 8,314 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`route-stops.pmtiles`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.pmtiles) | 2.3 MB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/route-stops/thumbnail.webp) | 48.5 KB | Rendered from `styles/default.json` over a light basemap |
+| [`route-stops.parquet`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.parquet) | 371.6 KB | GeoParquet 1.1, 7,728 rows in 16 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`route-stops.pmtiles`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.pmtiles) | 2.1 MB | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/route-stops/thumbnail.webp) | 48.8 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/route-stops/collection.json) | — | STAC Collection metadata |
 
 ## Provenance

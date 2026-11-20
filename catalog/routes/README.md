@@ -1,15 +1,15 @@
 # TriMet Routes
 
-All existing bus and rail lines. **200 LineString features** covering the TriMet
+All existing bus and rail lines. **184 LineString features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_routes` and last updated at the source on
-**July 13, 2026**.
+**October 21, 2026**.
 
 Every fixed-route alignment TriMet operates, bus and rail together, as one
-line per route *and direction*. 200 features covering 179 bus, 13 MAX, 4
+line per route *and direction*. 184 features covering 163 bus, 13 MAX, 4
 streetcar, 2 commuter rail and 2 aerial tram segments.
 
-The `frequent` flag marks TriMet's Frequent Service network — 51 of the 200
+The `frequent` flag marks TriMet's Frequent Service network — 51 of the 184
 route-directions — which is the set of lines scheduled often enough that riders
 are told not to consult a timetable.
 
@@ -57,14 +57,14 @@ with fsspec.open("https://data.source.coop/cholmes/trimet/routes/routes.parquet"
 
 ## Limitations and inappropriate uses
 
-- **`rte` is not a primary key.** 87 route numbers appear twice, once per
+- **`rte` is not a primary key.** 63 route numbers appear twice, once per
   direction. The key is `(rte, dir)`. A `GROUP BY rte` that forgets this
   double-counts every two-way route.
 - **These are alignments, not schedules.** Nothing here says how often a bus
   runs, when it runs, or whether it runs today. `frequent` is the only
   service-level hint, and it is a flag rather than a frequency. Use the
   [GTFS feed](https://developer.trimet.org/GTFS.shtml) for anything time-based.
-- **Geometry type is mixed.** 91 features are `LINESTRING` and 109 are
+- **Geometry type is mixed.** 78 features are `LINESTRING` and 106 are
   `MULTILINESTRING`, so a route can be several disconnected pieces. Functions
   that assume a single linestring will silently misbehave — see the quirks.
 - **Not a rail cartography layer.** For drawing rail specifically, `rail-lines`
@@ -105,8 +105,8 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`routes.parquet`](https://data.source.coop/cholmes/trimet/routes/routes.parquet) | 794.0 KB | GeoParquet 1.1, 200 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`routes.pmtiles`](https://data.source.coop/cholmes/trimet/routes/routes.pmtiles) | 830.3 KB | Vector tiles for display, every feature kept at every zoom |
+| [`routes.parquet`](https://data.source.coop/cholmes/trimet/routes/routes.parquet) | 875.0 KB | GeoParquet 1.1, 184 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`routes.pmtiles`](https://data.source.coop/cholmes/trimet/routes/routes.pmtiles) | 786.8 KB | Vector tiles for display, every feature kept at every zoom |
 | [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/routes/thumbnail.webp) | 48.4 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/routes/collection.json) | — | STAC Collection metadata |
 

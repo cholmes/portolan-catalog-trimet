@@ -101,7 +101,7 @@ so they load unmodified against this directory.
 |---|---|---|
 | [`park-and-rides.parquet`](https://data.source.coop/cholmes/trimet/park-and-rides/park-and-rides.parquet) | 14.7 KB | GeoParquet 1.1, 46 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
 | [`park-and-rides.pmtiles`](https://data.source.coop/cholmes/trimet/park-and-rides/park-and-rides.pmtiles) | 61.1 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/park-and-rides/thumbnail.webp) | 46.8 KB | Rendered from `styles/default.json` over a light basemap |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/park-and-rides/thumbnail.webp) | 32.4 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/park-and-rides/collection.json) | — | STAC Collection metadata |
 
 ## Provenance

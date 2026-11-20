@@ -11,7 +11,7 @@
   ],
   "id": "route-stops",
   "title": "TriMet Route Stops",
-  "description": "Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. 8,314 Point features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_route_stops`](https://developer.trimet.org/gis/data/tm_route_stops.zip) and last updated at the source on July 30, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_route_stops.zip), [KML](https://developer.trimet.org/gis/data/tm_route_stops.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_route_stops.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/route-stops/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/route-stops/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
+  "description": "Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. 7,728 Point features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_route_stops`](https://developer.trimet.org/gis/data/tm_route_stops.zip) and last updated at the source on November 12, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_route_stops.zip), [KML](https://developer.trimet.org/gis/data/tm_route_stops.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_route_stops.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/route-stops/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/route-stops/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
   "license": "other",
   "keywords": [
     "transit",
@@ -56,13 +56,13 @@
     "temporal": {
       "interval": [
         [
-          "2026-07-30T00:00:00Z",
+          "2026-11-12T00:00:00Z",
           null
         ]
       ]
     }
   },
-  "updated": "2026-08-02T18:02:50Z",
+  "updated": "2026-11-20T12:23:12Z",
   "table:columns": [
     {
       "name": "rte",
@@ -131,7 +131,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 8314,
+  "table:row_count": 7728,
   "links": [
     {
       "rel": "root",
@@ -206,8 +206,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 351825,
-      "file:checksum": "1220d4f48d7937c510a29805e0f948e1a8065e744a4e197df1ed2a09eacbeaaf2190",
+      "file:size": 380562,
+      "file:checksum": "12203b985eff27e2f532d194707c772df7315c2f6ab2a6eeb9911c67d33a18ecdaa8",
       "table:columns": [
         {
           "name": "rte",
@@ -276,7 +276,7 @@
         }
       ],
       "table:primary_geometry": "geometry",
-      "table:row_count": 8314,
+      "table:row_count": 7728,
       "proj:code": "EPSG:2913",
       "alternate": {
         "s3": {
@@ -294,8 +294,8 @@
         "visual",
         "data"
       ],
-      "file:size": 2379201,
-      "file:checksum": "122071472e528a3ce8ec434fba558b4460591f0d43682e9c3e69132c484279c07875",
+      "file:size": 2233922,
+      "file:checksum": "12205617cabaf9059233be932f1919842c5430cc05fbc778fa0d06781482799b904c",
       "alternate": {
         "s3": {
           "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/route-stops/route-stops.pmtiles",
@@ -311,8 +311,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 49678,
-      "file:checksum": "12202b7e93826459acf6cfddabca099e4e46603d770fe1049ea7b8a15a7d370ab749"
+      "file:size": 49926,
+      "file:checksum": "1220c2a19ff38eddf215f3eb3b2e555f0aace5812b3b6cb488e640d65567a221eadb"
     },
     "style": {
       "href": "./styles/default.json",
@@ -368,8 +368,8 @@
         "data",
         "source"
       ],
-      "file:size": 255997,
-      "file:checksum": "1220d0ad9c51d05b0759d6574619e3f36bea3791aa4361ccade64b2a7080fc9a585d"
+      "file:size": 238199,
+      "file:checksum": "12205c0ad63dd99e763781a3aa428cc037baa66527b76b1cb5427cb44afaa8638525"
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_route_stops.kml",
@@ -380,8 +380,8 @@
         "data",
         "source"
       ],
-      "file:size": 12590040,
-      "file:checksum": "12206028a99fc14d47c0dba0a7460fec043071414ef9b577a5bf6b7b1d72a1af8fa1"
+      "file:size": 11726760,
+      "file:checksum": "12205682547704a096ce20bdc4e279e5b326110fe800fcbbe9d91e30e27c9fa55050"
     },
     "source_sld": {
       "href": "./styles/trimet-stops.sld.xml",

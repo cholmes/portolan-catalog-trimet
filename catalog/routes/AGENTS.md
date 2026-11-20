@@ -1,7 +1,7 @@
 # TriMet Routes — agent guide
 
-All existing bus and rail lines. 200 LineString features, EPSG:2913 (feet), one
-GeoParquet file of 794.0 KB in 1 row group(s).
+All existing bus and rail lines. 184 LineString features, EPSG:2913 (feet), one
+GeoParquet file of 875.0 KB in 1 row group(s).
 
 ## Access
 
@@ -19,7 +19,7 @@ the column name: GDAL writes the covering as `<geometry column>_bbox`, so it is
 
 ```sql
 -- Coordinates are EPSG:2913 feet, not degrees. This collection spans
--- x 7,531,765–7,730,400, y 595,331–727,211.
+-- x 7,531,764–7,730,399, y 595,332–727,213.
 SELECT * FROM 'https://data.source.coop/cholmes/trimet/routes/routes.parquet'
 WHERE geometry_bbox.xmin > 7630000 AND geometry_bbox.xmax < 7650000
   AND geometry_bbox.ymin >  680000 AND geometry_bbox.ymax <  700000;
@@ -79,7 +79,7 @@ which has TriMet's own `area_sq_mi` and `acres`.
 
 ### `(rte, dir)` is the key, not `rte`
 
-200 rows, 113 distinct `rte` values, 87 of which appear twice. `dir` is 0 or 1
+184 rows, 82 distinct `rte` values, 63 of which appear twice. `dir` is 0 or 1
 and TriMet documents it only as "Direction 0" and "Direction 1" — the human
 meaning lives in `dir_desc` (e.g. "To Portland"). Always group or join on the
 pair.
@@ -152,7 +152,7 @@ ORDER BY rte;
 
 TriMet publishes this as `tm_routes` at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/), last updated
-July 13, 2026. Every column description in `collection.json`
+October 21, 2026. Every column description in `collection.json`
 comes from [TriMet's metadata page](https://developer.trimet.org/gis/meta_tm_routes.shtml) — that
 page, not this catalog, is the authority on what a field means.
 

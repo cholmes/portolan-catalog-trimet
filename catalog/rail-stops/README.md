@@ -3,7 +3,7 @@
 Public transit rail stops. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar stops. The data have been generalized to improve cartographic display at smaller scales. **169 Point features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_rail_stops` and last updated at the source on
-**December 04, 2024**.
+**August 24, 2026**.
 
 The 169 MAX, WES and Portland Streetcar stops, generalized for cartographic
 display and carrying real **station names** rather than intersections. Each stop
@@ -62,7 +62,7 @@ with fsspec.open("https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.
   be spatial or by name, and neither is exact.
 - **A station is one point, not one per platform.** Directional platforms are
   collapsed, so counts here are lower than the rail stop counts in `stops`
-  (169 versus 161 MAX plus 58 streetcar plus 6 WES rows there).
+  (169 versus 162 MAX plus 58 streetcar plus 6 WES rows there).
 
 ## Schema
 
@@ -94,9 +94,9 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`rail-stops.parquet`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.parquet) | 17.1 KB | GeoParquet 1.1, 169 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`rail-stops.pmtiles`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.pmtiles) | 60.7 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/rail-stops/thumbnail.webp) | 48.7 KB | Rendered from `styles/default.json` over a light basemap |
+| [`rail-stops.parquet`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.parquet) | 17.0 KB | GeoParquet 1.1, 169 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`rail-stops.pmtiles`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.pmtiles) | 60.6 KB | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/rail-stops/thumbnail.webp) | 32.9 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/rail-stops/collection.json) | — | STAC Collection metadata |
 
 ## Provenance

@@ -11,7 +11,7 @@
   ],
   "id": "rail-lines",
   "title": "TriMet Rail Lines",
-  "description": "Public transit rail lines. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar lines. The data have been generalized to improve cartographic display at smaller scales. 171 LineString features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_rail_lines`](https://developer.trimet.org/gis/data/tm_rail_lines.zip) and last updated at the source on September 26, 2024.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_rail_lines.zip), [KML](https://developer.trimet.org/gis/data/tm_rail_lines.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_rail_lines.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/rail-lines/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/rail-lines/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
+  "description": "Public transit rail lines. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar lines. The data have been generalized to improve cartographic display at smaller scales. 172 LineString features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_rail_lines`](https://developer.trimet.org/gis/data/tm_rail_lines.zip) and last updated at the source on August 24, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_rail_lines.zip), [KML](https://developer.trimet.org/gis/data/tm_rail_lines.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_rail_lines.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/rail-lines/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/rail-lines/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
   "license": "other",
   "keywords": [
     "transit",
@@ -56,13 +56,13 @@
     "temporal": {
       "interval": [
         [
-          "2024-09-26T00:00:00Z",
+          "2026-08-24T00:00:00Z",
           null
         ]
       ]
     }
   },
-  "updated": "2026-08-02T18:02:50Z",
+  "updated": "2026-11-20T12:23:12Z",
   "table:columns": [
     {
       "name": "line",
@@ -96,7 +96,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 171,
+  "table:row_count": 172,
   "links": [
     {
       "rel": "root",
@@ -171,8 +171,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 91772,
-      "file:checksum": "122057a82569902d63731521a173008734c4ddd621fa6b1b57e913282ab2119b0fd9",
+      "file:size": 91732,
+      "file:checksum": "1220de3d0f0eb5139f7fa2ba7aa89673e42c590d62a560b37275d7f61f4432d72ac6",
       "table:columns": [
         {
           "name": "line",
@@ -206,7 +206,7 @@
         }
       ],
       "table:primary_geometry": "geometry",
-      "table:row_count": 171,
+      "table:row_count": 172,
       "proj:code": "EPSG:2913",
       "alternate": {
         "s3": {
@@ -224,8 +224,8 @@
         "visual",
         "data"
       ],
-      "file:size": 62239,
-      "file:checksum": "1220d3b4a9cd4d3bdc4f75c594f883724f737d92ee02201160e722477deb8d8f401d",
+      "file:size": 61973,
+      "file:checksum": "1220fe8a130ee3208cf88c6f1aeedf8b0a9be3cd41b69d13b5addbe2842f18672abe",
       "alternate": {
         "s3": {
           "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/rail-lines/rail-lines.pmtiles",
@@ -241,8 +241,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 48842,
-      "file:checksum": "1220492591a94d34f73302508fc8fc786c2d7978a12083ef0f08e9c8b5772e190030"
+      "file:size": 31738,
+      "file:checksum": "1220482ee62f2ef38b93d5712adc72cf71044f20f392847d073217cde3774f88c780"
     },
     "style": {
       "href": "./styles/default.json",
@@ -298,8 +298,8 @@
         "data",
         "source"
       ],
-      "file:size": 72423,
-      "file:checksum": "122017e2df17a7d9a3d2b6c4444c68c3893c0b432ad75f925ffdb312bcc9824b89d5"
+      "file:size": 72460,
+      "file:checksum": "1220f84461b9102cb521d6efa312147b7e796a83dda69de2bc8a0822d517887029ac"
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_rail_lines.kml",
@@ -310,8 +310,8 @@
         "data",
         "source"
       ],
-      "file:size": 351503,
-      "file:checksum": "122033e5ea985e92c8d4a4aacfb0060e9ec060cf3aba570ef4d851e73cfed40cfa02"
+      "file:size": 352208,
+      "file:checksum": "12201bd3a4e6ce0952833be0980f0c706655b575c0b9d4b338dcf8984c0d3eda27e4"
     },
     "source_sld": {
       "href": "./styles/trimet-rail.sld.xml",

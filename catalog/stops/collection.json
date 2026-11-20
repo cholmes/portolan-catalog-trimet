@@ -11,7 +11,7 @@
   ],
   "id": "stops",
   "title": "TriMet Stops",
-  "description": "Active transit stops. 6,316 Point features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_stops`](https://developer.trimet.org/gis/data/tm_stops.zip) and last updated at the source on July 30, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_stops.zip), [KML](https://developer.trimet.org/gis/data/tm_stops.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_stops.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/stops/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/stops/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
+  "description": "Active transit stops. 5,947 Point features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_stops`](https://developer.trimet.org/gis/data/tm_stops.zip) and last updated at the source on November 12, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_stops.zip), [KML](https://developer.trimet.org/gis/data/tm_stops.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_stops.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/stops/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/stops/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
   "license": "other",
   "keywords": [
     "transit",
@@ -56,13 +56,13 @@
     "temporal": {
       "interval": [
         [
-          "2026-07-30T00:00:00Z",
+          "2026-11-12T00:00:00Z",
           null
         ]
       ]
     }
   },
-  "updated": "2026-08-02T18:02:50Z",
+  "updated": "2026-11-20T12:23:12Z",
   "table:columns": [
     {
       "name": "stop_id",
@@ -101,7 +101,7 @@
     }
   ],
   "table:primary_geometry": "geometry",
-  "table:row_count": 6316,
+  "table:row_count": 5947,
   "links": [
     {
       "rel": "root",
@@ -176,8 +176,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 294824,
-      "file:checksum": "1220487a2ebf774a0c2e20c849af1361f370123de375f61ca6e87e7d6b7fc05f0ad4",
+      "file:size": 278310,
+      "file:checksum": "1220ae58498073102e6fec1c1a518ef0e6f1ff09cd6a2466d658f358d201c7eb2e0d",
       "table:columns": [
         {
           "name": "stop_id",
@@ -216,7 +216,7 @@
         }
       ],
       "table:primary_geometry": "geometry",
-      "table:row_count": 6316,
+      "table:row_count": 5947,
       "proj:code": "EPSG:2913",
       "alternate": {
         "s3": {
@@ -234,8 +234,8 @@
         "visual",
         "data"
       ],
-      "file:size": 1561493,
-      "file:checksum": "1220cca5a0c8760fd24f5b882f219c23aab47283d8757a8004b2bb3e7d7a33a961a4",
+      "file:size": 1476712,
+      "file:checksum": "1220cd9787fc23048efbf82c8bf621de078f25797cd18bed7345c7d1ad98bfc2a858",
       "alternate": {
         "s3": {
           "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/stops/stops.pmtiles",
@@ -251,8 +251,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 49604,
-      "file:checksum": "1220109f0e5f9ec5c20a7bf8d2a12d0602a30c429bec67719bab13a05a2f96d64f35"
+      "file:size": 49550,
+      "file:checksum": "122013efe3406ccbf2a320f6834ad88b416579133b43054c083fce6e7049e86bb3e4"
     },
     "style": {
       "href": "./styles/default.json",
@@ -308,8 +308,8 @@
         "data",
         "source"
       ],
-      "file:size": 197720,
-      "file:checksum": "122027ea0b13a7d74aa0aea65063ae2124344fb72e1d8d4c311837067b307c86a867"
+      "file:size": 182532,
+      "file:checksum": "1220bdd1b6e8c15c83d819d530234c53c8c235c919d65737d6ec72a5588268fb81b3"
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_stops.kml",
@@ -320,8 +320,8 @@
         "data",
         "source"
       ],
-      "file:size": 5280261,
-      "file:checksum": "12200744fd7385f8b895b2de2df2f2e4184f5b91af548e039c432cc7a6b6612481aa"
+      "file:size": 4972579,
+      "file:checksum": "12201dd1d9b518f3a113eb7618d9f14f2c83d2984bf9e0e6f459c7ebe0cdda17c704"
     },
     "source_sld": {
       "href": "./styles/trimet-stops.sld.xml",

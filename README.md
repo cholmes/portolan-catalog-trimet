@@ -29,7 +29,7 @@ never committed.
 |---|---|
 | Published at | `https://data.source.coop/cholmes/trimet` |
 | Collections | 8 |
-| Features | 15,232 |
+| Features | 14,262 |
 | Styles | 29 |
 | Spec | Portolan 0.3.0 |
 

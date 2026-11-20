@@ -1,7 +1,7 @@
 # TriMet Route Stops — agent guide
 
-Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. 8,314 Point features, EPSG:2913 (feet), one
-GeoParquet file of 343.6 KB in 1 row group(s).
+Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. 7,728 Point features, EPSG:2913 (feet), one
+GeoParquet file of 371.6 KB in 16 row group(s).
 
 ## Access
 
@@ -90,15 +90,15 @@ description says so. Treat it as reliable but formally undocumented upstream.
 No single column is unique. `stop_id` repeats across routes, `(rte, dir)` repeats
 across stops, and `stop_seq` repeats across route-directions.
 
-### Average 1.27 routes per stop, but the tail is long
+### Average 1.25 routes per stop, but the tail is long
 
-Most stops are served by a single route. The busiest, Clackamas Town Center, is
+Most stops are served by a single route. The busiest, NW Everett & 2nd, is
 served by 11. Analyses that assume one route per stop will be right most of the
 time and badly wrong at exactly the places that matter.
 
 ### `stop_name` agrees with `stops` on every row
 
-Verified: zero disagreements across all 8,314 rows. You can join on `stop_id`
+Verified: zero disagreements across all 7,728 rows. You can join on `stop_id`
 alone without worrying about reconciling names.
 
 ### No `public_rte` here
@@ -156,7 +156,7 @@ WHERE frequent = 'True';
 
 TriMet publishes this as `tm_route_stops` at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/), last updated
-July 30, 2026. Every column description in `collection.json`
+November 12, 2026. Every column description in `collection.json`
 comes from [TriMet's metadata page](https://developer.trimet.org/gis/meta_tm_route_stops.shtml) — that
 page, not this catalog, is the authority on what a field means.
 

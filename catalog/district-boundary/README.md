@@ -97,7 +97,7 @@ so they load unmodified against this directory.
 |---|---|---|
 | [`district-boundary.parquet`](https://data.source.coop/cholmes/trimet/district-boundary/district-boundary.parquet) | 88.5 KB | GeoParquet 1.1, 1 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
 | [`district-boundary.pmtiles`](https://data.source.coop/cholmes/trimet/district-boundary/district-boundary.pmtiles) | 26.9 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/district-boundary/thumbnail.webp) | 48.6 KB | Rendered from `styles/default.json` over a light basemap |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/district-boundary/thumbnail.webp) | 26.7 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/district-boundary/collection.json) | — | STAC Collection metadata |
 
 ## Provenance

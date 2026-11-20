@@ -350,7 +350,7 @@ GROUP BY county;
 ```
 
 Past the first query, the interesting pattern is joining across collections.
-`stops` and `route-stops` share `stop_id` exactly — all 6,316 of them — which
+`stops` and `route-stops` share `stop_id` exactly — all 5,947 of them — which
 turns a stop location into the set of routes that serve it:
 
 ```sql
@@ -457,8 +457,8 @@ def catalog_agents():
 A cloud-native mirror of the eight geospatial layers TriMet publishes at
 [developer.trimet.org/gis]({M.GIS_PAGE}). Every collection is a single
 GeoParquet file in EPSG:2913 plus PMTiles in WGS84. Total {sum(c['count'] for c in M.COLLECTIONS):,}
-features; the whole catalog is under 5 MB, so nothing here needs partitioning or
-a query engine beyond DuckDB.
+features; the GeoParquet and PMTiles together are {human(sum((ROOT / 'catalog' / c['id'] / f"{c['id']}.{ext}").stat().st_size for c in M.COLLECTIONS for ext in ('parquet', 'pmtiles')))}, so nothing
+here needs partitioning or a query engine beyond DuckDB.
 
 ## The collections, and how they connect
 
@@ -466,7 +466,7 @@ a query engine beyond DuckDB.
 
 **The joins that work:**
 
-- `stops` ↔ `route-stops` on **`stop_id`**. Exact: all 6,316 stops appear in
+- `stops` ↔ `route-stops` on **`stop_id`**. Exact: all 5,947 stops appear in
   both, and `stop_name` never disagrees. This is the join that answers "which
   routes serve this stop".
 - `route-stops` ↔ `routes` on **`(rte, dir)`**. Use it to get `public_rte`, the
@@ -516,7 +516,7 @@ position from them. `routes` carries the operational alignment.
 ### Vintages differ by more than a decade
 
 `district-boundary` was last updated 2013-01-09; `stops` and `route-stops`
-2026-07-30. Each collection's `collection.json` carries its own source date in
+2026-11-12. Each collection's `collection.json` carries its own source date in
 `extent.temporal`. Do not present the catalog as a single-date snapshot.
 
 ### Documented code values that do not appear, and undocumented ones that do
@@ -532,9 +532,9 @@ position from them. `routes` carries the operational alignment.
 
 ### Counts of "stops" depend on which layer you ask
 
-6,316 physical stops (`stops`), 8,314 stop-route-direction rows (`route-stops`),
+5,947 physical stops (`stops`), 7,728 stop-route-direction rows (`route-stops`),
 169 rail stations (`rail-stops`, which collapses directional platforms) against
-225 rail-typed rows in `stops`. All are correct answers to different questions.
+240 rail-typed rows in `stops`. All are correct answers to different questions.
 State which you used.
 
 ## Visualization

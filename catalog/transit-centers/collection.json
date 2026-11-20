@@ -62,7 +62,7 @@
       ]
     }
   },
-  "updated": "2026-08-02T18:02:50Z",
+  "updated": "2026-11-20T12:23:12Z",
   "table:columns": [
     {
       "name": "name",
@@ -182,7 +182,7 @@
         "data"
       ],
       "file:size": 12027,
-      "file:checksum": "122084cd25c8e3edaddfd0a0abfd4693262f3c16e81946d55b0b1a1e706996167499",
+      "file:checksum": "1220b3df9a262f15cc6e24fad01584ab4fda470c9e9d6a1b7941ef874960eb98872a",
       "table:columns": [
         {
           "name": "name",
@@ -261,8 +261,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 48420,
-      "file:checksum": "12201ccd03d313fd33ed3c2f3d1950a9e335c0b0cc8c61b714eaf5f45200dec9b35b"
+      "file:size": 21738,
+      "file:checksum": "1220a500e185a316e61068b55dd89b3273394d30356d66d59ad520d5a90ddf28acec"
     },
     "style": {
       "href": "./styles/default.json",
@@ -308,7 +308,7 @@
         "source"
       ],
       "file:size": 1797,
-      "file:checksum": "122060d7e42eff402b203d2f441139495fdada208a7a2667cabf25565a7eb94feba6"
+      "file:checksum": "12202a19371e9d3f43c4b2e68636dbb2a2e0229215ff26978e411fc2843b4151f344"
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_tran_cen.kml",
@@ -320,7 +320,7 @@
         "source"
       ],
       "file:size": 14623,
-      "file:checksum": "1220a5a645eb9694e537453b17848ff1fd400d10fef4d9a0cbf9f685e7efda854c3c"
+      "file:checksum": "12206999d0f78aeea85dffabe75a9fc151da756808715980be760ff9263efa7ff09e"
     }
   }
 }

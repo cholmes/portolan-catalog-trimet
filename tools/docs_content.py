@@ -167,10 +167,10 @@ related=[("stops", "the service the district exists to deliver"),
 "routes": dict(
 summary="""\
 Every fixed-route alignment TriMet operates, bus and rail together, as one
-line per route *and direction*. 200 features covering 179 bus, 13 MAX, 4
+line per route *and direction*. 184 features covering 163 bus, 13 MAX, 4
 streetcar, 2 commuter rail and 2 aerial tram segments.
 
-The `frequent` flag marks TriMet's Frequent Service network — 51 of the 200
+The `frequent` flag marks TriMet's Frequent Service network — 51 of the 184
 route-directions — which is the set of lines scheduled often enough that riders
 are told not to consult a timetable.""",
 uses="""\
@@ -181,14 +181,14 @@ uses="""\
 - Corridor analysis: buffering alignments to find what lies within a given
   distance of transit.""",
 limitations="""\
-- **`rte` is not a primary key.** 87 route numbers appear twice, once per
+- **`rte` is not a primary key.** 63 route numbers appear twice, once per
   direction. The key is `(rte, dir)`. A `GROUP BY rte` that forgets this
   double-counts every two-way route.
 - **These are alignments, not schedules.** Nothing here says how often a bus
   runs, when it runs, or whether it runs today. `frequent` is the only
   service-level hint, and it is a flag rather than a frequency. Use the
   [GTFS feed](https://developer.trimet.org/GTFS.shtml) for anything time-based.
-- **Geometry type is mixed.** 91 features are `LINESTRING` and 109 are
+- **Geometry type is mixed.** 78 features are `LINESTRING` and 106 are
   `MULTILINESTRING`, so a route can be several disconnected pieces. Functions
   that assume a single linestring will silently misbehave — see the quirks.
 - **Not a rail cartography layer.** For drawing rail specifically, `rail-lines`
@@ -196,7 +196,7 @@ limitations="""\
   is the operational alignment.""",
 quirks=[
 ("`(rte, dir)` is the key, not `rte`",
- """200 rows, 113 distinct `rte` values, 87 of which appear twice. `dir` is 0 or 1
+ """184 rows, 82 distinct `rte` values, 63 of which appear twice. `dir` is 0 or 1
 and TriMet documents it only as "Direction 0" and "Direction 1" — the human
 meaning lives in `dir_desc` (e.g. "To Portland"). Always group or join on the
 pair."""),
@@ -248,7 +248,7 @@ related=[("route-stops", "the stops along each of these route-directions, joined
 "rail-lines": dict(
 summary="""\
 TriMet's rail network — MAX light rail, WES commuter rail and Portland Streetcar
-— as 171 segments generalized for cartographic display. Each segment records
+— as 172 segments generalized for cartographic display. Each segment records
 which line or lines run over it (`line`), whether it is at surface level, on a
 bridge or in a tunnel (`passage`), its operational status, and its service type.
 
@@ -288,7 +288,7 @@ dropping them, so be aware they will appear where TriMet's maps show nothing.
 **Exclude `AUX` when counting revenue track.**"""),
 ("Everything is `Existing` right now",
  """`status` documents `Existing`, `Planned` and `UC` (under construction), but all
-171 current segments are `Existing`. Code that branches on status is not wrong,
+172 current segments are `Existing`. Code that branches on status is not wrong,
 it is just untested against this snapshot — and the values will reappear as
 TriMet adds projects."""),
 ("`line` is a set, encoded as a string",
@@ -334,8 +334,8 @@ related=[("rail-stops", "the stations on these lines, sharing the same `line` co
 # ---------------------------------------------------------------------------
 "stops": dict(
 summary="""\
-Every active TriMet stop, deduplicated — one row per physical stop, 6,316 of
-them. 6,075 are bus stops; the rest are 161 MAX platforms, 58 streetcar stops, 14
+Every active TriMet stop, deduplicated — one row per physical stop, 5,947 of
+them. 5,705 are bus stops; the rest are 162 MAX platforms, 58 streetcar stops, 14
 shared bus/streetcar stops, 6 WES platforms and 2 aerial tram terminals.
 
 `stop_id` is TriMet's public stop number, the one printed on the pole and used by
@@ -362,8 +362,8 @@ limitations="""\
   single bidirectional node without checking.""",
 quirks=[
 ("`stop_id` joins cleanly to `route-stops` — exactly",
- """All 6,316 `stop_id` values here appear in `route-stops`, and `route-stops` has
-exactly 6,316 distinct `stop_id` values. The two agree perfectly, and `stop_name`
+ """All 5,947 `stop_id` values here appear in `route-stops`, and `route-stops` has
+exactly 5,947 distinct `stop_id` values. The two agree perfectly, and `stop_name`
 never disagrees between them. This is the catalog's most reliable join."""),
 ("`type` has a value here that the routes layer does not",
  """`BSC`, "Shared Bus and Streetcar", appears on 14 stops. It is documented on the
@@ -411,7 +411,7 @@ related=[("route-stops", "the same stops exploded by route and direction; join o
 "route-stops": dict(
 summary="""\
 The same stops as `stops`, but exploded by the service that calls at them: one
-row per stop per route-direction, 8,314 rows over 6,316 distinct stops. A stop
+row per stop per route-direction, 7,728 rows over 5,947 distinct stops. A stop
 served by four routes appears four times.
 
 This is the only layer in the catalog that connects a stop to a route, and it
@@ -424,7 +424,7 @@ uses="""\
 - Answering "which routes serve this stop" and "which stops does this route
   serve", neither of which any other layer here can do.""",
 limitations="""\
-- **Every count is inflated unless you deduplicate.** `count(*)` is 8,314, which
+- **Every count is inflated unless you deduplicate.** `count(*)` is 7,728, which
   is not a number of stops. Use `count(DISTINCT stop_id)` for stops, or work from
   the `stops` collection.
 - **`stop_seq` restarts at every route-direction.** It is meaningful only within
@@ -444,12 +444,12 @@ description says so. Treat it as reliable but formally undocumented upstream."""
 ("The key is `(rte, dir, stop_id)`",
  """No single column is unique. `stop_id` repeats across routes, `(rte, dir)` repeats
 across stops, and `stop_seq` repeats across route-directions."""),
-("Average 1.27 routes per stop, but the tail is long",
- """Most stops are served by a single route. The busiest, Clackamas Town Center, is
+("Average 1.25 routes per stop, but the tail is long",
+ """Most stops are served by a single route. The busiest, NW Everett & 2nd, is
 served by 11. Analyses that assume one route per stop will be right most of the
 time and badly wrong at exactly the places that matter."""),
 ("`stop_name` agrees with `stops` on every row",
- """Verified: zero disagreements across all 8,314 rows. You can join on `stop_id`
+ """Verified: zero disagreements across all 7,728 rows. You can join on `stop_id`
 alone without worrying about reconciling names."""),
 ("No `public_rte` here",
  """Unlike `routes`, this layer carries only the integer `rte`. To show riders the
@@ -507,7 +507,7 @@ limitations="""\
   be spatial or by name, and neither is exact.
 - **A station is one point, not one per platform.** Directional platforms are
   collapsed, so counts here are lower than the rail stop counts in `stops`
-  (169 versus 161 MAX plus 58 streetcar plus 6 WES rows there).""",
+  (169 versus 162 MAX plus 58 streetcar plus 6 WES rows there).""",
 quirks=[
 ("No id column — this layer does not join to the rest of the catalog",
  """`rail-stops` carries `station`, `line`, `status`, `type` and nothing else. There
@@ -520,7 +520,7 @@ guaranteed."""),
 contains `NS/BL`, and here it is the code on 12 of the 169 stops. Filter on
 `NS/BL`."""),
 ("Counts here do not match the rail rows in `stops`",
- """169 stations here against 225 rail-typed rows in `stops`. Neither is wrong: this
+ """169 stations here against 240 rail-typed rows in `stops`. Neither is wrong: this
 layer collapses directional platforms into one station point, and `stops` keeps
 them separate. Pick the one that matches your question and say which you used."""),
 ("`station` is not unique",
@@ -563,7 +563,7 @@ The 15 transit centers — the timed-transfer hubs where many routes meet and wh
 riders are expected to change. Each carries a name, street address, city, county
 and ZIP code.
 
-They span all three counties of the district: 7 in Multnomah, 5 in Washington and
+They span all three counties of the district: 6 in Multnomah, 6 in Washington and
 3 in Clackamas.""",
 uses="""\
 - Anchoring network maps: 15 labelled points give a reader the shape of the

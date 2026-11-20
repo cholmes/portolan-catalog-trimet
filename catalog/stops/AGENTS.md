@@ -1,7 +1,7 @@
 # TriMet Stops — agent guide
 
-Active transit stops. 6,316 Point features, EPSG:2913 (feet), one
-GeoParquet file of 287.9 KB in 1 row group(s).
+Active transit stops. 5,947 Point features, EPSG:2913 (feet), one
+GeoParquet file of 271.8 KB in 1 row group(s).
 
 ## Access
 
@@ -79,8 +79,8 @@ which has TriMet's own `area_sq_mi` and `acres`.
 
 ### `stop_id` joins cleanly to `route-stops` — exactly
 
-All 6,316 `stop_id` values here appear in `route-stops`, and `route-stops` has
-exactly 6,316 distinct `stop_id` values. The two agree perfectly, and `stop_name`
+All 5,947 `stop_id` values here appear in `route-stops`, and `route-stops` has
+exactly 5,947 distinct `stop_id` values. The two agree perfectly, and `stop_name`
 never disagrees between them. This is the catalog's most reliable join.
 
 ### `type` has a value here that the routes layer does not
@@ -147,7 +147,7 @@ LIMIT 10;
 
 TriMet publishes this as `tm_stops` at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/), last updated
-July 30, 2026. Every column description in `collection.json`
+November 12, 2026. Every column description in `collection.json`
 comes from [TriMet's metadata page](https://developer.trimet.org/gis/meta_tm_stops.shtml) — that
 page, not this catalog, is the authority on what a field means.
 

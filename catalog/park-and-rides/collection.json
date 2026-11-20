@@ -62,7 +62,7 @@
       ]
     }
   },
-  "updated": "2026-08-02T18:02:50Z",
+  "updated": "2026-11-20T12:23:12Z",
   "table:columns": [
     {
       "name": "name",
@@ -192,7 +192,7 @@
         "data"
       ],
       "file:size": 15056,
-      "file:checksum": "12204f805dc17250339d0ebe2f5a6f2042b0777bba4952fc65920bd2d4f67c6f0a0a",
+      "file:checksum": "12204efbd842e3ff786ffb606354dceb5d1a58557a6abeb54a16b27f87868e04cf6b",
       "table:columns": [
         {
           "name": "name",
@@ -281,8 +281,8 @@
       "roles": [
         "thumbnail"
       ],
-      "file:size": 47898,
-      "file:checksum": "12209b5aaaecb6f91165e26cdb78ee0ddcac2c07f1d963afa1837a93a07df5d52ef9"
+      "file:size": 33202,
+      "file:checksum": "12201fb6a5108a2abaea02e0a29a4661e712bf32636850bd4feb9024ebcfc8e2a65e"
     },
     "style": {
       "href": "./styles/default.json",
@@ -338,8 +338,8 @@
         "data",
         "source"
       ],
-      "file:size": 3588,
-      "file:checksum": "12202a96f73b259332b5cccc038873d26bcaf5e83791be9c6788de7a4779fcd703e7"
+      "file:size": 3587,
+      "file:checksum": "122022caa9ffb47ff0269dfb077d50097b1946e0063e007632811bc25088de36b171"
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_parkride.kml",
