@@ -1,12 +1,12 @@
 # TriMet Route Stops
 
-Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. **8,314 Point features** covering the TriMet
+Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. **7,728 Point features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_route_stops` and last updated at the source on
-**July 30, 2026**.
+**November 12, 2026**.
 
 The same stops as `stops`, but exploded by the service that calls at them: one
-row per stop per route-direction, 8,314 rows over 6,316 distinct stops. A stop
+row per stop per route-direction, 7,728 rows over 5,947 distinct stops. A stop
 served by four routes appears four times.
 
 This is the only layer in the catalog that connects a stop to a route, and it
@@ -35,11 +35,15 @@ INSTALL httpfs;  LOAD httpfs;
 SELECT * FROM 'https://data.source.coop/cholmes/trimet/route-stops/route-stops.parquet' LIMIT 10;
 ```
 
-Or with GeoPandas:
+Or with GeoPandas (`read_parquet` does not accept a bare https URL, so open it
+with fsspec):
 
 ```python
+import fsspec
 import geopandas as gpd
-gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/route-stops/route-stops.parquet")
+
+with fsspec.open("https://data.source.coop/cholmes/trimet/route-stops/route-stops.parquet") as f:
+    gdf = gpd.read_parquet(f)
 ```
 
 ## Suggested uses
@@ -52,7 +56,7 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/route-stops/rout
 
 ## Limitations and inappropriate uses
 
-- **Every count is inflated unless you deduplicate.** `count(*)` is 8,314, which
+- **Every count is inflated unless you deduplicate.** `count(*)` is 7,728, which
   is not a number of stops. Use `count(DISTINCT stop_id)` for stops, or work from
   the `stops` collection.
 - **`stop_seq` restarts at every route-direction.** It is meaningful only within
@@ -78,7 +82,7 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/route-stops/rout
 | `jurisdic` | string | Jurisdiction (City or County) in which stop is located. |
 | `zipcode` | string | Zipcode in which stop is located. |
 | `frequent` | string | Indicates whether a route or route segment has frequent service.<br>Values: `True` Route segment has frequent service; `False` Route segment does not have frequent service. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from
@@ -101,9 +105,9 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`route-stops.parquet`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.parquet) | 343.6 KB | GeoParquet 1.1, 8,314 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`route-stops.pmtiles`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.pmtiles) | 2.3 MB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/route-stops/thumbnail.webp) | 48.5 KB | Rendered from `styles/default.json` over a light basemap |
+| [`route-stops.parquet`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.parquet) | 371.6 KB | GeoParquet 1.1, 7,728 rows in 16 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`route-stops.pmtiles`](https://data.source.coop/cholmes/trimet/route-stops/route-stops.pmtiles) | 2.1 MB | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/route-stops/thumbnail.webp) | 48.8 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/route-stops/collection.json) | — | STAC Collection metadata |
 
 ## Provenance

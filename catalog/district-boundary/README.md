@@ -36,11 +36,15 @@ INSTALL httpfs;  LOAD httpfs;
 SELECT * FROM 'https://data.source.coop/cholmes/trimet/district-boundary/district-boundary.parquet' LIMIT 10;
 ```
 
-Or with GeoPandas:
+Or with GeoPandas (`read_parquet` does not accept a bare https URL, so open it
+with fsspec):
 
 ```python
+import fsspec
 import geopandas as gpd
-gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/district-boundary/district-boundary.parquet")
+
+with fsspec.open("https://data.source.coop/cholmes/trimet/district-boundary/district-boundary.parquet") as f:
+    gdf = gpd.read_parquet(f)
 ```
 
 ## Suggested uses
@@ -69,7 +73,7 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/district-boundar
 |---|---|---|
 | `area_sq_mi` | int64 | Area in square miles |
 | `acres` | int64 | Area in acres. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from
@@ -93,7 +97,7 @@ so they load unmodified against this directory.
 |---|---|---|
 | [`district-boundary.parquet`](https://data.source.coop/cholmes/trimet/district-boundary/district-boundary.parquet) | 88.5 KB | GeoParquet 1.1, 1 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
 | [`district-boundary.pmtiles`](https://data.source.coop/cholmes/trimet/district-boundary/district-boundary.pmtiles) | 26.9 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/district-boundary/thumbnail.webp) | 48.6 KB | Rendered from `styles/default.json` over a light basemap |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/district-boundary/thumbnail.webp) | 26.7 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/district-boundary/collection.json) | — | STAC Collection metadata |
 
 ## Provenance

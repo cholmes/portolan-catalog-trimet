@@ -40,7 +40,8 @@ jobs:
           node-version: "24"
 
       - name: Install rashid
-        run: pip install rashid
+        # 0.4.0 implements the Portolan 0.3 rules the catalog declares.
+        run: pip install rashid==0.4.0
 
       # The data files are not committed and several tests read them (row
       # counts, checksums, SQL recipes), so rebuild them from TriMet's sources.

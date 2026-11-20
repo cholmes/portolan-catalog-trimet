@@ -1,6 +1,6 @@
 # TriMet Rail Lines — agent guide
 
-Public transit rail lines. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar lines. The data have been generalized to improve cartographic display at smaller scales. 171 LineString features, WGS84, one
+Public transit rail lines. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar lines. The data have been generalized to improve cartographic display at smaller scales. 172 LineString features, EPSG:2913 (feet), one
 GeoParquet file of 89.6 KB in 1 row group(s).
 
 ## Access
@@ -96,7 +96,7 @@ dropping them, so be aware they will appear where TriMet's maps show nothing.
 ### Everything is `Existing` right now
 
 `status` documents `Existing`, `Planned` and `UC` (under construction), but all
-171 current segments are `Existing`. Code that branches on status is not wrong,
+172 current segments are `Existing`. Code that branches on status is not wrong,
 it is just untested against this snapshot — and the values will reappear as
 TriMet adds projects.
 
@@ -160,12 +160,13 @@ ORDER BY type, segments DESC;
 
 TriMet publishes this as `tm_rail_lines` at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/), last updated
-September 26, 2024. Every column description in `collection.json`
+August 24, 2026. Every column description in `collection.json`
 comes from [TriMet's metadata page](https://developer.trimet.org/gis/meta_tm_rail_lines.shtml) — that
 page, not this catalog, is the authority on what a field means.
 
-Conversion: `ogr2ogr -f Parquet -t_srs EPSG:4326 -lco COMPRESSION=ZSTD -lco
-SORT_BY_BBOX=YES -lco WRITE_COVERING_BBOX=YES`, then tippecanoe with `-r1
+Conversion: `ogr2ogr -f Parquet -lco COMPRESSION=ZSTD -lco SORT_BY_BBOX=YES
+-lco WRITE_COVERING_BBOX=YES`, keeping the native EPSG:2913; the PMTiles step
+reprojects to WGS84 and runs tippecanoe with `-r1
 --no-feature-limit` so no feature is dropped at any zoom. See
 [`tools/convert.py`](https://github.com/cholmes/portolan-catalog-trimet/blob/main/tools/convert.py).
 

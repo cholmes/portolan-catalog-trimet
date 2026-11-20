@@ -2,7 +2,7 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
@@ -62,7 +62,7 @@
       ]
     }
   },
-  "updated": "2026-08-02T18:02:50Z",
+  "updated": "2026-11-20T12:23:12Z",
   "table:columns": [
     {
       "name": "name",
@@ -192,7 +192,7 @@
         "data"
       ],
       "file:size": 15056,
-      "file:checksum": "12204f805dc17250339d0ebe2f5a6f2042b0777bba4952fc65920bd2d4f67c6f0a0a",
+      "file:checksum": "12204efbd842e3ff786ffb606354dceb5d1a58557a6abeb54a16b27f87868e04cf6b",
       "table:columns": [
         {
           "name": "name",
@@ -277,12 +277,12 @@
       "href": "./thumbnail.webp",
       "type": "image/webp",
       "title": "TriMet Park and Rides preview",
-      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap. WebP is allowed for thumbnails by spec PR portolan-sdi/portolan-spec#121, which this catalog targets; Portolan 0.1 alone permits only PNG and JPEG.",
+      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap.",
       "roles": [
         "thumbnail"
       ],
-      "file:size": 47898,
-      "file:checksum": "12209b5aaaecb6f91165e26cdb78ee0ddcac2c07f1d963afa1837a93a07df5d52ef9"
+      "file:size": 33202,
+      "file:checksum": "12201fb6a5108a2abaea02e0a29a4661e712bf32636850bd4feb9024ebcfc8e2a65e"
     },
     "style": {
       "href": "./styles/default.json",
@@ -290,7 +290,8 @@
       "title": "TriMet Park and Rides",
       "description": "The 46 park and ride facilities in TriMet blue. A steady mark size makes this the right style when the question is where the lots are rather than how big they are.",
       "roles": [
-        "style"
+        "style",
+        "default"
       ],
       "file:size": 896,
       "file:checksum": "12203877cd9582f40a607268bb52d4c1d30912a7de3f4152cecb467992a629f46c97"
@@ -337,8 +338,8 @@
         "data",
         "source"
       ],
-      "file:size": 3588,
-      "file:checksum": "12202a96f73b259332b5cccc038873d26bcaf5e83791be9c6788de7a4779fcd703e7"
+      "file:size": 3587,
+      "file:checksum": "122022caa9ffb47ff0269dfb077d50097b1946e0063e007632811bc25088de36b171"
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_parkride.kml",

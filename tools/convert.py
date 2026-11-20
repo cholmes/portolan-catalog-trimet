@@ -26,6 +26,17 @@ OUT = ROOT / "catalog"
 MAXZOOM = {"district-boundary": 12}
 DEFAULT_MAXZOOM = 14
 
+# Row-group size per collection. The default leaves every layer in one row
+# group. route-stops is large enough that the incubating spatial-order metric
+# (PORTO spatial-order, reported by rashid as PTL-DAT-006) judges it, and a
+# single row group defeats row-group pruning, so it is written in ~1,000-row
+# groups small enough that a window query can skip most of the file. Measured
+# with rashid 0.4.0: one row group fails at 0.65 efficiency, 1,000-row groups
+# fail at 0.62, and 512-row groups pass the 0.65 bar (no finding). The finer
+# groups cost 9.5% more bytes (380,562 against 347,422).
+ROW_GROUP_SIZE = {"route-stops": 512}
+DEFAULT_ROW_GROUP_SIZE = 20000
+
 
 def run(cmd, **kw):
     print("   $", " ".join(str(c) for c in cmd[:6]), "...")
@@ -53,7 +64,8 @@ def to_geoparquet(coll):
         "-lco", "WRITE_COVERING_BBOX=YES",
         # Hilbert-orders rows so nearby features land in the same row group.
         "-lco", "SORT_BY_BBOX=YES",
-        "-lco", "ROW_GROUP_SIZE=20000",
+        "-lco",
+        f"ROW_GROUP_SIZE={ROW_GROUP_SIZE.get(coll['id'], DEFAULT_ROW_GROUP_SIZE)}",
     ])
     return dst
 

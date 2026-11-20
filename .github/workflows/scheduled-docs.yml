@@ -1,0 +1,47 @@
+# Runs the documented SQL against the PUBLISHED catalog on a schedule.
+#
+# The pull-request gates (ci.yml) run the same blocks against the working
+# tree, which proves the docs match the repo. This workflow proves they still
+# match what data.source.coop actually serves: a deleted object, a host
+# change, or a published tree that drifted from main all fail here and
+# nowhere else.
+#
+# Expected to fail between merging a data change and publishing it, because
+# the docs on main then describe data the bucket does not hold yet. A red run
+# here after a merge means "publish", not "revert".
+name: scheduled-docs
+
+on:
+  schedule:
+    - cron: "17 6 * * 1" # weekly, Monday 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # renovate: datasource=pypi depName=duckdb
+  DUCKDB_VERSION: "1.5.3"
+
+jobs:
+  live-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Install duckdb
+        run: python3 -m pip install "duckdb==${DUCKDB_VERSION}"
+
+      - name: Run the documented SQL against the published catalog
+        env:
+          DOC_SQL_BASE: https://data.source.coop/cholmes/trimet
+        run: |
+          python3 tests/test_doc_sql.py
+          python3 tests/test_recipes.py

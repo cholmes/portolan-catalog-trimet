@@ -3,7 +3,7 @@
 Public transit rail stops. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar stops. The data have been generalized to improve cartographic display at smaller scales. **169 Point features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_rail_stops` and last updated at the source on
-**December 04, 2024**.
+**August 24, 2026**.
 
 The 169 MAX, WES and Portland Streetcar stops, generalized for cartographic
 display and carrying real **station names** rather than intersections. Each stop
@@ -32,11 +32,15 @@ INSTALL httpfs;  LOAD httpfs;
 SELECT * FROM 'https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.parquet' LIMIT 10;
 ```
 
-Or with GeoPandas:
+Or with GeoPandas (`read_parquet` does not accept a bare https URL, so open it
+with fsspec):
 
 ```python
+import fsspec
 import geopandas as gpd
-gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.parquet")
+
+with fsspec.open("https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.parquet") as f:
+    gdf = gpd.read_parquet(f)
 ```
 
 ## Suggested uses
@@ -58,7 +62,7 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/rail-stops/rail-
   be spatial or by name, and neither is exact.
 - **A station is one point, not one per platform.** Directional platforms are
   collapsed, so counts here are lower than the rail stop counts in `stops`
-  (169 versus 161 MAX plus 58 streetcar plus 6 WES rows there).
+  (169 versus 162 MAX plus 58 streetcar plus 6 WES rows there).
 
 ## Schema
 
@@ -68,7 +72,7 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/rail-stops/rail-
 | `line` | string | Line(s) serving a particular stop.<br>Values: `AL` Portland Streetcar A Loop; `AL/BL` Portland Streetcar A & B Loops; `B` MAX Blue Line; `BGR` MAX Blue, Green, and Red Lines; `BGRY` MAX Blue, Green, Red, and Yellow Lines; `BL` Portland Streetcar B Loop; `BL/NS` Portland Streetcar B Loop and North/South Line; `BR` MAX Blue and Red Lines; `G` MAX Green Line; `GO` MAX Green and Orange Lines; `GY` MAX Green and Yellow Lines; `NS` Portland Streetcar North/South Line; `NS/AL` Portland Streetcar A Loop and North/South Line; `NS/AL/BL` Portland Streetcar A & B Loops and North/South Line; `O` MAX Orange Line; `R` MAX Red Line; `WES` WES (Westside Express Service); `Y` MAX Yellow Line. |
 | `status` | string | Operational status of the stop.<br>Values: `Existing` Service currently provided at rail stop; `Planned` Rail stop in advanced planning stages; `UC` Rail stop is under construction. |
 | `type` | string | Type of service.<br>Values: `CR` Commuter rail; `MAX` Light rail; `SC` Streetcar. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from
@@ -90,9 +94,9 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`rail-stops.parquet`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.parquet) | 17.1 KB | GeoParquet 1.1, 169 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`rail-stops.pmtiles`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.pmtiles) | 60.7 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/rail-stops/thumbnail.webp) | 48.7 KB | Rendered from `styles/default.json` over a light basemap |
+| [`rail-stops.parquet`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.parquet) | 17.0 KB | GeoParquet 1.1, 169 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`rail-stops.pmtiles`](https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.pmtiles) | 60.6 KB | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/rail-stops/thumbnail.webp) | 32.9 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/rail-stops/collection.json) | — | STAC Collection metadata |
 
 ## Provenance

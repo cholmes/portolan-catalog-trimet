@@ -19,7 +19,7 @@ If a fact is not in one of those places, it does not belong in this file.
 # Catalog-level
 # --------------------------------------------------------------------------
 
-PORTOLAN_SCHEMA = "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json"
+PORTOLAN_SCHEMA = "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json"
 
 CATALOG_ID = "trimet"
 CATALOG_TITLE = "TriMet Geospatial Data"
@@ -248,11 +248,11 @@ COLLECTIONS = [
         "blurb": "TriMet fixed route alignments (includes bus and rail.)",
         "description": "All existing bus and rail lines.",
         "geometry": "LineString",
-        "source_updated": "2026-07-13",
-        "source_updated_text": "July 13, 2026",
-        "count": 200,
-        "bbox": [-123.11573, 45.28495, -122.332951, 45.639118],
-        "native_bbox": [7531764.7, 595330.7, 7730400.1, 727210.8],
+        "source_updated": "2026-10-21",
+        "source_updated_text": "October 21, 2026",
+        "count": 184,
+        "bbox": [-123.115731, 45.284955, -122.332954, 45.639124],
+        "native_bbox": [7531764.5, 595332.5, 7730399.3, 727213.0],
         "columns": [
             {"name": "rte", "type": "int32", "description": "Route number."},
             {"name": "dir", "type": "int32", "description": "Direction of route.",
@@ -280,9 +280,9 @@ COLLECTIONS = [
             "generalized to improve cartographic display at smaller scales."
         ),
         "geometry": "LineString",
-        "source_updated": "2024-09-26",
-        "source_updated_text": "September 26, 2024",
-        "count": 171,
+        "source_updated": "2026-08-24",
+        "source_updated_text": "August 24, 2026",
+        "count": 172,
         "bbox": [-122.991049, 45.311167, -122.418509, 45.605455],
         "native_bbox": [7563740.0, 607778.2, 7710256.6, 714400.3],
         "columns": [
@@ -334,9 +334,9 @@ COLLECTIONS = [
         "blurb": "Active TriMet stops (includes bus and rail.)",
         "description": "Active transit stops.",
         "geometry": "Point",
-        "source_updated": "2026-07-30",
-        "source_updated_text": "July 30, 2026",
-        "count": 6316,
+        "source_updated": "2026-11-12",
+        "source_updated_text": "November 12, 2026",
+        "count": 5947,
         "bbox": [-123.115462, 45.285222, -122.333062, 45.637731],
         "native_bbox": [7531831.2, 595429.4, 7730367.6, 726731.3],
         "columns": [
@@ -359,9 +359,9 @@ COLLECTIONS = [
             "multiple lines there are multiple records in this dataset."
         ),
         "geometry": "Point",
-        "source_updated": "2026-07-30",
-        "source_updated_text": "July 30, 2026",
-        "count": 8314,
+        "source_updated": "2026-11-12",
+        "source_updated_text": "November 12, 2026",
+        "count": 7728,
         "bbox": [-123.115462, 45.285222, -122.333062, 45.637731],
         "native_bbox": [7531831.2, 595429.4, 7730367.6, 726731.3],
         "columns": [
@@ -398,8 +398,8 @@ COLLECTIONS = [
             "generalized to improve cartographic display at smaller scales."
         ),
         "geometry": "Point",
-        "source_updated": "2024-12-04",
-        "source_updated_text": "December 04, 2024",
+        "source_updated": "2026-08-24",
+        "source_updated_text": "August 24, 2026",
         "count": 169,
         "bbox": [-122.991035, 45.311167, -122.418509, 45.605455],
         "native_bbox": [7563749.3, 607778.2, 7710256.6, 714400.3],

@@ -7,9 +7,9 @@ dense layer like `stops` is not held to the same quality as a single polygon.
 Re-rendering to try a different quality would refetch every basemap tile; this
 does not.
 
-Portolan 0.1 allows only PNG and JPEG for thumbnails. `image/webp` is added by
-spec PR #121 (portolan-sdi/portolan-spec#121), which this catalog targets — the
-same deliberate deviation the portolan-nl catalog makes.
+Portolan 0.3 allows `image/webp` for thumbnails outright (it entered the spec
+through PR #121), so this is no longer a deviation — just the format that holds
+every thumbnail under the size budget.
 
     python3 tools/to_webp.py [--budget 50000] [--keep-png]
 """

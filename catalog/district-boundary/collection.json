@@ -2,7 +2,7 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
@@ -62,7 +62,7 @@
       ]
     }
   },
-  "updated": "2026-08-02T18:02:50Z",
+  "updated": "2026-11-20T12:23:12Z",
   "table:columns": [
     {
       "name": "area_sq_mi",
@@ -162,7 +162,7 @@
         "data"
       ],
       "file:size": 90671,
-      "file:checksum": "1220dc2f46ba302191d3f462ea65248998d437fcf630be882cbccc9d2b7a26081a47",
+      "file:checksum": "12201124fcc50d2278efcf8dbae0ae89d662e70bc48f10b5b7b7a6727d143fca90b6",
       "table:columns": [
         {
           "name": "area_sq_mi",
@@ -217,12 +217,12 @@
       "href": "./thumbnail.webp",
       "type": "image/webp",
       "title": "TriMet District Boundary preview",
-      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap. WebP is allowed for thumbnails by spec PR portolan-sdi/portolan-spec#121, which this catalog targets; Portolan 0.1 alone permits only PNG and JPEG.",
+      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap.",
       "roles": [
         "thumbnail"
       ],
-      "file:size": 49784,
-      "file:checksum": "1220e873719f6534dd3e055689b770e4f774bf59b7b2695c92ff54bdd86fa1f7da3f"
+      "file:size": 27372,
+      "file:checksum": "12205f6b5b481a1e35e42a08891d43c4123eac211f8215226076e9ca4844deeeeadf"
     },
     "style": {
       "href": "./styles/default.json",
@@ -230,7 +230,8 @@
       "title": "TriMet District Boundary",
       "description": "The TriMet service district as a tinted fill with a TriMet-orange edge. The fill uses TriMet's own basemap water tint at low opacity so the district reads as an area without hiding a basemap underneath.",
       "roles": [
-        "style"
+        "style",
+        "default"
       ],
       "file:size": 1146,
       "file:checksum": "122004bd5d2247e2b4fabf88d04b86a146d1604bf4789fa6f6be11c02e16af4ed660"
@@ -267,7 +268,7 @@
         "source"
       ],
       "file:size": 68862,
-      "file:checksum": "12208a1a21d037a0462a9cb6bfc934b664dc4f9f56b637929c047ea4639f84f67f1d"
+      "file:checksum": "122011626706b6f18e9ffe0b8628bf1d46a9b378d815dce640763b716f5f896b7e7d"
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_boundary.kml",
@@ -279,7 +280,7 @@
         "source"
       ],
       "file:size": 261887,
-      "file:checksum": "12200993dc67171ff764551c3948f3419d775dd39f69d88cd5738315cb7218f8e258"
+      "file:checksum": "12200c1cb9f407de9fb9de821e7bf86add5f6d4661511fa8535bfaab5d4045ddecd5"
     }
   }
 }

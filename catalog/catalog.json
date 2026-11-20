@@ -2,12 +2,12 @@
   "type": "Catalog",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json"
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json"
   ],
   "id": "trimet",
   "title": "TriMet Geospatial Data",
   "description": "A cloud-native mirror of the eight geospatial datasets TriMet publishes at [developer.trimet.org/gis](https://developer.trimet.org/gis/) \u2014 the transit district boundary, fixed-route alignments, rail lines, stops, route stops, rail stops, transit centers and park and rides for the Portland, Oregon metropolitan area. TriMet distributes these as Shapefile and KML; this catalog republishes them as GeoParquet and PMTiles with the original files, KML and metadata linked from every collection. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. Visualization styles reproduce TriMet's own published cartography.\n\nEach collection carries an [**AGENTS.md** agent guide](https://source.coop/cholmes/trimet/AGENTS.md) alongside its README \u2014 join keys, the quirks that produce silently wrong answers, and query recipes that have each been run against the published files.",
-  "updated": "2026-08-02T18:02:50Z",
+  "updated": "2026-11-20T12:23:12Z",
   "extent": {
     "spatial": {
       "bbox": [
@@ -55,6 +55,24 @@
       "href": "./catalog.json",
       "type": "application/json",
       "title": "TriMet Geospatial Data"
+    },
+    {
+      "rel": "self",
+      "href": "https://data.source.coop/cholmes/trimet/catalog.json",
+      "type": "application/json",
+      "title": "TriMet Geospatial Data"
+    },
+    {
+      "rel": "vcs",
+      "href": "https://github.com/cholmes/portolan-catalog-trimet",
+      "type": "text/html",
+      "title": "Catalog source repository"
+    },
+    {
+      "rel": "issues",
+      "href": "https://github.com/cholmes/portolan-catalog-trimet/issues",
+      "type": "text/html",
+      "title": "Report a problem with this catalog"
     },
     {
       "rel": "describedby",

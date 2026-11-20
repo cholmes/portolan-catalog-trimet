@@ -33,10 +33,10 @@ follow the links back to TriMet — no setup, nothing to install.
 | Collection | Features | Geometry | Description |
 |---|---|---|---|
 | [TriMet District Boundary](https://source.coop/cholmes/trimet/district-boundary/) | 1 | Polygon | TriMet service district boundary. |
-| [TriMet Routes](https://source.coop/cholmes/trimet/routes/) | 200 | LineString | TriMet fixed route alignments (includes bus and rail.) |
-| [TriMet Rail Lines](https://source.coop/cholmes/trimet/rail-lines/) | 171 | LineString | TriMet rail service optimized for cartographic display. |
-| [TriMet Stops](https://source.coop/cholmes/trimet/stops/) | 6,316 | Point | Active TriMet stops (includes bus and rail.) |
-| [TriMet Route Stops](https://source.coop/cholmes/trimet/route-stops/) | 8,314 | Point | Active TriMet stops (includes bus and rail) by route and direction. |
+| [TriMet Routes](https://source.coop/cholmes/trimet/routes/) | 184 | LineString | TriMet fixed route alignments (includes bus and rail.) |
+| [TriMet Rail Lines](https://source.coop/cholmes/trimet/rail-lines/) | 172 | LineString | TriMet rail service optimized for cartographic display. |
+| [TriMet Stops](https://source.coop/cholmes/trimet/stops/) | 5,947 | Point | Active TriMet stops (includes bus and rail.) |
+| [TriMet Route Stops](https://source.coop/cholmes/trimet/route-stops/) | 7,728 | Point | Active TriMet stops (includes bus and rail) by route and direction. |
 | [TriMet Rail Stops](https://source.coop/cholmes/trimet/rail-stops/) | 169 | Point | TriMet rail stops optimized for cartographic display. |
 | [TriMet Transit Centers](https://source.coop/cholmes/trimet/transit-centers/) | 15 | Point | TriMet transit center locations. |
 | [TriMet Park and Rides](https://source.coop/cholmes/trimet/park-and-rides/) | 46 | Point | TriMet park and ride locations. |
@@ -53,7 +53,7 @@ GROUP BY county;
 ```
 
 Past the first query, the interesting pattern is joining across collections.
-`stops` and `route-stops` share `stop_id` exactly — all 6,316 of them — which
+`stops` and `route-stops` share `stop_id` exactly — all 5,947 of them — which
 turns a stop location into the set of routes that serve it:
 
 ```sql
@@ -88,16 +88,17 @@ Every collection ships three to five styles; see each collection's README.
 | Collection | TriMet source | Last updated at source |
 |---|---|---|
 | TriMet District Boundary | `tm_boundary` — [Shapefile](https://developer.trimet.org/gis/data/tm_boundary.zip) · [KML](https://developer.trimet.org/gis/data/tm_boundary.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_boundary.shtml) | January 09, 2013 |
-| TriMet Routes | `tm_routes` — [Shapefile](https://developer.trimet.org/gis/data/tm_routes.zip) · [KML](https://developer.trimet.org/gis/data/tm_routes.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_routes.shtml) | July 13, 2026 |
-| TriMet Rail Lines | `tm_rail_lines` — [Shapefile](https://developer.trimet.org/gis/data/tm_rail_lines.zip) · [KML](https://developer.trimet.org/gis/data/tm_rail_lines.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_rail_lines.shtml) | September 26, 2024 |
-| TriMet Stops | `tm_stops` — [Shapefile](https://developer.trimet.org/gis/data/tm_stops.zip) · [KML](https://developer.trimet.org/gis/data/tm_stops.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_stops.shtml) | July 30, 2026 |
-| TriMet Route Stops | `tm_route_stops` — [Shapefile](https://developer.trimet.org/gis/data/tm_route_stops.zip) · [KML](https://developer.trimet.org/gis/data/tm_route_stops.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_route_stops.shtml) | July 30, 2026 |
-| TriMet Rail Stops | `tm_rail_stops` — [Shapefile](https://developer.trimet.org/gis/data/tm_rail_stops.zip) · [KML](https://developer.trimet.org/gis/data/tm_rail_stops.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_rail_stops.shtml) | December 04, 2024 |
+| TriMet Routes | `tm_routes` — [Shapefile](https://developer.trimet.org/gis/data/tm_routes.zip) · [KML](https://developer.trimet.org/gis/data/tm_routes.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_routes.shtml) | October 21, 2026 |
+| TriMet Rail Lines | `tm_rail_lines` — [Shapefile](https://developer.trimet.org/gis/data/tm_rail_lines.zip) · [KML](https://developer.trimet.org/gis/data/tm_rail_lines.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_rail_lines.shtml) | August 24, 2026 |
+| TriMet Stops | `tm_stops` — [Shapefile](https://developer.trimet.org/gis/data/tm_stops.zip) · [KML](https://developer.trimet.org/gis/data/tm_stops.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_stops.shtml) | November 12, 2026 |
+| TriMet Route Stops | `tm_route_stops` — [Shapefile](https://developer.trimet.org/gis/data/tm_route_stops.zip) · [KML](https://developer.trimet.org/gis/data/tm_route_stops.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_route_stops.shtml) | November 12, 2026 |
+| TriMet Rail Stops | `tm_rail_stops` — [Shapefile](https://developer.trimet.org/gis/data/tm_rail_stops.zip) · [KML](https://developer.trimet.org/gis/data/tm_rail_stops.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_rail_stops.shtml) | August 24, 2026 |
 | TriMet Transit Centers | `tm_tran_cen` — [Shapefile](https://developer.trimet.org/gis/data/tm_tran_cen.zip) · [KML](https://developer.trimet.org/gis/data/tm_tran_cen.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_tran_cen.shtml) | July 31, 2024 |
 | TriMet Park and Rides | `tm_parkride` — [Shapefile](https://developer.trimet.org/gis/data/tm_parkride.zip) · [KML](https://developer.trimet.org/gis/data/tm_parkride.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_parkride.shtml) | June 23, 2026 |
 
-All eight are published in EPSG:2913 (NAD83(HARN) / Oregon North (ft)) and reprojected
-here to EPSG:4326. TriMet's note on the GIS page:
+All eight are published in EPSG:2913 (NAD83(HARN) / Oregon North (ft)). The GeoParquet
+here keeps that CRS; only the PMTiles are reprojected, to WGS84, because vector
+tiles require it. TriMet's note on the GIS page:
 
 > TriMet provides these datasets free of charge in shapefile and KML format. All geospatial datasets created and distributed by TriMet are in NAD83, Oregon State Plane North projection and coordinate system. Refer to the metadata for additional information regarding a specific data layer. TriMet provides data to the general public under certain terms and conditions.
 
@@ -127,7 +128,7 @@ starting point.
 Maintained by Chris Holmes
 ([cholmes@9eo.org](mailto:cholmes@9eo.org)), **not affiliated with
 TriMet**. Conforms to the [Portolan](https://www.portolan-sdi.org/)
-specification v0.1.0.
+specification v0.3.0.
 
 ### Both halves are on GitHub, and contributions are welcome
 

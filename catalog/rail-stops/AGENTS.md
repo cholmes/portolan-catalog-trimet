@@ -1,7 +1,7 @@
 # TriMet Rail Stops — agent guide
 
-Public transit rail stops. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar stops. The data have been generalized to improve cartographic display at smaller scales. 169 Point features, WGS84, one
-GeoParquet file of 17.1 KB in 1 row group(s).
+Public transit rail stops. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar stops. The data have been generalized to improve cartographic display at smaller scales. 169 Point features, EPSG:2913 (feet), one
+GeoParquet file of 17.0 KB in 1 row group(s).
 
 ## Access
 
@@ -93,7 +93,7 @@ contains `NS/BL`, and here it is the code on 12 of the 169 stops. Filter on
 
 ### Counts here do not match the rail rows in `stops`
 
-169 stations here against 225 rail-typed rows in `stops`. Neither is wrong: this
+169 stations here against 240 rail-typed rows in `stops`. Neither is wrong: this
 layer collapses directional platforms into one station point, and `stops` keeps
 them separate. Pick the one that matches your question and say which you used.
 
@@ -150,12 +150,13 @@ LIMIT 10;
 
 TriMet publishes this as `tm_rail_stops` at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/), last updated
-December 04, 2024. Every column description in `collection.json`
+August 24, 2026. Every column description in `collection.json`
 comes from [TriMet's metadata page](https://developer.trimet.org/gis/meta_tm_rail_stops.shtml) — that
 page, not this catalog, is the authority on what a field means.
 
-Conversion: `ogr2ogr -f Parquet -t_srs EPSG:4326 -lco COMPRESSION=ZSTD -lco
-SORT_BY_BBOX=YES -lco WRITE_COVERING_BBOX=YES`, then tippecanoe with `-r1
+Conversion: `ogr2ogr -f Parquet -lco COMPRESSION=ZSTD -lco SORT_BY_BBOX=YES
+-lco WRITE_COVERING_BBOX=YES`, keeping the native EPSG:2913; the PMTiles step
+reprojects to WGS84 and runs tippecanoe with `-r1
 --no-feature-limit` so no feature is dropped at any zoom. See
 [`tools/convert.py`](https://github.com/cholmes/portolan-catalog-trimet/blob/main/tools/convert.py).
 

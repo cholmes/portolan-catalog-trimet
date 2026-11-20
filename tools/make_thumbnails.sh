@@ -20,7 +20,11 @@ SIZE="${SIZE:-800}"
 # Bash ends a ${VAR:-default} at the first "}", so a {z}/{x}/{y} template cannot
 # be inlined as the default -- it would silently become "{z/{x}/{y}.png}" and the
 # basemap would fetch nothing. Keep the template in its own variable.
-DEFAULT_BASEMAP_URL='https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+# CARTO's basemaps.cartocdn.com started answering keyless requests with
+# "API KEY REQUIRED" watermark tiles (seen 2026-11-20), so the default is now
+# Esri's World Light Gray Canvas, which serves without a key and reads almost
+# identically. Note Esri's path order is {z}/{y}/{x}.
+DEFAULT_BASEMAP_URL='https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
 BASEMAP_URL="${BASEMAP_URL:-$DEFAULT_BASEMAP_URL}"
 
 # Portable file size (macOS stat differs from GNU stat).

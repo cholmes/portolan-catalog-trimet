@@ -1,12 +1,12 @@
 # TriMet Stops
 
-Active transit stops. **6,316 Point features** covering the TriMet
+Active transit stops. **5,947 Point features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_stops` and last updated at the source on
-**July 30, 2026**.
+**November 12, 2026**.
 
-Every active TriMet stop, deduplicated — one row per physical stop, 6,316 of
-them. 6,075 are bus stops; the rest are 161 MAX platforms, 58 streetcar stops, 14
+Every active TriMet stop, deduplicated — one row per physical stop, 5,947 of
+them. 5,705 are bus stops; the rest are 162 MAX platforms, 58 streetcar stops, 14
 shared bus/streetcar stops, 6 WES platforms and 2 aerial tram terminals.
 
 `stop_id` is TriMet's public stop number, the one printed on the pole and used by
@@ -35,11 +35,15 @@ INSTALL httpfs;  LOAD httpfs;
 SELECT * FROM 'https://data.source.coop/cholmes/trimet/stops/stops.parquet' LIMIT 10;
 ```
 
-Or with GeoPandas:
+Or with GeoPandas (`read_parquet` does not accept a bare https URL, so open it
+with fsspec):
 
 ```python
+import fsspec
 import geopandas as gpd
-gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/stops/stops.parquet")
+
+with fsspec.open("https://data.source.coop/cholmes/trimet/stops/stops.parquet") as f:
+    gdf = gpd.read_parquet(f)
 ```
 
 ## Suggested uses
@@ -74,7 +78,7 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/stops/stops.parq
 | `jurisdic` | string | Jurisdiction (City or County) in which stop is located. |
 | `zipcode` | string | Zipcode in which stop is located. |
 | `type` | string | Type of service.<br>Values: `AT` Aerial Tram; `BUS` Bus; `CR` Commuter rail; `MAX` Light rail; `SC` Streetcar; `BSC` Shared Bus and Streetcar. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from
@@ -97,8 +101,8 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`stops.parquet`](https://data.source.coop/cholmes/trimet/stops/stops.parquet) | 287.9 KB | GeoParquet 1.1, 6,316 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`stops.pmtiles`](https://data.source.coop/cholmes/trimet/stops/stops.pmtiles) | 1.5 MB | Vector tiles for display, every feature kept at every zoom |
+| [`stops.parquet`](https://data.source.coop/cholmes/trimet/stops/stops.parquet) | 271.8 KB | GeoParquet 1.1, 5,947 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`stops.pmtiles`](https://data.source.coop/cholmes/trimet/stops/stops.pmtiles) | 1.4 MB | Vector tiles for display, every feature kept at every zoom |
 | [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/stops/thumbnail.webp) | 48.4 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/stops/collection.json) | — | STAC Collection metadata |
 

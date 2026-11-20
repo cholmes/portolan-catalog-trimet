@@ -85,7 +85,8 @@ def schema_table(coll):
                 codes = "; ".join(f"`{k}` {v.rstrip('.')}" for k, v in d["values"].items())
                 desc += f"<br>Values: {codes}."
         elif name == "geometry":
-            desc = "Feature geometry, WGS84 lon/lat."
+            desc = ("Feature geometry in TriMet's native EPSG:2913 "
+                   "(NAD83(HARN) / Oregon North, international feet).")
         elif name.endswith("_bbox"):
             desc = ("GeoParquet 1.1 covering column, for row-group pruning. "
                     "Same projected feet as the geometry.")
@@ -154,11 +155,15 @@ INSTALL httpfs;  LOAD httpfs;
 SELECT * FROM '{BASE}/{cid}/{cid}.parquet' LIMIT 10;
 ```
 
-Or with GeoPandas:
+Or with GeoPandas (`read_parquet` does not accept a bare https URL, so open it
+with fsspec):
 
 ```python
+import fsspec
 import geopandas as gpd
-gdf = gpd.read_parquet("{BASE}/{cid}/{cid}.parquet")
+
+with fsspec.open("{BASE}/{cid}/{cid}.parquet") as f:
+    gdf = gpd.read_parquet(f)
 ```
 
 ## Suggested uses
@@ -235,7 +240,7 @@ def collection_agents(coll):
 
     return f"""# {coll['title']} — agent guide
 
-{coll['description']} {st['rows']:,} {coll['geometry']} features, WGS84, one
+{coll['description']} {st['rows']:,} {coll['geometry']} features, EPSG:2913 (feet), one
 GeoParquet file of {human(st['size'])} in {st['row_groups']} row group(s).
 
 ## Access
@@ -289,8 +294,9 @@ TriMet publishes this as `{coll['source']}` at
 comes from [TriMet's metadata page]({M.source_links(coll)['metadata']}) — that
 page, not this catalog, is the authority on what a field means.
 
-Conversion: `ogr2ogr -f Parquet -t_srs EPSG:4326 -lco COMPRESSION=ZSTD -lco
-SORT_BY_BBOX=YES -lco WRITE_COVERING_BBOX=YES`, then tippecanoe with `-r1
+Conversion: `ogr2ogr -f Parquet -lco COMPRESSION=ZSTD -lco SORT_BY_BBOX=YES
+-lco WRITE_COVERING_BBOX=YES`, keeping the native EPSG:2913; the PMTiles step
+reprojects to WGS84 and runs tippecanoe with `-r1
 --no-feature-limit` so no feature is dropped at any zoom. See
 [`tools/convert.py`](https://github.com/cholmes/portolan-catalog-trimet/blob/main/tools/convert.py).
 
@@ -344,7 +350,7 @@ GROUP BY county;
 ```
 
 Past the first query, the interesting pattern is joining across collections.
-`stops` and `route-stops` share `stop_id` exactly — all 6,316 of them — which
+`stops` and `route-stops` share `stop_id` exactly — all 5,947 of them — which
 turns a stop location into the set of routes that serve it:
 
 ```sql
@@ -378,8 +384,9 @@ Every collection ships three to five styles; see each collection's README.
 
 {src_table}
 
-All eight are published in {M.SOURCE_CRS} ({M.SOURCE_CRS_NAME}) and reprojected
-here to EPSG:4326. TriMet's note on the GIS page:
+All eight are published in {M.SOURCE_CRS} ({M.SOURCE_CRS_NAME}). The GeoParquet
+here keeps that CRS; only the PMTiles are reprojected, to WGS84, because vector
+tiles require it. TriMet's note on the GIS page:
 
 > {M.GIS_PAGE_NOTE}
 
@@ -394,7 +401,7 @@ Contact for the source data: **TriMet GIS**, {M.TRIMET_CONTACT['address']},
 Maintained by {M.HOST['name']}
 ([{M.HOST['email']}](mailto:{M.HOST['email']})), **not affiliated with
 TriMet**. Conforms to the [Portolan](https://www.portolan-sdi.org/)
-specification v0.1.0.
+specification v0.3.0.
 
 ### Both halves are on GitHub, and contributions are welcome
 
@@ -449,9 +456,9 @@ def catalog_agents():
 
 A cloud-native mirror of the eight geospatial layers TriMet publishes at
 [developer.trimet.org/gis]({M.GIS_PAGE}). Every collection is a single
-GeoParquet file plus PMTiles, in WGS84. Total {sum(c['count'] for c in M.COLLECTIONS):,}
-features; the whole catalog is under 5 MB, so nothing here needs partitioning or
-a query engine beyond DuckDB.
+GeoParquet file in EPSG:2913 plus PMTiles in WGS84. Total {sum(c['count'] for c in M.COLLECTIONS):,}
+features; the GeoParquet and PMTiles together are {human(sum((ROOT / 'catalog' / c['id'] / f"{c['id']}.{ext}").stat().st_size for c in M.COLLECTIONS for ext in ('parquet', 'pmtiles')))}, so nothing
+here needs partitioning or a query engine beyond DuckDB.
 
 ## The collections, and how they connect
 
@@ -459,7 +466,7 @@ a query engine beyond DuckDB.
 
 **The joins that work:**
 
-- `stops` ↔ `route-stops` on **`stop_id`**. Exact: all 6,316 stops appear in
+- `stops` ↔ `route-stops` on **`stop_id`**. Exact: all 5,947 stops appear in
   both, and `stop_name` never disagrees. This is the join that answers "which
   routes serve this stop".
 - `route-stops` ↔ `routes` on **`(rte, dir)`**. Use it to get `public_rte`, the
@@ -509,7 +516,7 @@ position from them. `routes` carries the operational alignment.
 ### Vintages differ by more than a decade
 
 `district-boundary` was last updated 2013-01-09; `stops` and `route-stops`
-2026-07-30. Each collection's `collection.json` carries its own source date in
+2026-11-12. Each collection's `collection.json` carries its own source date in
 `extent.temporal`. Do not present the catalog as a single-date snapshot.
 
 ### Documented code values that do not appear, and undocumented ones that do
@@ -525,9 +532,9 @@ position from them. `routes` carries the operational alignment.
 
 ### Counts of "stops" depend on which layer you ask
 
-6,316 physical stops (`stops`), 8,314 stop-route-direction rows (`route-stops`),
+5,947 physical stops (`stops`), 7,728 stop-route-direction rows (`route-stops`),
 169 rail stations (`rail-stops`, which collapses directional platforms) against
-225 rail-typed rows in `stops`. All are correct answers to different questions.
+240 rail-typed rows in `stops`. All are correct answers to different questions.
 State which you used.
 
 ## Visualization

@@ -20,7 +20,22 @@ import docs_content as C  # noqa: E402
 
 CATALOG = ROOT / "catalog"
 
+# DOC_SQL_BASE runs the recipes against a published base URL instead of the
+# local tree, for the scheduled live check. See test_doc_sql.py.
+LIVE_BASE = os.environ.get("DOC_SQL_BASE", "").rstrip("/")
+
 PREAMBLE = "INSTALL spatial; LOAD spatial;\n"
+if LIVE_BASE:
+    PREAMBLE += "INSTALL httpfs; LOAD httpfs;\n"
+
+
+def localize(sql):
+    """Rewrite the recipes' catalog-relative parquet paths for a live run."""
+    if LIVE_BASE:
+        import re
+        sql = re.sub(r"'([\w-]+/[\w.-]+\.parquet)'",
+                     lambda m: f"'{LIVE_BASE}/{m.group(1)}'", sql)
+    return sql
 
 
 def run_sql_module(sql):
@@ -69,7 +84,7 @@ def main():
     for cid, content in C.COLLECTIONS.items():
         for title, sql in content["recipes"]:
             total += 1
-            rc, out, err = run_sql(sql)
+            rc, out, err = run_sql(localize(sql))
             if rc != 0:
                 failures.append((cid, title, err.strip()[:400]))
                 print(f"FAIL {cid}: {title}")

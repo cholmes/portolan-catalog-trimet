@@ -1,6 +1,6 @@
 # TriMet Park and Rides — agent guide
 
-TriMet park and ride locations. 46 Point features, WGS84, one
+TriMet park and ride locations. 46 Point features, EPSG:2913 (feet), one
 GeoParquet file of 14.7 KB in 1 row group(s).
 
 ## Access
@@ -125,12 +125,18 @@ LIMIT 10;
 ### Park and ride capacity served by rail
 
 ```sql
-SELECT CASE WHEN r.station IS NULL THEN 'bus only' ELSE 'rail-served' END AS access,
-       count(DISTINCT p.name) AS lots, sum(DISTINCT p.spaces) AS spaces
-FROM 'park-and-rides/park-and-rides.parquet' p
-LEFT JOIN 'rail-stops/rail-stops.parquet' r
-  ON ST_DWithin(p.geometry, r.geometry, 1312.34)
-GROUP BY 1;
+-- Deduplicate per lot before summing: the spatial join fans out one row per
+-- nearby station, and sum(DISTINCT spaces) would collapse same-sized lots.
+WITH lots AS (
+  SELECT p.name, any_value(p.spaces) AS spaces,
+         CASE WHEN count(r.station) = 0 THEN 'bus only' ELSE 'rail-served' END AS access
+  FROM 'park-and-rides/park-and-rides.parquet' p
+  LEFT JOIN 'rail-stops/rail-stops.parquet' r
+    ON ST_DWithin(p.geometry, r.geometry, 1312.34)
+  GROUP BY p.name
+)
+SELECT access, count(*) AS lots, sum(spaces) AS spaces
+FROM lots GROUP BY access;
 ```
 
 ## Related collections
@@ -146,8 +152,9 @@ June 23, 2026. Every column description in `collection.json`
 comes from [TriMet's metadata page](https://developer.trimet.org/gis/meta_tm_parkride.shtml) — that
 page, not this catalog, is the authority on what a field means.
 
-Conversion: `ogr2ogr -f Parquet -t_srs EPSG:4326 -lco COMPRESSION=ZSTD -lco
-SORT_BY_BBOX=YES -lco WRITE_COVERING_BBOX=YES`, then tippecanoe with `-r1
+Conversion: `ogr2ogr -f Parquet -lco COMPRESSION=ZSTD -lco SORT_BY_BBOX=YES
+-lco WRITE_COVERING_BBOX=YES`, keeping the native EPSG:2913; the PMTiles step
+reprojects to WGS84 and runs tippecanoe with `-r1
 --no-feature-limit` so no feature is dropped at any zoom. See
 [`tools/convert.py`](https://github.com/cholmes/portolan-catalog-trimet/blob/main/tools/convert.py).
 

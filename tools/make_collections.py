@@ -200,10 +200,7 @@ def assets_for(coll):
             "title": f"{coll['title']} preview",
             "description": (
                 "Rendered from this collection's styles/default.json with "
-                "MapLibre GL Native, over a light basemap. WebP is allowed for "
-                "thumbnails by spec PR portolan-sdi/portolan-spec#121, which "
-                "this catalog targets; Portolan 0.1 alone permits only PNG and "
-                "JPEG."
+                "MapLibre GL Native, over a light basemap."
             ),
             "roles": ["thumbnail"],
             **file_meta(thumb),
@@ -226,7 +223,9 @@ def assets_for(coll):
                 "type": MEDIA[".json"],
                 "title": meta.get("name", name),
                 "description": meta.get("metadata", {}).get("description", ""),
-                "roles": ["style"],
+                # Portolan 0.3 (PTL-VIZ-006): exactly one style asset carries
+                # the 'default' role; clients render that one first.
+                "roles": ["style", "default"] if name == "default.json" else ["style"],
                 **file_meta(p),
             }
 
@@ -428,6 +427,15 @@ def catalog_json():
         "links": [
             {"rel": "root", "href": "./catalog.json", "type": "application/json",
              "title": M.CATALOG_TITLE},
+            # The root is served from one fixed URL, so it carries an absolute
+            # self link (PORTO-CORE-081); rashid resolves absolute structural
+            # links against it.
+            {"rel": "self", "href": f"{M.PUBLIC_BASE}/catalog.json",
+             "type": "application/json", "title": M.CATALOG_TITLE},
+            {"rel": "vcs", "href": M.CATALOG_REPO, "type": "text/html",
+             "title": "Catalog source repository"},
+            {"rel": "issues", "href": f"{M.CATALOG_REPO}/issues",
+             "type": "text/html", "title": "Report a problem with this catalog"},
             {"rel": "describedby", "href": "./README.md", "type": "text/markdown",
              "title": "Catalog README"},
             {"rel": "agents", "href": "./AGENTS.md", "type": "text/markdown",

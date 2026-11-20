@@ -1,12 +1,12 @@
 # TriMet Rail Lines
 
-Public transit rail lines. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar lines. The data have been generalized to improve cartographic display at smaller scales. **171 LineString features** covering the TriMet
+Public transit rail lines. Includes existing, under construction, and planned MAX, WES, and Portland Streetcar lines. The data have been generalized to improve cartographic display at smaller scales. **172 LineString features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_rail_lines` and last updated at the source on
-**September 26, 2024**.
+**August 24, 2026**.
 
 TriMet's rail network — MAX light rail, WES commuter rail and Portland Streetcar
-— as 171 segments generalized for cartographic display. Each segment records
+— as 172 segments generalized for cartographic display. Each segment records
 which line or lines run over it (`line`), whether it is at surface level, on a
 bridge or in a tunnel (`passage`), its operational status, and its service type.
 
@@ -37,11 +37,15 @@ INSTALL httpfs;  LOAD httpfs;
 SELECT * FROM 'https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.parquet' LIMIT 10;
 ```
 
-Or with GeoPandas:
+Or with GeoPandas (`read_parquet` does not accept a bare https URL, so open it
+with fsspec):
 
 ```python
+import fsspec
 import geopandas as gpd
-gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.parquet")
+
+with fsspec.open("https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.parquet") as f:
+    gdf = gpd.read_parquet(f)
 ```
 
 ## Suggested uses
@@ -73,7 +77,7 @@ gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/rail-lines/rail-
 | `passage` | string | Indicates the infrastructure (if any) over/through which a rail segment travels.  This data is intended for use in cartographic display rather than analysis<br>Values: `bridge` Rail segment travels over bridge; `surface` Rail segment travels over ground/surface level; `tunnel` Rail segment passes through tunnel. |
 | `status` | string | Operational status of the segment.<br>Values: `Existing` Service currently provided on rail segment; `Planned` Rail segment in advanced planning stages; `UC` Rail segment is under construction. |
 | `type` | string | Type of service.<br>Values: `CR` Commuter rail; `MAX` Light rail; `MAX/SC` Shared light rail and streetcar; `SC` Streetcar. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from
@@ -96,9 +100,9 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`rail-lines.parquet`](https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.parquet) | 89.6 KB | GeoParquet 1.1, 171 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
-| [`rail-lines.pmtiles`](https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.pmtiles) | 60.8 KB | Vector tiles for display, every feature kept at every zoom |
-| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/rail-lines/thumbnail.webp) | 47.7 KB | Rendered from `styles/default.json` over a light basemap |
+| [`rail-lines.parquet`](https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.parquet) | 89.6 KB | GeoParquet 1.1, 172 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`rail-lines.pmtiles`](https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.pmtiles) | 60.5 KB | Vector tiles for display, every feature kept at every zoom |
+| [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/rail-lines/thumbnail.webp) | 31.0 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/rail-lines/collection.json) | — | STAC Collection metadata |
 
 ## Provenance
