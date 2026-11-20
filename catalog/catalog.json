@@ -57,6 +57,24 @@
       "title": "TriMet Geospatial Data"
     },
     {
+      "rel": "self",
+      "href": "https://data.source.coop/cholmes/trimet/catalog.json",
+      "type": "application/json",
+      "title": "TriMet Geospatial Data"
+    },
+    {
+      "rel": "vcs",
+      "href": "https://github.com/cholmes/portolan-catalog-trimet",
+      "type": "text/html",
+      "title": "Catalog source repository"
+    },
+    {
+      "rel": "issues",
+      "href": "https://github.com/cholmes/portolan-catalog-trimet/issues",
+      "type": "text/html",
+      "title": "Report a problem with this catalog"
+    },
+    {
       "rel": "describedby",
       "href": "./README.md",
       "type": "text/markdown",

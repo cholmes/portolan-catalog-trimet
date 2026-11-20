@@ -48,8 +48,15 @@ def check_object(path, obj, is_root):
     check(obj.get("title"), f"{rel}: missing title")
     check(obj.get("description") or obj.get("type") == "Catalog",
           f"{rel}: missing description")
-    check("self" not in {l.get("rel") for l in obj.get("links", [])},
-          f"{rel}: must not carry a self link")
+    # Collections stay relocatable, so they carry no self link. The root is
+    # served from one fixed URL and PORTO-CORE-081 says it should carry an
+    # absolute self link, which rashid resolves absolute links against.
+    selfs = [l for l in obj.get("links", []) if l.get("rel") == "self"]
+    if is_root:
+        check(len(selfs) == 1 and selfs[0]["href"] == f"{M.PUBLIC_BASE}/catalog.json",
+              f"{rel}: root must carry one absolute self link to the published URL")
+    else:
+        check(not selfs, f"{rel}: must not carry a self link")
 
     rels = {l.get("rel") for l in obj.get("links", [])}
     check("root" in rels, f"{rel}: missing root link")

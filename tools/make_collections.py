@@ -427,6 +427,15 @@ def catalog_json():
         "links": [
             {"rel": "root", "href": "./catalog.json", "type": "application/json",
              "title": M.CATALOG_TITLE},
+            # The root is served from one fixed URL, so it carries an absolute
+            # self link (PORTO-CORE-081); rashid resolves absolute structural
+            # links against it.
+            {"rel": "self", "href": f"{M.PUBLIC_BASE}/catalog.json",
+             "type": "application/json", "title": M.CATALOG_TITLE},
+            {"rel": "vcs", "href": M.CATALOG_REPO, "type": "text/html",
+             "title": "Catalog source repository"},
+            {"rel": "issues", "href": f"{M.CATALOG_REPO}/issues",
+             "type": "text/html", "title": "Report a problem with this catalog"},
             {"rel": "describedby", "href": "./README.md", "type": "text/markdown",
              "title": "Catalog README"},
             {"rel": "agents", "href": "./AGENTS.md", "type": "text/markdown",
