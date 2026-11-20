@@ -76,7 +76,7 @@ with fsspec.open("https://data.source.coop/cholmes/trimet/park-and-rides/park-an
 | `owner` | string | Indicates whether a park and ride is TriMet owned or a shared use facility.<br>Values: `TriMet` TriMet owned; `Shared` Shared use. |
 | `spaces` | int32 | Indicates number of parking spaces available at park and ride. |
 | `status` | string | Operational status of park and ride.<br>Values: `Existing` Park and ride is operational; `Planned` Park and ride is in advanced planning stages; `UC` Park and ride is under construction. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from

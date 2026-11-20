@@ -85,7 +85,8 @@ def schema_table(coll):
                 codes = "; ".join(f"`{k}` {v.rstrip('.')}" for k, v in d["values"].items())
                 desc += f"<br>Values: {codes}."
         elif name == "geometry":
-            desc = "Feature geometry, WGS84 lon/lat."
+            desc = ("Feature geometry in TriMet's native EPSG:2913 "
+                   "(NAD83(HARN) / Oregon North, international feet).")
         elif name.endswith("_bbox"):
             desc = ("GeoParquet 1.1 covering column, for row-group pruning. "
                     "Same projected feet as the geometry.")
@@ -239,7 +240,7 @@ def collection_agents(coll):
 
     return f"""# {coll['title']} — agent guide
 
-{coll['description']} {st['rows']:,} {coll['geometry']} features, WGS84, one
+{coll['description']} {st['rows']:,} {coll['geometry']} features, EPSG:2913 (feet), one
 GeoParquet file of {human(st['size'])} in {st['row_groups']} row group(s).
 
 ## Access
@@ -293,8 +294,9 @@ TriMet publishes this as `{coll['source']}` at
 comes from [TriMet's metadata page]({M.source_links(coll)['metadata']}) — that
 page, not this catalog, is the authority on what a field means.
 
-Conversion: `ogr2ogr -f Parquet -t_srs EPSG:4326 -lco COMPRESSION=ZSTD -lco
-SORT_BY_BBOX=YES -lco WRITE_COVERING_BBOX=YES`, then tippecanoe with `-r1
+Conversion: `ogr2ogr -f Parquet -lco COMPRESSION=ZSTD -lco SORT_BY_BBOX=YES
+-lco WRITE_COVERING_BBOX=YES`, keeping the native EPSG:2913; the PMTiles step
+reprojects to WGS84 and runs tippecanoe with `-r1
 --no-feature-limit` so no feature is dropped at any zoom. See
 [`tools/convert.py`](https://github.com/cholmes/portolan-catalog-trimet/blob/main/tools/convert.py).
 
@@ -454,7 +456,7 @@ def catalog_agents():
 
 A cloud-native mirror of the eight geospatial layers TriMet publishes at
 [developer.trimet.org/gis]({M.GIS_PAGE}). Every collection is a single
-GeoParquet file plus PMTiles, in WGS84. Total {sum(c['count'] for c in M.COLLECTIONS):,}
+GeoParquet file in EPSG:2913 plus PMTiles in WGS84. Total {sum(c['count'] for c in M.COLLECTIONS):,}
 features; the whole catalog is under 5 MB, so nothing here needs partitioning or
 a query engine beyond DuckDB.
 

@@ -72,7 +72,7 @@ with fsspec.open("https://data.source.coop/cholmes/trimet/rail-stops/rail-stops.
 | `line` | string | Line(s) serving a particular stop.<br>Values: `AL` Portland Streetcar A Loop; `AL/BL` Portland Streetcar A & B Loops; `B` MAX Blue Line; `BGR` MAX Blue, Green, and Red Lines; `BGRY` MAX Blue, Green, Red, and Yellow Lines; `BL` Portland Streetcar B Loop; `BL/NS` Portland Streetcar B Loop and North/South Line; `BR` MAX Blue and Red Lines; `G` MAX Green Line; `GO` MAX Green and Orange Lines; `GY` MAX Green and Yellow Lines; `NS` Portland Streetcar North/South Line; `NS/AL` Portland Streetcar A Loop and North/South Line; `NS/AL/BL` Portland Streetcar A & B Loops and North/South Line; `O` MAX Orange Line; `R` MAX Red Line; `WES` WES (Westside Express Service); `Y` MAX Yellow Line. |
 | `status` | string | Operational status of the stop.<br>Values: `Existing` Service currently provided at rail stop; `Planned` Rail stop in advanced planning stages; `UC` Rail stop is under construction. |
 | `type` | string | Type of service.<br>Values: `CR` Commuter rail; `MAX` Light rail; `SC` Streetcar. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from

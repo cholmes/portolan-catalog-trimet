@@ -78,7 +78,7 @@ with fsspec.open("https://data.source.coop/cholmes/trimet/stops/stops.parquet") 
 | `jurisdic` | string | Jurisdiction (City or County) in which stop is located. |
 | `zipcode` | string | Zipcode in which stop is located. |
 | `type` | string | Type of service.<br>Values: `AT` Aerial Tram; `BUS` Bus; `CR` Commuter rail; `MAX` Light rail; `SC` Streetcar; `BSC` Shared Bus and Streetcar. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from

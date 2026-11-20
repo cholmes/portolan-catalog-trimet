@@ -77,7 +77,7 @@ with fsspec.open("https://data.source.coop/cholmes/trimet/rail-lines/rail-lines.
 | `passage` | string | Indicates the infrastructure (if any) over/through which a rail segment travels.  This data is intended for use in cartographic display rather than analysis<br>Values: `bridge` Rail segment travels over bridge; `surface` Rail segment travels over ground/surface level; `tunnel` Rail segment passes through tunnel. |
 | `status` | string | Operational status of the segment.<br>Values: `Existing` Service currently provided on rail segment; `Planned` Rail segment in advanced planning stages; `UC` Rail segment is under construction. |
 | `type` | string | Type of service.<br>Values: `CR` Commuter rail; `MAX` Light rail; `MAX/SC` Shared light rail and streetcar; `SC` Streetcar. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from

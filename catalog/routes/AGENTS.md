@@ -1,6 +1,6 @@
 # TriMet Routes — agent guide
 
-All existing bus and rail lines. 200 LineString features, WGS84, one
+All existing bus and rail lines. 200 LineString features, EPSG:2913 (feet), one
 GeoParquet file of 794.0 KB in 1 row group(s).
 
 ## Access
@@ -156,8 +156,9 @@ July 13, 2026. Every column description in `collection.json`
 comes from [TriMet's metadata page](https://developer.trimet.org/gis/meta_tm_routes.shtml) — that
 page, not this catalog, is the authority on what a field means.
 
-Conversion: `ogr2ogr -f Parquet -t_srs EPSG:4326 -lco COMPRESSION=ZSTD -lco
-SORT_BY_BBOX=YES -lco WRITE_COVERING_BBOX=YES`, then tippecanoe with `-r1
+Conversion: `ogr2ogr -f Parquet -lco COMPRESSION=ZSTD -lco SORT_BY_BBOX=YES
+-lco WRITE_COVERING_BBOX=YES`, keeping the native EPSG:2913; the PMTiles step
+reprojects to WGS84 and runs tippecanoe with `-r1
 --no-feature-limit` so no feature is dropped at any zoom. See
 [`tools/convert.py`](https://github.com/cholmes/portolan-catalog-trimet/blob/main/tools/convert.py).
 

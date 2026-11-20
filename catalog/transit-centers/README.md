@@ -74,7 +74,7 @@ with fsspec.open("https://data.source.coop/cholmes/trimet/transit-centers/transi
 | `county` | string | County in which Transit Center is located. |
 | `zipcode` | string | Zipcode in which Transit Center is located. |
 | `status` | string | Operational status of segment.<br>Values: `Existing` Transit Center is operational; `Planned` Transit Center is in advanced planning stages; `UC` Transit Center is under construction. |
-| `geometry` | binary | Feature geometry, WGS84 lon/lat. |
+| `geometry` | binary | Feature geometry in TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North, international feet). |
 | `geometry_bbox` | struct<xmin: float not null, ymin: float not null, xmax: float not null, ymax: float not null> | GeoParquet 1.1 covering column, for row-group pruning. Same projected feet as the geometry. |
 
 Column descriptions are TriMet's own, taken verbatim from

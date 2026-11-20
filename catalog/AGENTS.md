@@ -2,7 +2,7 @@
 
 A cloud-native mirror of the eight geospatial layers TriMet publishes at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/). Every collection is a single
-GeoParquet file plus PMTiles, in WGS84. Total 15,232
+GeoParquet file in EPSG:2913 plus PMTiles in WGS84. Total 15,232
 features; the whole catalog is under 5 MB, so nothing here needs partitioning or
 a query engine beyond DuckDB.
 
