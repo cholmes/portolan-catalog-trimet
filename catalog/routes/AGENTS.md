@@ -109,7 +109,7 @@ Sherwood, for example. Do not assume `routes` is contained by
 
 ## Query recipes
 
-### Longest routes in kilometres, one direction only
+### Longest routes in miles, one direction only
 
 ```sql
 -- ST_Length returns feet directly; 5280 ft to the mile.
@@ -122,7 +122,7 @@ ORDER BY miles DESC
 LIMIT 10;
 ```
 
-### Route-kilometres by mode
+### Route-miles by mode
 
 ```sql
 SELECT type,

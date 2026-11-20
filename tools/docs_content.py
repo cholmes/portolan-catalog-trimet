@@ -217,7 +217,7 @@ Sherwood, for example. Do not assume `routes` is contained by
 `district-boundary`."""),
 ],
 recipes=[
-("Longest routes in kilometres, one direction only", """\
+("Longest routes in miles, one direction only", """\
 -- ST_Length returns feet directly; 5280 ft to the mile.
 SELECT rte, any_value(rte_desc) AS name,
        round(sum(ST_Length(geometry)) / 5280.0, 1) AS miles
@@ -226,7 +226,7 @@ WHERE dir = 0
 GROUP BY rte
 ORDER BY miles DESC
 LIMIT 10;"""),
-("Route-kilometres by mode", """\
+("Route-miles by mode", """\
 SELECT type,
        round(sum(ST_Length(geometry)) / 5280.0, 1) AS miles,
        count(*) AS segments
