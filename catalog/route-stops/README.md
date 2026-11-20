@@ -3,7 +3,7 @@
 Public transit stops for all bus and rail lines. For stops served by multiple lines there are multiple records in this dataset. **7,728 Point features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_route_stops` and last updated at the source on
-**November 12, 2026**.
+**November 16, 2026**.
 
 The same stops as `stops`, but exploded by the service that calls at them: one
 row per stop per route-direction, 7,728 rows over 5,947 distinct stops. A stop

@@ -3,7 +3,7 @@
 Active transit stops. **5,947 Point features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_stops` and last updated at the source on
-**November 12, 2026**.
+**November 16, 2026**.
 
 Every active TriMet stop, deduplicated — one row per physical stop, 5,947 of
 them. 5,705 are bus stops; the rest are 162 MAX platforms, 58 streetcar stops, 14

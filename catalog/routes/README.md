@@ -3,7 +3,7 @@
 All existing bus and rail lines. **184 LineString features** covering the TriMet
 service district in the Portland, Oregon metropolitan area, published by TriMet
 as `tm_routes` and last updated at the source on
-**October 21, 2026**.
+**November 18, 2026**.
 
 Every fixed-route alignment TriMet operates, bus and rail together, as one
 line per route *and direction*. 184 features covering 163 bus, 13 MAX, 4
@@ -105,7 +105,7 @@ so they load unmodified against this directory.
 
 | File | Size | What it is |
 |---|---|---|
-| [`routes.parquet`](https://data.source.coop/cholmes/trimet/routes/routes.parquet) | 875.0 KB | GeoParquet 1.1, 184 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
+| [`routes.parquet`](https://data.source.coop/cholmes/trimet/routes/routes.parquet) | 874.9 KB | GeoParquet 1.1, 184 rows in 1 row group(s), zstd, Hilbert-ordered, bbox covering column |
 | [`routes.pmtiles`](https://data.source.coop/cholmes/trimet/routes/routes.pmtiles) | 786.8 KB | Vector tiles for display, every feature kept at every zoom |
 | [`thumbnail.webp`](https://data.source.coop/cholmes/trimet/routes/thumbnail.webp) | 48.4 KB | Rendered from `styles/default.json` over a light basemap |
 | [`collection.json`](https://source.coop/cholmes/trimet/routes/collection.json) | — | STAC Collection metadata |

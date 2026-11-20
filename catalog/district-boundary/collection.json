@@ -62,7 +62,7 @@
       ]
     }
   },
-  "updated": "2026-11-20T12:23:12Z",
+  "updated": "2026-11-20T13:52:28Z",
   "table:columns": [
     {
       "name": "area_sq_mi",
@@ -162,7 +162,7 @@
         "data"
       ],
       "file:size": 90671,
-      "file:checksum": "12201124fcc50d2278efcf8dbae0ae89d662e70bc48f10b5b7b7a6727d143fca90b6",
+      "file:checksum": "122039065a977ba449531db9efd4e55da378c4ca81e2b364c7a73dfc40908477d373",
       "table:columns": [
         {
           "name": "area_sq_mi",
@@ -262,25 +262,23 @@
       "href": "https://developer.trimet.org/gis/data/tm_boundary.zip",
       "type": "application/zip",
       "title": "TriMet District Boundary \u2014 original TriMet Shapefile",
-      "description": "TriMet's own distribution of `tm_boundary`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. Size and checksum are of what TriMet served at the sync time recorded in `updated`.",
+      "description": "TriMet's own distribution of `tm_boundary`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. The size is of what TriMet served at the sync time recorded in `updated`. No checksum is published: TriMet regenerates the zip on a schedule, which changes its bytes without changing the records.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 68862,
-      "file:checksum": "122011626706b6f18e9ffe0b8628bf1d46a9b378d815dce640763b716f5f896b7e7d"
+      "file:size": 68862
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_boundary.kml",
       "type": "application/vnd.google-earth.kml+xml",
       "title": "TriMet District Boundary \u2014 original TriMet KML",
-      "description": "TriMet's KML distribution of the same layer.",
+      "description": "TriMet's KML distribution of the same layer. Sized at sync time; no checksum, for the same reason as the Shapefile.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 261887,
-      "file:checksum": "12200c1cb9f407de9fb9de821e7bf86add5f6d4661511fa8535bfaab5d4045ddecd5"
+      "file:size": 261887
     }
   }
 }

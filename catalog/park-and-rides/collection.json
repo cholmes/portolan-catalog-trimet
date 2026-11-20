@@ -62,7 +62,7 @@
       ]
     }
   },
-  "updated": "2026-11-20T12:23:12Z",
+  "updated": "2026-11-20T13:52:28Z",
   "table:columns": [
     {
       "name": "name",
@@ -192,7 +192,7 @@
         "data"
       ],
       "file:size": 15056,
-      "file:checksum": "12204efbd842e3ff786ffb606354dceb5d1a58557a6abeb54a16b27f87868e04cf6b",
+      "file:checksum": "1220897d849df0cadef0bce8f1b6db34e656aee6c04bf271c074f19678b84f46c039",
       "table:columns": [
         {
           "name": "name",
@@ -333,25 +333,23 @@
       "href": "https://developer.trimet.org/gis/data/tm_parkride.zip",
       "type": "application/zip",
       "title": "TriMet Park and Rides \u2014 original TriMet Shapefile",
-      "description": "TriMet's own distribution of `tm_parkride`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. Size and checksum are of what TriMet served at the sync time recorded in `updated`.",
+      "description": "TriMet's own distribution of `tm_parkride`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. The size is of what TriMet served at the sync time recorded in `updated`. No checksum is published: TriMet regenerates the zip on a schedule, which changes its bytes without changing the records.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 3587,
-      "file:checksum": "122022caa9ffb47ff0269dfb077d50097b1946e0063e007632811bc25088de36b171"
+      "file:size": 3587
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_parkride.kml",
       "type": "application/vnd.google-earth.kml+xml",
       "title": "TriMet Park and Rides \u2014 original TriMet KML",
-      "description": "TriMet's KML distribution of the same layer.",
+      "description": "TriMet's KML distribution of the same layer. Sized at sync time; no checksum, for the same reason as the Shapefile.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 53704,
-      "file:checksum": "12200f8f82892c5850dbe427a4f6b95d8a18bbd909a7a3d00f77f17f94a9f1912f18"
+      "file:size": 53704
     }
   }
 }

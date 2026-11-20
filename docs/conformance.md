@@ -16,7 +16,32 @@ matching entry here.**
 
 ## Accepted deviations
 
-None. The catalog passes rashid 0.4.0 with zero errors and zero warnings.
+### PTL-AST-003 — the remote source assets carry no `file:checksum`
+
+> asset 'source_shapefile' has no file:checksum
+
+The `source_shapefile` and `source_kml` assets point at files TriMet hosts and
+**regenerates on a schedule**. Measured on 2026-11-20: a fresh
+`tm_stops.zip` differed from a copy fetched hours earlier in exactly one
+payload byte — offset 3 of the DBF header, which is the DBF "date of last
+update" day field (`11-13` → `11-20`) — plus the zip entry mtimes. The KML
+shows the same pattern: identical size, different bytes. The records are
+byte-identical.
+
+A published checksum of those files therefore goes stale on every
+regeneration, with no data change behind it. That is noise, not the staleness
+signal it was meant to be: the first live validation after publishing found 10
+`PTL-DAT-001` errors, all of them this artifact. So these two assets carry
+`file:size` only. The size is stable across regenerations (the date byte
+changes in place) and still moves when TriMet actually reissues a layer, where
+it surfaces as `PTL-DAT-002` — the honest drift signal.
+
+The acceptance in `tests/test_conformance.py` is predicated on the asset name,
+so a missing checksum on any asset this catalog hosts itself still fails the
+gate. All locally-hosted assets (GeoParquet, PMTiles, thumbnails, styles) keep
+full `file:size` and `file:checksum`.
+
+### Retired deviations
 
 Portolan 0.3 allows `image/webp` thumbnails, so the WebP deviation this file
 carried against 0.1 (spec PR
@@ -53,13 +78,14 @@ If TriMet ever publishes STAC, add the `canonical` link in
   [TriMet's Terms of Use](https://developer.trimet.org/terms_of_use.shtml), which
   is what the spec requires for `other`. See the licensing note in the root
   README.
-- **Source assets carry `file:size` and `file:checksum` from a sidecar.**
-  TriMet's Shapefile and KML are remote assets this repo does not host, so their
-  size and checksum are recorded by `tools/fetch.py` into
-  `sources/source_checksums.json` at sync time and emitted from there. They
-  describe what TriMet served at the moment named in each collection's `updated`
-  field; if TriMet reissues a layer they will stop matching, which is precisely
-  the signal a consumer would want.
+- **Source assets carry `file:size` from a sidecar, and no checksum.**
+  TriMet's Shapefile and KML are remote assets this repo does not host. Their
+  size is recorded by `tools/fetch.py` into `sources/source_checksums.json` at
+  sync time and emitted from there; it describes what TriMet served at the
+  moment named in each collection's `updated` field. When TriMet reissues a
+  layer the size stops matching, which is the drift signal a consumer wants.
+  The checksum is recorded in the sidecar for provenance but not published —
+  see the PTL-AST-003 deviation above for why it cannot stay valid.
 - **TriMet's metadata page is a `via` link, not an asset.** It describes the data
   rather than being the data, and its bytes change whenever TriMet edits the
   page, so a checksum on it would be noise.

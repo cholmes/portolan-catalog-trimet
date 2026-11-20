@@ -11,7 +11,7 @@
   ],
   "id": "stops",
   "title": "TriMet Stops",
-  "description": "Active transit stops. 5,947 Point features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_stops`](https://developer.trimet.org/gis/data/tm_stops.zip) and last updated at the source on November 12, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_stops.zip), [KML](https://developer.trimet.org/gis/data/tm_stops.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_stops.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/stops/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/stops/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
+  "description": "Active transit stops. 5,947 Point features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_stops`](https://developer.trimet.org/gis/data/tm_stops.zip) and last updated at the source on November 16, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_stops.zip), [KML](https://developer.trimet.org/gis/data/tm_stops.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_stops.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/stops/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/stops/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
   "license": "other",
   "keywords": [
     "transit",
@@ -56,13 +56,13 @@
     "temporal": {
       "interval": [
         [
-          "2026-11-12T00:00:00Z",
+          "2026-11-16T00:00:00Z",
           null
         ]
       ]
     }
   },
-  "updated": "2026-11-20T12:23:12Z",
+  "updated": "2026-11-20T13:52:28Z",
   "table:columns": [
     {
       "name": "stop_id",
@@ -177,7 +177,7 @@
         "data"
       ],
       "file:size": 278310,
-      "file:checksum": "1220ae58498073102e6fec1c1a518ef0e6f1ff09cd6a2466d658f358d201c7eb2e0d",
+      "file:checksum": "12207d8dbf52645294232dfcaa369c6bcb2f294522e84a083ff40a2ecc1d10778c56",
       "table:columns": [
         {
           "name": "stop_id",
@@ -303,25 +303,23 @@
       "href": "https://developer.trimet.org/gis/data/tm_stops.zip",
       "type": "application/zip",
       "title": "TriMet Stops \u2014 original TriMet Shapefile",
-      "description": "TriMet's own distribution of `tm_stops`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. Size and checksum are of what TriMet served at the sync time recorded in `updated`.",
+      "description": "TriMet's own distribution of `tm_stops`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. The size is of what TriMet served at the sync time recorded in `updated`. No checksum is published: TriMet regenerates the zip on a schedule, which changes its bytes without changing the records.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 182532,
-      "file:checksum": "1220bdd1b6e8c15c83d819d530234c53c8c235c919d65737d6ec72a5588268fb81b3"
+      "file:size": 182532
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_stops.kml",
       "type": "application/vnd.google-earth.kml+xml",
       "title": "TriMet Stops \u2014 original TriMet KML",
-      "description": "TriMet's KML distribution of the same layer.",
+      "description": "TriMet's KML distribution of the same layer. Sized at sync time; no checksum, for the same reason as the Shapefile.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 4972579,
-      "file:checksum": "12201dd1d9b518f3a113eb7618d9f14f2c83d2984bf9e0e6f459c7ebe0cdda17c704"
+      "file:size": 4972579
     },
     "source_sld": {
       "href": "./styles/trimet-stops.sld.xml",

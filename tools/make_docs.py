@@ -516,7 +516,7 @@ position from them. `routes` carries the operational alignment.
 ### Vintages differ by more than a decade
 
 `district-boundary` was last updated 2013-01-09; `stops` and `route-stops`
-2026-11-12. Each collection's `collection.json` carries its own source date in
+2026-11-16. Each collection's `collection.json` carries its own source date in
 `extent.temporal`. Do not present the catalog as a single-date snapshot.
 
 ### Documented code values that do not appear, and undocumented ones that do

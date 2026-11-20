@@ -62,7 +62,7 @@
       ]
     }
   },
-  "updated": "2026-11-20T12:23:12Z",
+  "updated": "2026-11-20T13:52:28Z",
   "table:columns": [
     {
       "name": "name",
@@ -182,7 +182,7 @@
         "data"
       ],
       "file:size": 12027,
-      "file:checksum": "1220b3df9a262f15cc6e24fad01584ab4fda470c9e9d6a1b7941ef874960eb98872a",
+      "file:checksum": "122049d511f054c05a7f40dba7bd4c93a661bd87d2806a171956ecdd0639cdd48ac5",
       "table:columns": [
         {
           "name": "name",
@@ -302,25 +302,23 @@
       "href": "https://developer.trimet.org/gis/data/tm_tran_cen.zip",
       "type": "application/zip",
       "title": "TriMet Transit Centers \u2014 original TriMet Shapefile",
-      "description": "TriMet's own distribution of `tm_tran_cen`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. Size and checksum are of what TriMet served at the sync time recorded in `updated`.",
+      "description": "TriMet's own distribution of `tm_tran_cen`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. The size is of what TriMet served at the sync time recorded in `updated`. No checksum is published: TriMet regenerates the zip on a schedule, which changes its bytes without changing the records.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 1797,
-      "file:checksum": "12202a19371e9d3f43c4b2e68636dbb2a2e0229215ff26978e411fc2843b4151f344"
+      "file:size": 1797
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_tran_cen.kml",
       "type": "application/vnd.google-earth.kml+xml",
       "title": "TriMet Transit Centers \u2014 original TriMet KML",
-      "description": "TriMet's KML distribution of the same layer.",
+      "description": "TriMet's KML distribution of the same layer. Sized at sync time; no checksum, for the same reason as the Shapefile.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 14623,
-      "file:checksum": "12206999d0f78aeea85dffabe75a9fc151da756808715980be760ff9263efa7ff09e"
+      "file:size": 14623
     }
   }
 }

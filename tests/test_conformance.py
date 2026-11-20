@@ -20,11 +20,20 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / "catalog"
 
-# rule_id -> why it is accepted. See docs/conformance.md.
-# Empty since the 0.3.0 upgrade: rashid 0.4.0 reports no errors or warnings.
-# Portolan 0.3 allows image/webp thumbnails, which retires the PTL-VIZ-001
-# deviation this list carried against 0.1.
-ACCEPTED = {}
+# rule_id -> (why it is accepted, predicate on the finding).
+# A finding is tolerated only when its rule is here AND the predicate holds,
+# so an acceptance cannot silently widen to other assets. Every entry needs a
+# matching section in docs/conformance.md.
+ACCEPTED = {
+    "PTL-AST-003": (
+        "The remote source_shapefile and source_kml assets carry no "
+        "file:checksum. TriMet regenerates those exports on a schedule, "
+        "which changes their bytes without changing the records, so a "
+        "recorded checksum goes stale within days. file:size stays.",
+        lambda f: "source_shapefile" in f.get("message", "")
+        or "source_kml" in f.get("message", ""),
+    ),
+}
 
 
 def main():
@@ -47,12 +56,12 @@ def main():
         sev = f.get("severity")
         if sev == "info":
             infos.append(f)
-        elif f.get("rule_id") in ACCEPTED:
+        elif f.get("rule_id") in ACCEPTED and ACCEPTED[f["rule_id"]][1](f):
             accepted.append(f)
         elif sev in ("error", "warning"):
             errors.append(f)
 
-    for rule, why in ACCEPTED.items():
+    for rule, (why, _) in ACCEPTED.items():
         n = sum(1 for f in accepted if f["rule_id"] == rule)
         print(f"accepted  {rule}  x{n}\n          {why}")
     if infos:
