@@ -382,8 +382,9 @@ Every collection ships three to five styles; see each collection's README.
 
 {src_table}
 
-All eight are published in {M.SOURCE_CRS} ({M.SOURCE_CRS_NAME}) and reprojected
-here to EPSG:4326. TriMet's note on the GIS page:
+All eight are published in {M.SOURCE_CRS} ({M.SOURCE_CRS_NAME}). The GeoParquet
+here keeps that CRS; only the PMTiles are reprojected, to WGS84, because vector
+tiles require it. TriMet's note on the GIS page:
 
 > {M.GIS_PAGE_NOTE}
 

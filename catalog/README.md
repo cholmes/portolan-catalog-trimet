@@ -96,8 +96,9 @@ Every collection ships three to five styles; see each collection's README.
 | TriMet Transit Centers | `tm_tran_cen` — [Shapefile](https://developer.trimet.org/gis/data/tm_tran_cen.zip) · [KML](https://developer.trimet.org/gis/data/tm_tran_cen.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_tran_cen.shtml) | July 31, 2024 |
 | TriMet Park and Rides | `tm_parkride` — [Shapefile](https://developer.trimet.org/gis/data/tm_parkride.zip) · [KML](https://developer.trimet.org/gis/data/tm_parkride.kml) · [Metadata](https://developer.trimet.org/gis/meta_tm_parkride.shtml) | June 23, 2026 |
 
-All eight are published in EPSG:2913 (NAD83(HARN) / Oregon North (ft)) and reprojected
-here to EPSG:4326. TriMet's note on the GIS page:
+All eight are published in EPSG:2913 (NAD83(HARN) / Oregon North (ft)). The GeoParquet
+here keeps that CRS; only the PMTiles are reprojected, to WGS84, because vector
+tiles require it. TriMet's note on the GIS page:
 
 > TriMet provides these datasets free of charge in shapefile and KML format. All geospatial datasets created and distributed by TriMet are in NAD83, Oregon State Plane North projection and coordinate system. Refer to the metadata for additional information regarding a specific data layer. TriMet provides data to the general public under certain terms and conditions.
 
