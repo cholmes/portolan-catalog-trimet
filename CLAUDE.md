@@ -160,10 +160,11 @@ pruning snippet named the covering column `bbox` when GDAL writes
 
 ## Conformance
 
-Targets **Portolan 0.1.0 + [spec#121](https://github.com/portolan-sdi/portolan-spec/pull/121)**
-(WebP thumbnails). `tests/test_conformance.py` runs `rashid` and fails on
-anything not in its `ACCEPTED` list. **Never grow `ACCEPTED` without adding the
-reasoning to [`docs/conformance.md`](docs/conformance.md).**
+Targets **Portolan 0.3.0** (which allows the WebP thumbnails outright; the old
+0.1-era deviation for them is retired). `tests/test_conformance.py` runs
+`rashid` (0.4.0+, pinned in CI) and fails on anything not in its `ACCEPTED`
+list — currently empty. **Never grow `ACCEPTED` without adding the reasoning to
+[`docs/conformance.md`](docs/conformance.md).**
 
 ## Two URL hosts, and which to use
 

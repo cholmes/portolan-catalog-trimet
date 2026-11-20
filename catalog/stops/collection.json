@@ -2,7 +2,7 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
@@ -247,7 +247,7 @@
       "href": "./thumbnail.webp",
       "type": "image/webp",
       "title": "TriMet Stops preview",
-      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap. WebP is allowed for thumbnails by spec PR portolan-sdi/portolan-spec#121, which this catalog targets; Portolan 0.1 alone permits only PNG and JPEG.",
+      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap.",
       "roles": [
         "thumbnail"
       ],
@@ -260,7 +260,8 @@
       "title": "TriMet Stops",
       "description": "TriMet's own stop symbol, taken from the GeoServer style `ott:stops`: a white circle with a dark stroke. Radius grows with zoom so all 6,316 stops stay separable in dense corridors.",
       "roles": [
-        "style"
+        "style",
+        "default"
       ],
       "file:size": 879,
       "file:checksum": "1220690bb2172aec3ecb9c9e0f6e29dd738800f71fd8bd49602630419d99d079907e"

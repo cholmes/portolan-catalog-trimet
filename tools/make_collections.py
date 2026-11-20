@@ -200,10 +200,7 @@ def assets_for(coll):
             "title": f"{coll['title']} preview",
             "description": (
                 "Rendered from this collection's styles/default.json with "
-                "MapLibre GL Native, over a light basemap. WebP is allowed for "
-                "thumbnails by spec PR portolan-sdi/portolan-spec#121, which "
-                "this catalog targets; Portolan 0.1 alone permits only PNG and "
-                "JPEG."
+                "MapLibre GL Native, over a light basemap."
             ),
             "roles": ["thumbnail"],
             **file_meta(thumb),
@@ -226,7 +223,9 @@ def assets_for(coll):
                 "type": MEDIA[".json"],
                 "title": meta.get("name", name),
                 "description": meta.get("metadata", {}).get("description", ""),
-                "roles": ["style"],
+                # Portolan 0.3 (PTL-VIZ-006): exactly one style asset carries
+                # the 'default' role; clients render that one first.
+                "roles": ["style", "default"] if name == "default.json" else ["style"],
                 **file_meta(p),
             }
 

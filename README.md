@@ -31,7 +31,7 @@ never committed.
 | Collections | 8 |
 | Features | 15,232 |
 | Styles | 29 |
-| Spec | Portolan 0.1.0 + [spec#121](https://github.com/portolan-sdi/portolan-spec/pull/121) |
+| Spec | Portolan 0.3.0 |
 
 ## ⚠️ Licensing
 

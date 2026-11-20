@@ -2,7 +2,7 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
@@ -237,7 +237,7 @@
       "href": "./thumbnail.webp",
       "type": "image/webp",
       "title": "TriMet Rail Lines preview",
-      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap. WebP is allowed for thumbnails by spec PR portolan-sdi/portolan-spec#121, which this catalog targets; Portolan 0.1 alone permits only PNG and JPEG.",
+      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap.",
       "roles": [
         "thumbnail"
       ],
@@ -250,7 +250,8 @@
       "title": "TriMet Rail Lines \u2014 TriMet cartography",
       "description": "A direct reproduction of TriMet's published GeoServer style `ott:rail`, whose rules key on exactly the LINE values this layer carries. Each segment gets a solid base stroke in its trunk line's color, then one dashed overlay per additional line sharing the track \u2014 so the four-line trunk through downtown Portland reads as blue under red, green and yellow dashes, the way it does on TriMet's own maps. Widths step at zoom 12, standing in for the SLD's scale break at denominator 151181. Dash lengths are converted from SLD pixels into MapLibre line-widths using the low-zoom width, so they match exactly below zoom 12 and run proportionally shorter above it. AUX segments carry no SLD rule and are drawn neutral gray rather than dropped.",
       "roles": [
-        "style"
+        "style",
+        "default"
       ],
       "file:size": 16506,
       "file:checksum": "122024c1265ab6d3a1e3aa4be4dc3626887eabdba0bf552bd94c1d14eda777adb74b"

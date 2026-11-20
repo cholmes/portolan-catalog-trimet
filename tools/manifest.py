@@ -19,7 +19,7 @@ If a fact is not in one of those places, it does not belong in this file.
 # Catalog-level
 # --------------------------------------------------------------------------
 
-PORTOLAN_SCHEMA = "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json"
+PORTOLAN_SCHEMA = "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json"
 
 CATALOG_ID = "trimet"
 CATALOG_TITLE = "TriMet Geospatial Data"

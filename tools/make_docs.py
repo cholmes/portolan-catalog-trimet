@@ -394,7 +394,7 @@ Contact for the source data: **TriMet GIS**, {M.TRIMET_CONTACT['address']},
 Maintained by {M.HOST['name']}
 ([{M.HOST['email']}](mailto:{M.HOST['email']})), **not affiliated with
 TriMet**. Conforms to the [Portolan](https://www.portolan-sdi.org/)
-specification v0.1.0.
+specification v0.3.0.
 
 ### Both halves are on GitHub, and contributions are welcome
 

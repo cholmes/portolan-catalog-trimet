@@ -1,9 +1,10 @@
 # Portolan conformance
 
-The catalog targets **Portolan 0.1.0** plus spec PR
-[#121](https://github.com/portolan-sdi/portolan-spec/pull/121). Conformance means
-passing [rashid](https://github.com/portolan-sdi/rashid), not claiming to
-conform, so it is checked in CI:
+The catalog targets **Portolan 0.3.0**, declared through the
+`https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json` extension URI
+that `tools/manifest.py` stamps on every object. Conformance means passing
+[rashid](https://github.com/portolan-sdi/rashid) (0.4.0 or later, which
+implements the 0.3 rules), not claiming to conform, so it is checked in CI:
 
 ```
 python3 tests/test_conformance.py
@@ -15,28 +16,18 @@ matching entry here.**
 
 ## Accepted deviations
 
-### PTL-VIZ-001 — thumbnails are WebP (8 findings)
+None. The catalog passes rashid 0.4.0 with zero errors and zero warnings.
 
-> thumbnail asset 'thumbnail' has type 'image/webp', expected image/png or image/jpeg
+Portolan 0.3 allows `image/webp` thumbnails, so the WebP deviation this file
+carried against 0.1 (spec PR
+[#121](https://github.com/portolan-sdi/portolan-spec/pull/121)) is retired. The
+size reasoning stands and still motivates the format choice: a 800px PNG render
+averages ~187 KB where `tools/to_webp.py` holds every WebP under a 50 KB budget
+by binary-searching the quality per file.
 
-Portolan 0.1 permits only `image/png` and `image/jpeg` for thumbnails. Spec PR
-[#121](https://github.com/portolan-sdi/portolan-spec/pull/121), *"feat(spec):
-allow image/webp for thumbnails"*, adds `image/webp` to that list; its companion
-validator change is [rashid#91](https://github.com/portolan-sdi/rashid/pull/91).
-This catalog is authored against that change, and the finding will disappear when
-it lands.
-
-The reason WebP is worth the deviation is size. Each thumbnail is a 800px
-MapLibre render over a raster basemap, which is expensive to store losslessly:
-
-| Encoding | Average per thumbnail | Total for 8 |
-|---|---|---|
-| PNG, 800px, optimized | ~187 KB | 1.5 MB |
-| WebP, quality-searched under 50 KB | ~49 KB | 394 KB |
-
-`tools/to_webp.py` binary-searches the quality per file for the highest one that
-still fits a 50 KB budget, so a dense layer such as `stops` is compressed harder
-than a single polygon rather than holding every image to one quality.
+Portolan 0.3 also requires one style asset per collection to carry the
+`default` role (PTL-VIZ-006). Each collection's `styles/default.json` carries
+it, stamped by `tools/make_collections.py`.
 
 ## Informational findings, deliberately not addressed
 

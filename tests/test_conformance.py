@@ -21,14 +21,10 @@ ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / "catalog"
 
 # rule_id -> why it is accepted. See docs/conformance.md.
-ACCEPTED = {
-    "PTL-VIZ-001": (
-        "Thumbnails are WebP. Portolan 0.1 allows only PNG and JPEG; "
-        "image/webp is added by portolan-sdi/portolan-spec#121, which this "
-        "catalog targets. WebP holds every thumbnail under 50 KB where the "
-        "same image as PNG runs several times larger."
-    ),
-}
+# Empty since the 0.3.0 upgrade: rashid 0.4.0 reports no errors or warnings.
+# Portolan 0.3 allows image/webp thumbnails, which retires the PTL-VIZ-001
+# deviation this list carried against 0.1.
+ACCEPTED = {}
 
 
 def main():

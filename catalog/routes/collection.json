@@ -2,7 +2,7 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
@@ -267,7 +267,7 @@
       "href": "./thumbnail.webp",
       "type": "image/webp",
       "title": "TriMet Routes preview",
-      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap. WebP is allowed for thumbnails by spec PR portolan-sdi/portolan-spec#121, which this catalog targets; Portolan 0.1 alone permits only PNG and JPEG.",
+      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap.",
       "roles": [
         "thumbnail"
       ],
@@ -280,7 +280,8 @@
       "title": "TriMet Routes by service type",
       "description": "Every fixed-route alignment colored by TYPE, following TriMet's own `trimet-routes` MapLibre style: bus lines thin and blue, MAX heaviest, streetcar thin, commuter rail gray. Colors are TriMet's GTFS route_color values, which is what that style resolves at draw time.",
       "roles": [
-        "style"
+        "style",
+        "default"
       ],
       "file:size": 2969,
       "file:checksum": "1220ec55eb211b01c742f2329e3df52d051e9eb07fec2fc68db3d36c5647e0607865"

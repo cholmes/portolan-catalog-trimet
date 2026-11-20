@@ -2,7 +2,7 @@
   "type": "Collection",
   "stac_version": "1.1.0",
   "stac_extensions": [
-    "https://schemas.portolan-sdi.org/portolan/v0.1.0/schema.json",
+    "https://schemas.portolan-sdi.org/portolan/v0.3.0/schema.json",
     "https://stac-extensions.github.io/file/v2.1.0/schema.json",
     "https://stac-extensions.github.io/table/v1.2.0/schema.json",
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
@@ -237,7 +237,7 @@
       "href": "./thumbnail.webp",
       "type": "image/webp",
       "title": "TriMet Rail Stops preview",
-      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap. WebP is allowed for thumbnails by spec PR portolan-sdi/portolan-spec#121, which this catalog targets; Portolan 0.1 alone permits only PNG and JPEG.",
+      "description": "Rendered from this collection's styles/default.json with MapLibre GL Native, over a light basemap.",
       "roles": [
         "thumbnail"
       ],
@@ -250,7 +250,8 @@
       "title": "TriMet Rail Stops by line",
       "description": "Station marks filled with the color of the line that serves them, using the same palette as TriMet's `ott:rail` style so this layer sits correctly on top of the rail-lines default style. Stations on shared track take the trunk line's color; the LINE code itself records the full set of services.",
       "roles": [
-        "style"
+        "style",
+        "default"
       ],
       "file:size": 3035,
       "file:checksum": "122079488723860502e16f95c52edffd7c24438e57ec44a0a3c0ba210b083da356bd"

@@ -127,7 +127,7 @@ starting point.
 Maintained by Chris Holmes
 ([cholmes@9eo.org](mailto:cholmes@9eo.org)), **not affiliated with
 TriMet**. Conforms to the [Portolan](https://www.portolan-sdi.org/)
-specification v0.1.0.
+specification v0.3.0.
 
 ### Both halves are on GitHub, and contributions are welcome
 
