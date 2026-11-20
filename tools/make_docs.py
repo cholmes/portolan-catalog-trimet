@@ -154,11 +154,15 @@ INSTALL httpfs;  LOAD httpfs;
 SELECT * FROM '{BASE}/{cid}/{cid}.parquet' LIMIT 10;
 ```
 
-Or with GeoPandas:
+Or with GeoPandas (`read_parquet` does not accept a bare https URL, so open it
+with fsspec):
 
 ```python
+import fsspec
 import geopandas as gpd
-gdf = gpd.read_parquet("{BASE}/{cid}/{cid}.parquet")
+
+with fsspec.open("{BASE}/{cid}/{cid}.parquet") as f:
+    gdf = gpd.read_parquet(f)
 ```
 
 ## Suggested uses

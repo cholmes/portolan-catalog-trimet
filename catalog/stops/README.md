@@ -35,11 +35,15 @@ INSTALL httpfs;  LOAD httpfs;
 SELECT * FROM 'https://data.source.coop/cholmes/trimet/stops/stops.parquet' LIMIT 10;
 ```
 
-Or with GeoPandas:
+Or with GeoPandas (`read_parquet` does not accept a bare https URL, so open it
+with fsspec):
 
 ```python
+import fsspec
 import geopandas as gpd
-gdf = gpd.read_parquet("https://data.source.coop/cholmes/trimet/stops/stops.parquet")
+
+with fsspec.open("https://data.source.coop/cholmes/trimet/stops/stops.parquet") as f:
+    gdf = gpd.read_parquet(f)
 ```
 
 ## Suggested uses
