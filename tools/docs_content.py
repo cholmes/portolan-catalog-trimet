@@ -674,12 +674,18 @@ FROM 'park-and-rides/park-and-rides.parquet'
 ORDER BY spaces DESC
 LIMIT 10;"""),
 ("Park and ride capacity served by rail", """\
-SELECT CASE WHEN r.station IS NULL THEN 'bus only' ELSE 'rail-served' END AS access,
-       count(DISTINCT p.name) AS lots, sum(DISTINCT p.spaces) AS spaces
-FROM 'park-and-rides/park-and-rides.parquet' p
-LEFT JOIN 'rail-stops/rail-stops.parquet' r
-  ON ST_DWithin(p.geometry, r.geometry, 1312.34)
-GROUP BY 1;"""),
+-- Deduplicate per lot before summing: the spatial join fans out one row per
+-- nearby station, and sum(DISTINCT spaces) would collapse same-sized lots.
+WITH lots AS (
+  SELECT p.name, any_value(p.spaces) AS spaces,
+         CASE WHEN count(r.station) = 0 THEN 'bus only' ELSE 'rail-served' END AS access
+  FROM 'park-and-rides/park-and-rides.parquet' p
+  LEFT JOIN 'rail-stops/rail-stops.parquet' r
+    ON ST_DWithin(p.geometry, r.geometry, 1312.34)
+  GROUP BY p.name
+)
+SELECT access, count(*) AS lots, sum(spaces) AS spaces
+FROM lots GROUP BY access;"""),
 ],
 related=[("transit-centers", "many park and rides sit at a transit center"),
          ("rail-stops", "the large lots are mostly on MAX")],
