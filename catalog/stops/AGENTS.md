@@ -147,7 +147,7 @@ LIMIT 10;
 
 TriMet publishes this as `tm_stops` at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/), last updated
-November 12, 2026. Every column description in `collection.json`
+November 16, 2026. Every column description in `collection.json`
 comes from [TriMet's metadata page](https://developer.trimet.org/gis/meta_tm_stops.shtml) — that
 page, not this catalog, is the authority on what a field means.
 

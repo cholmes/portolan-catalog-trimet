@@ -62,7 +62,7 @@
       ]
     }
   },
-  "updated": "2026-11-20T12:23:12Z",
+  "updated": "2026-11-20T13:52:28Z",
   "table:columns": [
     {
       "name": "station",
@@ -172,7 +172,7 @@
         "data"
       ],
       "file:size": 17448,
-      "file:checksum": "1220ab35731d88460855f1f1c54817a725b1b91ff98598a16c595b1b71d44c69e476",
+      "file:checksum": "1220f36b4dc88a53e727da8e02f70999db3a356561431020c5142c0d122adc48d607",
       "table:columns": [
         {
           "name": "station",
@@ -282,25 +282,23 @@
       "href": "https://developer.trimet.org/gis/data/tm_rail_stops.zip",
       "type": "application/zip",
       "title": "TriMet Rail Stops \u2014 original TriMet Shapefile",
-      "description": "TriMet's own distribution of `tm_rail_stops`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. Size and checksum are of what TriMet served at the sync time recorded in `updated`.",
+      "description": "TriMet's own distribution of `tm_rail_stops`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. The size is of what TriMet served at the sync time recorded in `updated`. No checksum is published: TriMet regenerates the zip on a schedule, which changes its bytes without changing the records.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 6123,
-      "file:checksum": "1220bbb06fa84f2f97eedf8831608837d781ccdae809155ce25b2bbf05278d34d1fd"
+      "file:size": 6123
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_rail_stops.kml",
       "type": "application/vnd.google-earth.kml+xml",
       "title": "TriMet Rail Stops \u2014 original TriMet KML",
-      "description": "TriMet's KML distribution of the same layer.",
+      "description": "TriMet's KML distribution of the same layer. Sized at sync time; no checksum, for the same reason as the Shapefile.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 119172,
-      "file:checksum": "1220856b66d5706ddb024f22715bbbb99270d8b336f23f76f85d1f303a71fbc7e017"
+      "file:size": 119172
     },
     "source_sld": {
       "href": "./styles/trimet-rail.sld.xml",

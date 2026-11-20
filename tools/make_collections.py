@@ -231,6 +231,14 @@ def assets_for(coll):
 
     # The original TriMet artifacts. These are alternates to the cloud-native
     # primaries above, per the primary-vs-alternate rule.
+    # These remote assets carry file:size but deliberately no file:checksum.
+    # TriMet regenerates the exports on a schedule: a fresh tm_stops.zip
+    # differed from a hours-older one by exactly one payload byte, the DBF
+    # header's last-update date (plus the zip entry mtimes), and the KML shows
+    # the same same-size byte churn. A recorded checksum therefore goes stale
+    # on every regeneration with no data change, while the size is stable
+    # across regenerations and still moves when TriMet actually reissues a
+    # layer. See docs/conformance.md.
     sums = SOURCE_SUMS[coll["source"]]
     assets["source_shapefile"] = {
         "href": src["shapefile"],
@@ -239,21 +247,24 @@ def assets_for(coll):
         "description": (
             f"TriMet's own distribution of `{coll['source']}`, in "
             f"{M.SOURCE_CRS_NAME}. This is the file this collection was built "
-            f"from. Size and checksum are of what TriMet served at the sync time "
-            f"recorded in `updated`."
+            f"from. The size is of what TriMet served at the sync time "
+            f"recorded in `updated`. No checksum is published: TriMet "
+            f"regenerates the zip on a schedule, which changes its bytes "
+            f"without changing the records."
         ),
         "roles": ["data", "source"],
         "file:size": sums["shapefile"]["size"],
-        "file:checksum": sums["shapefile"]["checksum"],
     }
     assets["source_kml"] = {
         "href": src["kml"],
         "type": "application/vnd.google-earth.kml+xml",
         "title": f"{coll['title']} — original TriMet KML",
-        "description": "TriMet's KML distribution of the same layer.",
+        "description": (
+            "TriMet's KML distribution of the same layer. Sized at sync "
+            "time; no checksum, for the same reason as the Shapefile."
+        ),
         "roles": ["data", "source"],
         "file:size": sums["kml"]["size"],
-        "file:checksum": sums["kml"]["checksum"],
     }
     # TriMet's metadata page is carried as a rel:via link rather than an asset:
     # it describes the data, it is not the data, and its bytes change whenever

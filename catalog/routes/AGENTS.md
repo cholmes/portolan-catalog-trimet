@@ -1,7 +1,7 @@
 # TriMet Routes — agent guide
 
 All existing bus and rail lines. 184 LineString features, EPSG:2913 (feet), one
-GeoParquet file of 875.0 KB in 1 row group(s).
+GeoParquet file of 874.9 KB in 1 row group(s).
 
 ## Access
 
@@ -152,7 +152,7 @@ ORDER BY rte;
 
 TriMet publishes this as `tm_routes` at
 [developer.trimet.org/gis](https://developer.trimet.org/gis/), last updated
-October 21, 2026. Every column description in `collection.json`
+November 18, 2026. Every column description in `collection.json`
 comes from [TriMet's metadata page](https://developer.trimet.org/gis/meta_tm_routes.shtml) — that
 page, not this catalog, is the authority on what a field means.
 

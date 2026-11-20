@@ -11,7 +11,7 @@
   ],
   "id": "routes",
   "title": "TriMet Routes",
-  "description": "All existing bus and rail lines. 184 LineString features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_routes`](https://developer.trimet.org/gis/data/tm_routes.zip) and last updated at the source on October 21, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_routes.zip), [KML](https://developer.trimet.org/gis/data/tm_routes.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_routes.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/routes/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/routes/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
+  "description": "All existing bus and rail lines. 184 LineString features covering [TriMet](https://developer.trimet.org/gis/)'s service district in the Portland, Oregon metropolitan area, published by TriMet as [`tm_routes`](https://developer.trimet.org/gis/data/tm_routes.zip) and last updated at the source on November 18, 2026.\n\nThis is a cloud-native mirror: the same data as GeoParquet and PMTiles. The GeoParquet keeps TriMet's native EPSG:2913 (NAD83(HARN) / Oregon North (ft)), so lengths and areas are in feet; only the PMTiles are reprojected to WGS84. The original [Shapefile](https://developer.trimet.org/gis/data/tm_routes.zip), [KML](https://developer.trimet.org/gis/data/tm_routes.kml) and [metadata page](https://developer.trimet.org/gis/meta_tm_routes.shtml) are linked as assets, and column descriptions and code lists are TriMet's own, taken from that page.\n\nThe [collection README](https://source.coop/cholmes/trimet/routes/README.md) covers suggested uses, limitations and the full schema.\n\n**Agents:** [`AGENTS.md`](https://source.coop/cholmes/trimet/routes/AGENTS.md) is the guide written for you \u2014 what joins to what and on which column, the quirks that produce silently wrong answers (documented codes that do not appear in the data, columns TriMet's metadata omits, counts that mean different things in different collections), what the coordinate system implies for measurement, and query recipes that have each been run against these files.",
   "license": "other",
   "keywords": [
     "transit",
@@ -56,13 +56,13 @@
     "temporal": {
       "interval": [
         [
-          "2026-10-21T00:00:00Z",
+          "2026-11-18T00:00:00Z",
           null
         ]
       ]
     }
   },
-  "updated": "2026-11-20T12:23:12Z",
+  "updated": "2026-11-20T13:52:28Z",
   "table:columns": [
     {
       "name": "rte",
@@ -186,8 +186,8 @@
       "roles": [
         "data"
       ],
-      "file:size": 895962,
-      "file:checksum": "12205f741dca264bf70735b54ff6321b8251c2ed4003312c7497e0a96dc1d48aa44d",
+      "file:size": 895940,
+      "file:checksum": "1220bfe76fedc1d8b5f40665ee25ab78a270ea0f5dfe7b1fdaad457e46ec942210d5",
       "table:columns": [
         {
           "name": "rte",
@@ -254,8 +254,8 @@
         "visual",
         "data"
       ],
-      "file:size": 805704,
-      "file:checksum": "1220f1dfeb7551c8169e04f2ab0fbf2b8c20f39b4046ba87ef5556788e61c5f0d8f6",
+      "file:size": 805688,
+      "file:checksum": "1220dfc0a22fb11bbe632f49faf90c3c44bc770567401e2818c09bee607e0df7fabd",
       "alternate": {
         "s3": {
           "href": "s3://us-west-2.opendata.source.coop/cholmes/trimet/routes/routes.pmtiles",
@@ -323,25 +323,23 @@
       "href": "https://developer.trimet.org/gis/data/tm_routes.zip",
       "type": "application/zip",
       "title": "TriMet Routes \u2014 original TriMet Shapefile",
-      "description": "TriMet's own distribution of `tm_routes`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. Size and checksum are of what TriMet served at the sync time recorded in `updated`.",
+      "description": "TriMet's own distribution of `tm_routes`, in NAD83(HARN) / Oregon North (ft). This is the file this collection was built from. The size is of what TriMet served at the sync time recorded in `updated`. No checksum is published: TriMet regenerates the zip on a schedule, which changes its bytes without changing the records.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 847396,
-      "file:checksum": "1220ca55baea8f2ee94bf7ee482f544203def1ddcd885a054d3dcbd69365cc4b2cee"
+      "file:size": 847674
     },
     "source_kml": {
       "href": "https://developer.trimet.org/gis/data/tm_routes.kml",
       "type": "application/vnd.google-earth.kml+xml",
       "title": "TriMet Routes \u2014 original TriMet KML",
-      "description": "TriMet's KML distribution of the same layer.",
+      "description": "TriMet's KML distribution of the same layer. Sized at sync time; no checksum, for the same reason as the Shapefile.",
       "roles": [
         "data",
         "source"
       ],
-      "file:size": 7571726,
-      "file:checksum": "12200ff0e619bf59108c9776f753eb43350c7e97da9d52bc0aef4bd48e177f437133"
+      "file:size": 7571726
     },
     "source_style": {
       "href": "./styles/trimet-routes.style.json",
