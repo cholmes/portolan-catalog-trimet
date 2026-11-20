@@ -28,7 +28,14 @@ CATALOG = ROOT / "catalog"
 sys.path.insert(0, str(ROOT / "tools"))
 import manifest as M  # noqa: E402
 
+# DOC_SQL_BASE switches the gate from the local tree to a published base URL:
+# every parquet reference in the docs is rewritten to that base, so the same
+# blocks that gate a pull request also verify the live catalog on a schedule.
+LIVE_BASE = os.environ.get("DOC_SQL_BASE", "").rstrip("/")
+
 PREAMBLE = "INSTALL spatial; LOAD spatial;\n"
+if LIVE_BASE:
+    PREAMBLE += "INSTALL httpfs; LOAD httpfs;\n"
 SQL_BLOCK = re.compile(r"```sql\n(.*?)```", re.S)
 
 # Fragments, not statements: shown to explain a function's units or an
@@ -46,6 +53,9 @@ def statements(text):
         if not sql.rstrip().endswith(";"):
             continue          # a fragment, e.g. the units cheat-sheet
         sql = sql.replace(M.PUBLIC_BASE + "/", "")
+        if LIVE_BASE:
+            sql = re.sub(r"'([\w-]+/[\w.-]+\.parquet)'",
+                         lambda m: f"'{LIVE_BASE}/{m.group(1)}'", sql)
         out.append(sql)
     return out
 
